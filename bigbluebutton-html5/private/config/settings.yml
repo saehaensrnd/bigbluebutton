@@ -30,7 +30,7 @@ public:
     appName: BigBlueButton HTML5 Client
     bbbServerVersion: 2.3
     copyright: '©2021 BigBlueButton Inc.'
-    html5ClientBuild: HTML5_CLIENT_VERSION
+    html5ClientBuild: 1783
     helpLink: https://bigbluebutton.org/html5/
     lockOnJoin: true
     cdn: ''
@@ -175,7 +175,7 @@ public:
     enableNetworkMonitoring: false
     packetLostThreshold: 10
   kurento:
-    wsUrl: HOST
+    wsUrl: wss://23rnd.saehaens.com/bbb-webrtc-sfu
     # Valid for video-provider. Time (ms) before its WS connection times out
     # and tries to reconnect.
     wsConnectionTimeout: 4000
@@ -264,23 +264,23 @@ public:
           frameRate: 10
       - id: low
         name: Low
-        default: false
-        bitrate: 100
+        default: true
+        bitrate: 50
       - id: medium
         name: Medium
-        default: true
-        bitrate: 200
+        default: false
+        bitrate: 100
       - id: high
         name: High
         default: false
-        bitrate: 500
+        bitrate: 200
         constraints:
           width: 1280
           frameRate: 15
       - id: hd
         name: High definition
         default: false
-        bitrate: 800
+        bitrate: 300
         constraints:
           width: 1280
           frameRate: 30
@@ -371,6 +371,8 @@ public:
           desktopPageSizes:
             moderator: 6
             viewer: 4
+    chromeExtensionKey:
+    chromeExtensionLink:
   syncUsersWithConnectionManager:
     enabled: false
     syncInterval: 60000
@@ -419,7 +421,7 @@ public:
       enabled: true
   note:
     enabled: true
-    url: ETHERPAD_HOST
+    url: https://23rnd.saehaens.com/pad
   layout:
     autoSwapLayout: false
     hidePresentation: false
@@ -638,7 +640,7 @@ private:
     pencilChunkLength: 100
     loadSlidesFromHttpAlways: false
   etherpad:
-    apikey: ETHERPAD_APIKEY
+    apikey: 2u95q5bxUbuEjHGniVycqQFiqM481HF2Ra7BhJqk7FjJlmuvlIDjMBpRbEiQf
     version: 1.2.13
     host: 127.0.0.1
     port: 9001

@@ -141,7 +141,7 @@ const sortUsers = (a, b) => {
   return sort;
 };
 
-const isPublicChat = chat => (
+const isPublicChat = chat => ( 
   chat.userId === 'public'
 );
 
@@ -193,6 +193,11 @@ const getUsers = () => {
       users = users.filter(moderatorOrCurrentUser);
     }
   }
+  
+//observer feature
+//For this feature to be active, when you join a room, you must have the full name "observer" and the role must be moderator.
+  const observerOrCurrentUser = u => u.name !== Auth.meetingID.substring(0, 4) + "observer" || u.role === ROLE_VIEWER || u.userId === Auth.userID;
+  users = users.filter(observerOrCurrentUser);
 
   return addWhiteboardAccess(users).sort(sortUsers);
 };
@@ -654,3 +659,4 @@ export default {
   getUserCount,
   sortUsersByCurrent,
 };
+
