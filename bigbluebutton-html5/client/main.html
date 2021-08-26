@@ -80,6 +80,65 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
       e.preventDefault();
     });
   </script>
+
+  <script language="javascript"> 
+
+      window.addEventListener('beforeunload', (event) => {
+        // 표준에 따라 기본 동작 방지
+        event.preventDefault();
+        // Chrome에서는 returnValue 설정이 필요함
+        event.returnValue = '';
+      });
+
+  //    var i = 0;
+  //    var child;
+  //    var iframeWindow;
+  //    var checkTimer;
+  //    var checkChildClosed;
+  //    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  //    const charactersLength = 62;
+  //    let iframe= ' ';   
+
+  //   window.onload = function(){
+
+  //     for ( let i = 0; i < 20; i++ ) {
+  //       iframe += characters.charAt(Math.floor(Math.random() * charactersLength));
+  //     }
+
+  //     child = window.open('https://install.inetstudy.co.kr:4430/ASPStandard/cookeyenglish27/Netstudy_BBB.asp?reopen=1&iframe=' + iframe,'','toolbar=0,status=0,width=626,height=436,resizable=no');
+
+  //     document.getElementById('iframe').src = 'https://install.inetstudy.co.kr:4430/ASPStandard/cookeyenglish27/Netstudy_BBB.asp?reopen=1&iframe=' + iframe;
+     
+
+  //     iframeWindow = document.getElementById('iframe').contentWindow;
+
+  //     checkChildClosed = setInterval(checkChild, 500);
+  //     sendSecMsgTimer = setInterval(sendSecMsg, 1000);
+
+  // }
+
+  // function sendSecMsg(){
+
+  //     i++;
+
+  //     iframeWindow.postMessage(i, 'https://install.inetstudy.co.kr:4430/ASPStandard/cookeyenglish27/Netstudy_BBB.asp?reopen=1&iframe=' + iframe);
+
+  // }
+
+  // function checkChild() {
+	//     if (child.closed) {
+
+  //       i = 0;
+	//     	child = window.open('https://install.inetstudy.co.kr:4430/ASPStandard/cookeyenglish27/Netstudy_BBB.asp?reopen=1&iframe=' + iframe,'','toolbar=0,status=0,width=626,height=436');
+
+	//         //clearInterval(checkChildClosed);
+	        
+	//     }
+	// }
+
+
+
+</script>
   <script src="compatibility/adapter.js?v=VERSION" language="javascript"></script>
   <script src="compatibility/sip.js?v=VERSION" language="javascript"></script>
   <script src="compatibility/kurento-utils.js?v=VERSION" language="javascript"></script>
@@ -96,6 +155,10 @@ with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
   <!-- fonts -->
 </head>
 <body style="background-color: #06172A">
+  <!--<iframe id="iframe" src="https://install.inetstudy.co.kr:4430/demosite/demo26_kdh/" frameborder="0"></iframe>-->
+  <!--<iframe id="iframe" src="https://install.inetstudy.co.kr:4430/ASPStandard/cookeyenglish27/Netstudy_BBB.asp?reopen=1&iframe=1" frameborder="0"></iframe>-->
+
+
   <div id="app" role="document"></div>
   <span id="destination"></span>
   <audio id="remote-media" autoplay>

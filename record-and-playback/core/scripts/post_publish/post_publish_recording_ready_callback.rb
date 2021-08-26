@@ -24,6 +24,7 @@ require "trollop"
 require 'net/http'
 require "jwt"
 require "java_properties"
+require "open3"
 require File.expand_path('../../../lib/recordandplayback', __FILE__)
 
 logger = Logger.new("/var/log/bigbluebutton/post_publish.log", 'weekly' )
@@ -65,7 +66,6 @@ end
 #
 # Main code
 #
-BigBlueButton.logger.info("Recording Ready Notify for [#{meeting_id}] starts")
 
 begin
   callback_url = get_callback_url(events_xml)
@@ -110,4 +110,32 @@ end
 
 BigBlueButton.logger.info("Recording Ready notify ends")
 
+#pid = Process.spawn("node /home/ubuntu/dev/bigbluebutton/bbb-recorder/export.js https://23rnd.saehaens.com/playback/presentation/2.3/#{meeting_id} MEETING_ID 0 true")
+#Process.wait pid
+
+#BigBlueButton.logger.info("#{pid}")
+#
+begin
+
+#BigBlueButton.logger.info("Recording Ready Notify for [#{meeting_id}] starts")
+
+#cmd = "node /home/ubuntu/dev/bigbluebutton/bbb-recorder/export.js https://23rnd.saehaens.com/playback/presentation/2.3/#{meeting_id} MEETING_ID 0 true"
+#system(cmd)
+#BigBlueButton.logger.info(cmd)
+
+#Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
+  #while line = stdout.gets
+   # BigBlueButton.logger.info(line)
+#  end
+
+#  exit_status = wait_thr.value
+#  unless exit_status.success?
+#    BigBlueButton.logger.info("FAILED !!! #{cmd}")
+#  end
+#end
+
+#BigBlueButton.logger.info("end?")
+end
+
+	
 exit 0

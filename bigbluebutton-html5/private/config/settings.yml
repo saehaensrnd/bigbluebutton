@@ -11,7 +11,7 @@ public:
     listenOnlyMode: true
     forceListenOnly: false
     # Skips the echo test when connecting with microphone.
-    skipCheck: false
+    skipCheck: true
     # Skips the echo test when connecting with microphone right after user
     # joins the room the first time. Subsequents joins  to microphone won't
     # have echo test skipped, for example if user leave and join mic again
@@ -288,8 +288,8 @@ public:
     enableVideo: true
     enableVideoMenu: true
     enableListenOnly: true
-    autoShareWebcam: false
-    skipVideoPreview: false
+    autoShareWebcam: true
+    skipVideoPreview: true
     skipVideoPreviewOnFirstJoin: false
     # cameraSortingModes.paginationSorting: sorting mode to be applied when pagination is active
     # cameraSortingModes.defaultSorting: sorting mode when pagination is not active (full mesh)
@@ -330,7 +330,7 @@ public:
       # PUBLISHERS aren't accounted for .
       # A page size of 0 (zero) means that the page size is unlimited (disabled).
       desktopPageSizes:
-        moderator: 0
+        moderator: 35
         viewer: 5
       # video page sizes for MOBILE endpoints
       mobilePageSizes:
@@ -423,7 +423,7 @@ public:
     enabled: true
     url: https://23rnd.saehaens.com/pad
   layout:
-    autoSwapLayout: false
+    autoSwapLayout: true
     hidePresentation: false
     showParticipantsOnLogin: true
   media:
@@ -587,6 +587,8 @@ public:
         - value: 20
         - value: 16
       tools:
+        - icon: eraser_tool
+          value: eraser
         - icon: text_tool
           value: text
         - icon: line_tool
@@ -602,6 +604,7 @@ public:
         - icon: hand
           value: hand
       presenterTools:
+        - eraser
         - text
         - line
         - ellipse
@@ -610,6 +613,7 @@ public:
         - pencil
         - hand
       multiUserTools:
+        - eraser
         - text
         - line
         - ellipse

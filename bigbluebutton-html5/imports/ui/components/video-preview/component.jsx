@@ -11,6 +11,7 @@ import cx from 'classnames';
 import Service from './service';
 import VideoService from '../video-provider/service';
 import { styles } from './styles';
+import Auth from '/imports/ui/services/auth';
 
 const CAMERA_PROFILES = Meteor.settings.public.kurento.cameraProfiles;
 const GUM_TIMEOUT = Meteor.settings.public.kurento.gUMTimeout;
@@ -340,7 +341,14 @@ class VideoPreview extends Component {
     const { resolve, startSharing } = this.props;
     const { webcamDeviceId } = this.state;
     this.stopTracks();
-    startSharing(webcamDeviceId);
+    
+
+    const fullname = Auth.fullname;
+    if(fullname.indexOf("observer") != -1) 
+      stopSharing();
+    else 
+      startSharing(webcamDeviceId);
+ 
     if (resolve) resolve();
   }
 

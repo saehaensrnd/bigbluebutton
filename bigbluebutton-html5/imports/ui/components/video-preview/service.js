@@ -1,52 +1,59 @@
-import Storage from '/imports/ui/services/storage/session';
-import getFromUserSettings from '/imports/ui/services/users-settings';
+  import Storage from '/imports/ui/services/storage/session';
+  import getFromUserSettings from '/imports/ui/services/users-settings';
+  import Auth from '/imports/ui/services/auth';
 
-const promiseTimeout = (ms, promise) => {
-  const timeout = new Promise((resolve, reject) => {
-    const id = setTimeout(() => {
-      clearTimeout(id);
+  const promiseTimeout = (ms, promise) => {
+    const timeout = new Promise((resolve, reject) => {
+      const id = setTimeout(() => {
+        clearTimeout(id);
 
-      const error = {
-        name: 'TimeoutError',
-        message: 'Promise did not return',
-      };
+        const error = {
+          name: 'TimeoutError',
+          message: 'Promise did not return',
+        };
 
-      reject(error);
-    }, ms);
-  });
+        reject(error);
+      }, ms);
+    });
 
-  return Promise.race([
-    promise,
-    timeout,
-  ]);
-};
+    return Promise.race([
+      promise,
+      timeout,
+    ]);
+  };
 
-const getSkipVideoPreview = () => {
-  const KURENTO_CONFIG = Meteor.settings.public.kurento;
+  const getSkipVideoPreview = () => {
+    const KURENTO_CONFIG = Meteor.settings.public.kurento;
 
-  const skipVideoPreviewOnFirstJoin = getFromUserSettings(
-    'bbb_skip_video_preview_on_first_join',
-    KURENTO_CONFIG.skipVideoPreviewOnFirstJoin,
-  );
-  const skipVideoPreview = getFromUserSettings(
-    'bbb_skip_video_preview',
-    KURENTO_CONFIG.skipVideoPreview,
-  );
+    const skipVideoPreviewOnFirstJoin = getFromUserSettings(
+      'bbb_skip_video_preview_on_first_join',
+      KURENTO_CONFIG.skipVideoPreviewOnFirstJoin,
+    );
+    const skipVideoPreview = getFromUserSettings(
+      'bbb_skip_video_preview',
+      KURENTO_CONFIG.skipVideoPreview,
+    );
+    const fullname = Auth.fullname;
+    // return (
+    //   (Storage.getItem('isFirstJoin') !== false && skipVideoPreviewOnFirstJoin)
+    //   || skipVideoPreview && fullname.indexOf("observer") == -1
+    // );
 
-  return (
-    (Storage.getItem('isFirstJoin') !== false && skipVideoPreviewOnFirstJoin)
-    || skipVideoPreview
-  );
-};
+    return (
+      (Storage.getItem('isFirstJoin') !== false && skipVideoPreviewOnFirstJoin)
+      || skipVideoPreview
+    );
+  };
 
-export default {
-  promiseTimeout,
-  changeWebcam: (deviceId) => {
-    Session.set('WebcamDeviceId', deviceId);
-  },
-  webcamDeviceId: () => Session.get('WebcamDeviceId'),
-  changeProfile: (profileId) => {
-    Session.set('WebcamProfileId', profileId);
-  },
-  getSkipVideoPreview,
-};
+  export default {
+    promiseTimeout,
+    changeWebcam: (deviceId) => {
+      Session.set('WebcamDeviceId', deviceId);
+    },
+    webcamDeviceId: () => Session.get('WebcamDeviceId'),
+    changeProfile: (profileId) => {
+      Session.set('WebcamProfileId', profileId);
+    },
+    getSkipVideoPreview,
+  };
+
