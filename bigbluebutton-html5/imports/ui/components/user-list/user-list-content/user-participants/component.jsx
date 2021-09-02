@@ -13,6 +13,7 @@ import {
 import UserListItemContainer from './user-list-item/container';
 import UserOptionsContainer from './user-options/container';
 import Settings from '/imports/ui/services/settings';
+import { notify } from '/imports/ui/services/notification';
 
 const propTypes = {
   compact: PropTypes.bool,
@@ -88,6 +89,15 @@ class UserParticipants extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { selectedUser } = this.state;
 
+    
+    // console.log("prevProps Keys : " + Object.keys(prevProps));
+    // console.log("prevProps Values : " + Object.values(prevProps));
+    // console.log("--------------------------------------------")
+
+    //  console.log("this.props Keys : " + Object.keys(this.props));
+    //  console.log("this.props Values : " + Object.values(this.props));
+    //  console.log("--------------------------------------------")
+
     if (selectedUser) {
       const { firstChild } = selectedUser;
       if (!firstChild.isEqualNode(document.activeElement)) {
@@ -136,6 +146,7 @@ class UserParticipants extends Component {
           key={key}
           id={`user-${user.userId}`}
         >
+          
           <UserListItemContainer
             {...{
               compact,
@@ -184,6 +195,13 @@ class UserParticipants extends Component {
       meetingIsBreakout,
     } = this.props;
     const { isOpen, scrollArea } = this.state;
+
+    // console.log("this.props Keys : " + Object.keys(this.props));
+    // console.log("this.props Values : " + Object.values(this.props));
+    // console.log("--------------------------------------------")
+
+    // console.log("upupupusssss1111");
+    // notify("hello2222???", 'info',  'user');
 
     return (
       <div className={styles.userListColumn}>

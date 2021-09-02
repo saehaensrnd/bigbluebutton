@@ -12,6 +12,7 @@ import TimeWindowList from './time-window-list/container';
 import ChatDropdownContainer from './chat-dropdown/container';
 import { UserSentMessageCollection } from './service';
 import Auth from '/imports/ui/services/auth';
+import Users from '/imports/api/users';
 
 const ELEMENT_ID = 'chat-messages';
 
@@ -58,6 +59,12 @@ const Chat = (props) => {
   const HIDE_CHAT_AK = shortcuts.hideprivatechat;
   const CLOSE_CHAT_AK = shortcuts.closeprivatechat;
   ChatLogger.debug('ChatComponent::render', props);
+
+
+  const users = Users.find({
+    meetingId: Auth.meetingID,
+  }, { fields: { userId: 1, emoji: 1 } });
+
   return (
     <div
       data-test={chatID !== 'public' ? 'privateChat' : 'publicChat'}
@@ -144,6 +151,7 @@ const Chat = (props) => {
         locked={isChatLocked}
         handleSendMessage={actions.handleSendMessage}
         partnerIsLoggedOut={partnerIsLoggedOut}
+        users={users}
       />
     </div>
   );

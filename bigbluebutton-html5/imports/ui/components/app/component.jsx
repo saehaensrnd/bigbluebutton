@@ -202,13 +202,17 @@ class App extends Component {
           : intl.formatMessage(intlMessages.setEmoji, ({ 0: formattedEmojiStatus }));
       }
 
-      notify(
-        statusLabel,
-        'info',
-        currentUserEmoji.status === 'none'
-          ? 'clear_status'
-          : 'user',
-      );
+      // notify(
+      //   statusLabel,
+      //   'info',
+      //   currentUserEmoji.status === 'none'
+      //     ? 'clear_status'
+      //     : 'user',
+      // );
+
+    //   console.log("APP Keys : " + Object.keys(this.props));
+    //  console.log("APP prevProps Values : " + Object.values(this.props));
+    //  console.log("--------------------------------------------")
     }
     if (!prevProps.meetingMuted && meetingMuted) {
       notify(

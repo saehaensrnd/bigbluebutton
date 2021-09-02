@@ -8,6 +8,8 @@ import _ from 'lodash';
 import TypingIndicatorContainer from './typing-indicator/container';
 import { styles } from './styles.scss';
 import Button from '../../button/component';
+import Auth from '/imports/ui/services/auth';
+
 
 const propTypes = {
   intl: PropTypes.object.isRequired,
@@ -69,6 +71,25 @@ const messages = defineMessages({
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const CHAT_ENABLED = CHAT_CONFIG.enabled;
+let isEmoji = false;
+let currentEmoji = "none";
+let userArray = [];
+let isTyping = false;
+let isSent = false;
+
+const emojiArray = {
+
+  away: "I'm out for a moment",
+  raiseHand: "I have a question",
+  //neutral: "Nothing",
+  speakLouder: "Please speak Louder",
+  speakSofter : 'Please speak Softer',
+  speakFaster: 'Please speak Faster',
+  speakSlower : 'Please speak Slower',
+  thumbsUp: 'Good!',
+  thumbsDown: 'Bad',
+
+};
 
 class MessageForm extends PureComponent {
   constructor(props) {
@@ -86,6 +107,15 @@ class MessageForm extends PureComponent {
     this.setMessageHint = this.setMessageHint.bind(this);
     this.handleUserTyping = _.throttle(this.handleUserTyping.bind(this), 2000, { trailing: false });
     this.typingIndicator = CHAT_CONFIG.typingIndicator.enabled;
+
+    this.handleEmojiSubmit = this.handleEmojiSubmit.bind(this);
+    
+    let {users} = props;
+
+
+    users.forEach(user => userArray.push(user));
+    
+
   }
 
   componentDidMount() {
@@ -96,6 +126,7 @@ class MessageForm extends PureComponent {
     if (!isMobile) {
       if (this.textarea) this.textarea.focus();
     }
+
   }
 
   componentDidUpdate(prevProps) {
@@ -129,6 +160,71 @@ class MessageForm extends PureComponent {
     ) {
       this.setMessageHint();
     }
+    const {users} = this.props;
+  
+
+    if(isTyping){
+      isTyping = false;
+      return;
+    } 
+
+    if(isSent){
+      isSent = false;
+      return;
+    } 
+
+    if(isEmoji){
+      isEmoji = false;
+      return;
+    } 
+      
+    //   userArray.forEach(prevUser => {
+     
+    //     console.log("prev userEmoji : " + prevUser.emoji);
+    //     console.log("prev userEmoji22222 : " + prevUser.emoji);
+  
+    //     users.forEach(user => {
+  
+    //       console.log("userEmoji : " + user.emoji);
+    //       console.log("userEmoji22222 : " + user.emoji);
+
+    //       if(user.userId === prevUser.userId && Auth.userID === user.userID){
+  
+    //         if(user.emoji !== prevUser.emoji){
+    //           isEmoji = true;
+    //           prevUser.emoji = user.emoji;
+    //           currentEmoji = user.emoji;
+    //           this.handleEmojiSubmit();
+    //           isEmoji = false;
+    //         }
+  
+    //       }
+  
+    //     })
+  
+    //  });
+
+
+    users.forEach(user => {
+
+      if(Auth.userID === user.userId){
+
+        if(currentEmoji !== user.emoji && user.emoji !== "none"){
+          isEmoji = true;
+          //prevUser.emoji = user.emoji;
+          currentEmoji = user.emoji;
+          this.handleEmojiSubmit();
+        
+          //currentEmoji = "none";
+          //isEmoji = false;
+        }
+
+      }
+
+    })
+
+    console.log("chat update!!");
+    
   }
 
   componentWillUnmount() {
@@ -174,6 +270,7 @@ class MessageForm extends PureComponent {
 
   updateUnsentMessagesCollection(chatId, message) {
     const { UnsentMessagesCollection } = this.props;
+    console.log("unsent!!111" + chatId + " : " + message);
     UnsentMessagesCollection.upsert(
       { chatId },
       { $set: { message } },
@@ -206,6 +303,8 @@ class MessageForm extends PureComponent {
       maxMessageLength,
     } = this.props;
 
+    isTyping = true;
+
     const message = e.target.value;
     let error = null;
 
@@ -220,10 +319,12 @@ class MessageForm extends PureComponent {
       message,
       error,
     }, this.handleUserTyping(error));
+
+
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+
+  handleEmojiSubmit() {
 
     const {
       disabled,
@@ -233,7 +334,64 @@ class MessageForm extends PureComponent {
       stopUserTyping,
     } = this.props;
     const { message } = this.state;
-    let msg = message.trim();
+
+    let msg = emojiArray[currentEmoji].trim();
+
+    // if(isEmoji){
+    //   msg = currentEmoji.trim();
+    // } else {
+    //   return;
+    // }
+   
+    console.log("msg : " + msg + " : " + currentEmoji);
+
+    if (msg.length < minMessageLength) return;
+
+    console.log("disabled : " + disabled + " : " + msg.length + " : " + maxMessageLength);
+
+    if (disabled
+      || msg.length > maxMessageLength) {
+      this.setState({ hasErrors: true });
+      return false;
+    }
+
+    console.log("disabled222");
+
+    // Sanitize. See: http://shebang.brandonmintern.com/foolproof-html-escaping-in-javascript/
+
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(msg));
+    msg = div.innerHTML;
+
+    const callback = this.typingIndicator ? stopUserTyping : null;
+
+    console.log("callback : " + callback);
+
+    return (
+      handleSendMessage(msg),
+      this.setState({
+        message: '',
+        hasErrors: false,
+      }, callback)
+    );
+  }
+
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    isSent = true;
+
+    const {
+      disabled,
+      minMessageLength,
+      maxMessageLength,
+      handleSendMessage,
+      stopUserTyping,
+    } = this.props;
+    const { message } = this.state;
+
+    let  msg = message.trim();
 
     if (msg.length < minMessageLength) return;
 
@@ -250,6 +408,8 @@ class MessageForm extends PureComponent {
     msg = div.innerHTML;
 
     const callback = this.typingIndicator ? stopUserTyping : null;
+
+
 
     return (
       handleSendMessage(msg),
@@ -271,6 +431,8 @@ class MessageForm extends PureComponent {
     } = this.props;
 
     const { hasErrors, error, message } = this.state;
+
+    const {users} = this.props;
 
     return CHAT_ENABLED ? (
       <form
