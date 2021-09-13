@@ -24,6 +24,7 @@ export const EMOJI_STATUSES = {
     //applause: 'applause',
     thumbsUp: 'thumbs_up',
     thumbsDown: 'thumbs_down',
+    whiteboard : 'confused',
 };
 
 export default { EMOJI_STATUSES };

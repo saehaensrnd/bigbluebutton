@@ -17,6 +17,7 @@ import DropdownListSeparator from '/imports/ui/components/dropdown/list/separato
 import ShortcutHelpComponent from '/imports/ui/components/shortcut-help/component';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import FullscreenService from '../../fullscreen-button/service';
+import Auth from '/imports/ui/services/auth';
 
 import { styles } from '../styles';
 
@@ -201,7 +202,11 @@ class SettingsDropdown extends PureComponent {
       intl, mountModal, amIModerator, isBreakoutRoom, isMeteorConnected,
     } = this.props;
 
-    const allowedToEndMeeting = amIModerator && !isBreakoutRoom;
+    
+    const fullname = Auth.fullname;
+    const isObserver = fullname.indexOf("observer") != -1 ? true : false;
+
+    const allowedToEndMeeting = amIModerator && !isBreakoutRoom && !isObserver;
 
     const {
       showHelpButton: helpButton,

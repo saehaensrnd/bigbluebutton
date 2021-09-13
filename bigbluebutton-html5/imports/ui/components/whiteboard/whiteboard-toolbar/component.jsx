@@ -829,7 +829,7 @@ class WhiteboardToolbar extends Component {
           {this.renderColorItem()}
           {this.renderUndoItem()}
           {this.renderClearAllItem()}
-          {window.PointerEvent ? this.renderPalmRejectionItem() : null}
+          {/* {window.PointerEvent ? this.renderPalmRejectionItem() : null} */}
           {isPresenter ? this.renderMultiUserItem() : null}
         </div>
       </div>

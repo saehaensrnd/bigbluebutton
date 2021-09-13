@@ -14,6 +14,7 @@ import EchoTest from '../echo-test/component';
 import Help from '../help/component';
 import AudioDial from '../audio-dial/component';
 import AudioAutoplayPrompt from '../autoplay/component';
+import Auth from '/imports/ui/services/auth';
 
 const propTypes = {
   intl: PropTypes.object.isRequired,
@@ -363,10 +364,14 @@ class AudioModal extends Component {
     const arrow = isRTL ? '←' : '→';
     const dialAudioLabel = `${intl.formatMessage(intlMessages.audioDialTitle)} ${arrow}`;
 
+    const fullname = Auth.fullname;
+    const isObserver = fullname.indexOf("observer") != -1 ? true : false;
+    //if(fullname.indexOf("observer") != -1) 
+
     return (
       <div>
         <span className={styles.audioOptions}>
-          {!showMicrophone && !isMobileNative
+          {!showMicrophone && !isMobileNative && !isObserver
             ? (
               <Button
                 className={styles.audioBtn}
@@ -379,7 +384,7 @@ class AudioModal extends Component {
               />
             )
             : null}
-          {listenOnlyMode
+         {isObserver
             ? (
               <Button
                 className={styles.audioBtn}
@@ -391,6 +396,18 @@ class AudioModal extends Component {
               />
             )
             : null}
+          {/* {listenOnlyMode
+            ? (
+              <Button
+                className={styles.audioBtn}
+                label={intl.formatMessage(intlMessages.listenOnlyLabel)}
+                icon="listen"
+                circle
+                size="jumbo"
+                onClick={this.handleJoinListenOnly}
+              />
+            )
+            : null} */}
         </span>
         {formattedDialNum ? (
           <Button
@@ -430,7 +447,7 @@ class AudioModal extends Component {
           </div>
         </div>);
     }
-
+    console.log("skipAudio : " + this.skipAudioOptions());
     if (this.skipAudioOptions()) {
       return (
         <div className={styles.connecting} role="alert">

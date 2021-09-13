@@ -67,6 +67,42 @@ const messages = defineMessages({
     id: 'app.chat.severalPeople',
     description: 'displayed when 4 or more users are typing',
   },
+  away: {
+    id: 'app.chat.away',
+    description: 'away',
+  },
+  speakLouder: {
+    id: 'app.chat.speakLouder',
+    description: 'Please speak louder',
+  },
+  speakSofter: {
+    id: 'app.chat.speakSofter',
+    description: 'Please speak softer',
+  },
+  speakFaster: {
+    id: 'app.chat.speakFaster',
+    description: 'Please speak faster',
+  },
+  speakSlower: {
+    id: 'app.chat.speakSlower',
+    description: 'Please speak slower',
+  },
+  thumbsUp: {
+    id: 'app.chat.thumbsUp',
+    description: 'good',
+  },
+  thumbsDown: {
+    id: 'app.chat.thumbsDown',
+    description: 'bad',
+  },
+  whiteboard: {
+    id: 'app.chat.whiteboard',
+    description: 'whiteboard',
+  },
+  raiseHand: {
+    id: 'app.chat.raiseHand',
+    description: 'raiseHand',
+  },
 });
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
@@ -332,11 +368,12 @@ class MessageForm extends PureComponent {
       maxMessageLength,
       handleSendMessage,
       stopUserTyping,
+      intl,
     } = this.props;
     const { message } = this.state;
 
-    let msg = emojiArray[currentEmoji].trim();
-
+    //let msg = emojiArray[currentEmoji].trim();
+    let msg = intl.formatMessage(messages[currentEmoji]).trim();
     // if(isEmoji){
     //   msg = currentEmoji.trim();
     // } else {

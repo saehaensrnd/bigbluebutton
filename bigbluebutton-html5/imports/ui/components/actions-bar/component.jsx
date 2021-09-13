@@ -85,7 +85,7 @@ class ActionsBar extends PureComponent {
               />
             )
             : null}
-          {isRaiseHandButtonEnabled
+          {isRaiseHandButtonEnabled && !amIModerator
             ? (
               <Button
                 icon="hand"

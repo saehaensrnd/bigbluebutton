@@ -13,6 +13,10 @@ const messages = defineMessages({
     id: 'app.userList.you',
     description: 'Text for identifying your user',
   },
+  teacher: {
+    id: 'app.userList.teacher',
+    description: 'Text for identifying teacher user',
+  },
   locked: {
     id: 'app.userList.locked',
     description: 'Text for identifying locked user',
@@ -107,6 +111,7 @@ const UserName = (props) => {
 &nbsp;
         </span>
         <i>{(isMe(user.userId)) ? `(${intl.formatMessage(messages.you)})` : ''}</i>
+        <i>{user.role === ROLE_MODERATOR ? `(${intl.formatMessage(messages.teacher)})` : ''}</i>
       </span>
       {
         userNameSub.length

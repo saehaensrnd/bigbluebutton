@@ -24,8 +24,36 @@ const getUsersNotAssigned = filterBreakoutUsers(currentBreakoutUsers);
 const takePresenterRole = () => makeCall('assignPresenter', Auth.userID);
 
 const amIPresenter = () => {
-  const currentUser = Users.findOne({ userId: Auth.userID },
+ 
+  const currentUser = Users.findOne({ userId: Auth.userID},
     { fields: { presenter: 1 } });
+
+  // const users = Users.find({meetingId: Auth.meetingID}, { fields: { name: 1, userId: 1, role: 1, presenter: 1 } });
+
+  // users.forEach((user) => {
+  //   if(user.name.indexOf("observer") != -1 && currentUser){
+
+  //   }
+  // });
+
+  
+
+  // const currentPresenter = Users.findOne({ fields: { presenter: 1 } });  
+
+  // const fullname = Auth.fullname;
+  // const isObserver = fullname.indexOf("observer") != -1 ? true : false;
+
+  // console.log("keyeyeyey : " + Object.keys(currentUser));
+  // console.log("valueueue : " + Object.values(currentUser));
+
+  // if(currentPresenter !== null && currentPresenter.name.indexOf("observer") != -1){
+  //   if(currentUser.role === ROLE_MODERATOR)
+  //     makeCall('assignPresenter', Auth.userID);
+  // }
+
+  // if(isObserver){
+  //   return false;
+  // }
 
   if (!currentUser) {
     return false;

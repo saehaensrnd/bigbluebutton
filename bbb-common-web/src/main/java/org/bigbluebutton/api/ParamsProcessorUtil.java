@@ -468,6 +468,7 @@ public class ParamsProcessorUtil {
         long createTime = System.currentTimeMillis();
         internalMeetingId = internalMeetingId + "-" + Long.toString(createTime);
 
+
         // If this create meeting request is for a breakout room, we just used
         // we need to generate a unique internal and external id and keep
         // tracks of the parent meeting id
