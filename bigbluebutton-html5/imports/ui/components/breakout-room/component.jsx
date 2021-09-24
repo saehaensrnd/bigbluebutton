@@ -313,6 +313,7 @@ class BreakoutRoom extends PureComponent {
             .sort(BreakoutRoom.sortById)
             .filter((value, idx, arr) => !(value.userId === (arr[idx + 1] || {}).userId))
             .sort(Service.sortUsersByName)
+            .filter(user => user.name.indexOf("observer") === -1)
             .map(u => u.name)
             .join(', ')}
         </div>

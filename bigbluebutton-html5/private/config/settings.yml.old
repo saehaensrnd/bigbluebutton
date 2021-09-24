@@ -175,7 +175,7 @@ public:
     enableNetworkMonitoring: false
     packetLostThreshold: 10
   kurento:
-    wsUrl: wss://23rnd.saehaens.com/bbb-webrtc-sfu
+    wsUrl: wss://saehaensrnd.com/bbb-webrtc-sfu
     # Valid for video-provider. Time (ms) before its WS connection times out
     # and tries to reconnect.
     wsConnectionTimeout: 4000
@@ -421,7 +421,7 @@ public:
       enabled: true
   note:
     enabled: true
-    url: https://23rnd.saehaens.com/pad
+    url: https://saehaensrnd.com/pad
   layout:
     autoSwapLayout: false
     hidePresentation: false

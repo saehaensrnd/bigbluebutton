@@ -14,6 +14,7 @@ import AudioService from '/imports/ui/components/audio/service';
 import logger from '/imports/startup/client/logger';
 import WhiteboardService from '/imports/ui/components/whiteboard/service';
 import { Session } from 'meteor/session';
+import { meetingIsBreakout } from '/imports/ui/components/app/service';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_GROUP_CHAT_ID = CHAT_CONFIG.public_group_id;
@@ -197,8 +198,24 @@ const getUsers = () => {
   
 //observer feature
 //For this feature to be active, when you join a room, you must have the full name "observer" and the role must be moderator.
-  const observerOrCurrentUser = u => u.name !== Auth.meetingID.substring(0, 4) + "observer" || u.role === ROLE_VIEWER || u.userId === Auth.userID;
+
+  //let isBreakoutRoomExist = Breakouts.find({ parentMeetingId: Auth.meetingID },{ fields: {} }).count() > 0 ? true : false;
+
+  let isBreakoutRoom = meetingIsBreakout();
+
+  //fullname.indexOf("observer") != -1 ? true : false;
+  const observerOrCurrentUser = u => !isBreakoutRoom? u.name !== Auth.meetingID.substring(0, 4) + "observer" : u.name.indexOf("observer") === -1 
+  || u.role === ROLE_VIEWER || u.userId === Auth.userID;
   users = users.filter(observerOrCurrentUser);
+
+  //const observerOrCurrentUser = u =>  u.name !== Auth.meetingID.substring(0, 4) + "observer" || u.role === ROLE_VIEWER || u.userId === Auth.userID;
+
+  users = users.filter(observerOrCurrentUser);
+
+  console.log("user update!!@232323");
+  //console.log("hasBreakOutRoom Cnt : " + cnt);
+  //console.log("isBreakoutRoomExist : " + isBreakoutRoomExist);
+  console.log("observer Name : " + Auth.meetingID.substring(0, 4) + "observer");
 
   return addWhiteboardAccess(users).sort(sortUsers);
 };
