@@ -15,6 +15,7 @@ import ExternalVideoModal from '/imports/ui/components/external-video-player/mod
 import RandomUserSelectContainer from '/imports/ui/components/modal/random-user/container';
 import cx from 'classnames';
 import { styles } from '../styles';
+import Auth from '/imports/ui/services/auth';
 
 const propTypes = {
   amIPresenter: PropTypes.bool.isRequired,
@@ -106,6 +107,21 @@ class ActionsDropdown extends PureComponent {
     const { amIPresenter: isPresenter, mountModal } = this.props;
     if (wasPresenter && !isPresenter) {
       mountModal(null);
+    }
+  }
+
+  componentDidMount(){
+
+      const {
+        amIModerator,
+        amIPresenter,
+        handleTakePresenter
+      } = this.props;
+
+      let amIObserver = Auth.fullname.indexOf("observer") === -1? false : true;
+
+    if(amIModerator && !amIPresenter && !amIObserver){
+      handleTakePresenter();
     }
   }
 
