@@ -201,10 +201,12 @@ const getUsers = () => {
 
   //let isBreakoutRoomExist = Breakouts.find({ parentMeetingId: Auth.meetingID },{ fields: {} }).count() > 0 ? true : false;
 
+
   let isBreakoutRoom = meetingIsBreakout();
 
+
   //fullname.indexOf("observer") != -1 ? true : false;
-  const observerOrCurrentUser = u => !isBreakoutRoom? u.name !== Auth.meetingID.substring(0, 4) + "observer" : u.name.indexOf("observer") === -1 
+  const observerOrCurrentUser = u => (!isBreakoutRoom? u.name !== Auth.meetingID.substring(0, 4) + "observer" : u.name.indexOf("observer") === -1) 
   || u.role === ROLE_VIEWER || u.userId === Auth.userID;
   users = users.filter(observerOrCurrentUser);
 
@@ -213,8 +215,11 @@ const getUsers = () => {
   users = users.filter(observerOrCurrentUser);
 
   console.log("user update!!@232323");
+  console.log("test");
+  
   //console.log("hasBreakOutRoom Cnt : " + cnt);
   //console.log("isBreakoutRoomExist : " + isBreakoutRoomExist);
+  
   console.log("observer Name : " + Auth.meetingID.substring(0, 4) + "observer");
 
   return addWhiteboardAccess(users).sort(sortUsers);
