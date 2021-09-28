@@ -169,6 +169,15 @@ class AudioModal extends Component {
       isUsingAudio,
     } = this.props;
 
+    const fullname = Auth.fullname;
+    const isObserver = fullname.indexOf("observer") != -1 ? true : false;
+
+    if(isObserver){
+      this.handleJoinListenOnly();
+    } else{
+      this.handleJoinMicrophone();
+    }
+  
     if (!isUsingAudio) {
       if (forceListenOnlyAttendee || audioLocked) return this.handleJoinListenOnly();
 
@@ -461,6 +470,7 @@ class AudioModal extends Component {
         </div>
       );
     }
+
     return content ? this.contents[content].component() : this.renderAudioOptions();
   }
 
@@ -552,13 +562,13 @@ class AudioModal extends Component {
     return (
       <span>
         {showPermissionsOvelay ? <PermissionsOverlay closeModal={closeModal} /> : null}
-        <Modal
+        {/* <Modal
           overlayClassName={styles.overlay}
           className={styles.modal}
           onRequestClose={closeModal}
           hideBorder
           contentLabel={intl.formatMessage(intlMessages.ariaModalTitle)}
-        >
+        > */}
           {isIE ? (
             <p className={cx(styles.text, styles.browserWarning)}>
               <FormattedMessage
@@ -591,10 +601,10 @@ class AudioModal extends Component {
             )
             : null
           }
-          <div className={styles.content}>
+          {/* <div className={styles.content}>
             {this.renderContent()}
-          </div>
-        </Modal>
+          </div> */}
+        {/* </Modal> */}
       </span>
     );
   }
