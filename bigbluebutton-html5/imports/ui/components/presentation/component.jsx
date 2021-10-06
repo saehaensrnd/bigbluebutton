@@ -51,6 +51,8 @@ const intlMessages = defineMessages({
 
 const ALLOW_FULLSCREEN = Meteor.settings.public.app.allowFullscreen;
 
+let isPresentationChanged = false;
+
 class PresentationArea extends PureComponent {
   constructor() {
     super();
@@ -168,6 +170,13 @@ class PresentationArea extends PureComponent {
     if (numUsersVideo !== prevNumUsersVideo) {
       this.onResize();
     }
+
+    if(prevProps.currentPresentation.name !== currentPresentation.name){
+      isPresentationChanged = true;
+    } else {
+      isPresentationChanged = false;
+    }
+
 
     if(prevProps?.slidePosition && slidePosition){
       const { width: prevWidth, height: prevHeight } = prevProps.slidePosition;
@@ -778,6 +787,10 @@ class PresentationArea extends PureComponent {
       userIsPresenter,
       multiUser,
       slidePosition,
+      currentPresentation,
+      toggleSwapLayout,
+      toggleSwapLayoutOff,
+ 
     } = this.props;
 
     const {
@@ -787,6 +800,14 @@ class PresentationArea extends PureComponent {
       isFullscreen,
       localPosition,
     } = this.state;
+
+
+
+    if(isPresentationChanged){
+      toggleSwapLayoutOff();
+    }
+
+  
 
     let viewBoxDimensions;
 

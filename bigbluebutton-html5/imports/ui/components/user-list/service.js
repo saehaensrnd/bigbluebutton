@@ -214,14 +214,6 @@ const getUsers = () => {
 
   users = users.filter(observerOrCurrentUser);
 
-  console.log("user update!!@232323");
-  console.log("test");
-  
-  //console.log("hasBreakOutRoom Cnt : " + cnt);
-  //console.log("isBreakoutRoomExist : " + isBreakoutRoomExist);
-  
-  console.log("observer Name : " + Auth.meetingID.substring(0, 4) + "observer");
-
   return addWhiteboardAccess(users).sort(sortUsers);
 };
 

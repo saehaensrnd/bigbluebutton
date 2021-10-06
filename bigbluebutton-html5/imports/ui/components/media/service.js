@@ -51,11 +51,29 @@ const setSwapLayout = () => {
   swapLayout.tracker.changed();
 };
 
+
+
 const toggleSwapLayout = () => {
   window.dispatchEvent(new Event('togglePresentationHide'));
   swapLayout.value = !swapLayout.value;
   swapLayout.tracker.changed();
 };
+
+
+const toggleSwapLayoutOn = () => {
+  window.dispatchEvent(new Event('togglePresentationHide'));
+  swapLayout.value = true;
+  swapLayout.tracker.changed();
+
+}
+
+const toggleSwapLayoutOff = () => {
+  window.dispatchEvent(new Event('togglePresentationHide'));
+  swapLayout.value = false;
+  swapLayout.tracker.changed();
+
+}
+
 
 export const shouldEnableSwapLayout = () => !shouldShowScreenshare() && !shouldShowExternalVideo();
 
@@ -63,6 +81,8 @@ export const getSwapLayout = () => {
   swapLayout.tracker.depend();
   return swapLayout.value;
 };
+
+
 
 export default {
   getPresentationInfo,
@@ -73,6 +93,8 @@ export default {
   isUserPresenter,
   isVideoBroadcasting,
   toggleSwapLayout,
+  toggleSwapLayoutOn,
+  toggleSwapLayoutOff,
   shouldEnableSwapLayout,
   getSwapLayout,
   setSwapLayout,
