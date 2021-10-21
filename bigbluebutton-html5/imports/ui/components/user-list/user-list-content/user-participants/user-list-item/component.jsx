@@ -76,33 +76,7 @@ const emojiArray = {
 };
 
 class UserListItem extends PureComponent {
-
-  componentDidUpdate(prevProps){
-
-
-    const { setEmojiStatus } = this.props;
-
-    //   console.log("prevProps Keys : " + Object.keys(prevProps));
-    //  console.log("prevProps Values : " + Object.values(prevProps));
-    //  console.log("--------------------------------------------")
-
-    //   console.log("this.props Keys : " + Object.keys(this.props));
-    //   console.log("this.props Values : " + Object.values(this.props));
-    //   console.log("--------------------------------------------")
-    console.log(this.props.user.sortName + " : " + this.props.user.emoji);
-    console.log("--------------------------------------------")
-    //notify(this.props.user.sortName + " : " + emojiArray[this.props.user.emoji], 'info',  'user');
-    //notify("hello???", 'info',  'user');
-    // if(prevProps.user.emoji != this.props.user.emoji){
-    //   if(this.props.user.emoji != "neutral" && this.props.user.emoji != "none")
-    //     notify(this.props.user.sortName + " : " + emojiArray[this.props.user.emoji], 'info',  'user');
-    //     setEmojiStatus(this.props.user.userId, 'none')
-    //     console.log("emojijiji : " + this.props.user.emoji);
-    // }
-
-  }
-
-
+  
   render() {
     const {
       user,
@@ -138,8 +112,6 @@ class UserListItem extends PureComponent {
       raiseHandPushAlert,
       isRTL,
     } = this.props;
-
-    console.log("ujpdateeeee");
 
     const contents = (
       <UserDropdown

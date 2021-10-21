@@ -63,6 +63,12 @@ class LayoutManagerComponent extends Component {
         presentationHeight = (mediaAreaWidth * presentationWidth) / presentationHeight;
         presentationWidth = mediaAreaWidth;
       }
+
+      if(!isMobile){
+        presentationWidth = 970;
+        presentationHeight = 750;
+      }
+
     }
 
     return {
@@ -227,8 +233,10 @@ class LayoutManagerComponent extends Component {
       {
         type: 'setWebcamsAreaSize',
         value: {
-          width: layoutSizes.webcamsAreaSize.width,
-          height: layoutSizes.webcamsAreaSize.height,
+           width: layoutSizes.webcamsAreaSize.width,
+           height: layoutSizes.webcamsAreaSize.height,
+          //width: 345,
+          //height: 805,
         },
       },
     );
@@ -241,6 +249,7 @@ class LayoutManagerComponent extends Component {
         },
       },
     );
+
 
     const newLayoutData = {
       windowSize: {
@@ -296,13 +305,13 @@ class LayoutManagerComponent extends Component {
     if (!autoArrangeLayout || !this._isMounted) return;
 
     if (isScreenShare) {
-      layoutContextDispatch(
-        {
-          type: 'setWebcamsPlacement',
-          value: 'top',
-        },
-      );
-      Storage.setItem('webcamsPlacement', 'top');
+      // layoutContextDispatch(
+      //   {
+      //     type: 'setWebcamsPlacement',
+      //     value: 'top',
+      //   },
+      // );
+      // Storage.setItem('webcamsPlacement', 'top');
       return;
     }
 
@@ -315,13 +324,13 @@ class LayoutManagerComponent extends Component {
       );
       Storage.setItem('webcamsPlacement', 'left');
     } else {
-      layoutContextDispatch(
-        {
-          type: 'setWebcamsPlacement',
-          value: 'top',
-        },
-      );
-      Storage.setItem('webcamsPlacement', 'top');
+      // layoutContextDispatch(
+      //   {
+      //     type: 'setWebcamsPlacement',
+      //     value: 'top',
+      //   },
+      // );
+      // Storage.setItem('webcamsPlacement', 'top');
     }
   }
 
@@ -709,7 +718,7 @@ class LayoutManagerComponent extends Component {
     let presentationAreaHeight;
 
     if (webcamsPlacement === 'left' || webcamsPlacement === 'right') {
-      presentationAreaWidth = mediaAreaWidth - webcamAreaWidth - 20;
+      presentationAreaWidth = mediaAreaWidth - webcamAreaWidth - 20 - 100;
       presentationAreaHeight = mediaAreaHeight - 20;
     } else {
       presentationAreaWidth = mediaAreaWidth;
@@ -750,6 +759,8 @@ class LayoutManagerComponent extends Component {
 
     const firstPanel = newUserListSize;
 
+    
+
     let secondPanel = {
       width: 0,
     };
@@ -779,14 +790,17 @@ class LayoutManagerComponent extends Component {
       top: realNavbarHeight,
       left: firstPanel.width + secondPanel.width,
     };
+    
 
-    const { presentationWidth, presentationHeight } = LayoutManagerComponent.calculatesPresentationSize(
+    const { presentationWidth, presentationHeight } =  LayoutManagerComponent.calculatesPresentationSize(
       mediaAreaWidth, mediaAreaHeight, presentationSlideWidth, presentationSlideHeight,
     );
+
 
     this.defineWebcamPlacement(
       mediaAreaWidth, mediaAreaHeight, presentationWidth, presentationHeight,
     );
+    
 
     const { webcamsAreaWidth, webcamsAreaHeight } = this.calculatesWebcamsAreaSize(
       mediaAreaWidth, mediaAreaHeight, presentationWidth, presentationHeight,

@@ -26,7 +26,7 @@ public:
     # "media.setsinkid.enabled" to make it work properly
     # enableDynamicAudioDeviceSelection: true
     #
-    clientTitle: BigBlueButton
+    clientTitle: NetStudy
     appName: BigBlueButton HTML5 Client
     bbbServerVersion: 2.3
     copyright: '©2021 BigBlueButton Inc.'
@@ -423,7 +423,7 @@ public:
     enabled: true
     url: https://saehaensrnd.com/pad
   layout:
-    autoSwapLayout: true
+    autoSwapLayout: false
     hidePresentation: false
     showParticipantsOnLogin: true
   media:
@@ -644,7 +644,7 @@ private:
     pencilChunkLength: 100
     loadSlidesFromHttpAlways: false
   etherpad:
-    apikey: 2u95q5bxUbuEjHGniVycqQFiqM481HF2Ra7BhJqk7FjJlmuvlIDjMBpRbEiQf
+    apikey: smhhywfsmETCYFrz8PQYB8j0yj8McOjNqwiYFqVx9OgfwMItrDaVFm65NObbudT
     version: 1.2.13
     host: 127.0.0.1
     port: 9001

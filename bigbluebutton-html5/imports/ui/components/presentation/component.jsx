@@ -1,3 +1,5 @@
+//presentation
+
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import WhiteboardOverlayContainer from '/imports/ui/components/whiteboard/whiteboard-overlay/container';
@@ -21,6 +23,7 @@ import { withDraggableConsumer } from '../media/webcam-draggable-overlay/context
 import Icon from '/imports/ui/components/icon/component';
 import { withLayoutConsumer } from '/imports/ui/components/layout/context';
 import PollingContainer from '/imports/ui/components/polling/container';
+import deviceInfo from '/imports/utils/deviceInfo';
 
 const intlMessages = defineMessages({
   presentationLabel: {
@@ -53,16 +56,18 @@ const ALLOW_FULLSCREEN = Meteor.settings.public.app.allowFullscreen;
 
 let isPresentationChanged = false;
 
+//const { isMobile } = deviceInfo;
+
 class PresentationArea extends PureComponent {
   constructor() {
     super();
 
     this.state = {
-      presentationAreaWidth: 0,
-      presentationAreaHeight: 0,
+       presentationAreaWidth: 0,
+       presentationAreaHeight: 0,
       showSlide: false,
       zoom: 100,
-      fitToWidth: false,
+      fitToWidth: true,
       isFullscreen: false,
     };
 
@@ -320,7 +325,6 @@ class PresentationArea extends PureComponent {
   getInitialPresentationSizes() {
     // determining the presentationAreaWidth and presentationAreaHeight (available
     // space for the svg) on the initial load
-
     const presentationSizes = this.getPresentationSizesAvailable();
     if (Object.keys(presentationSizes).length > 0) {
       // setting the state of the available space for the svg
@@ -338,14 +342,50 @@ class PresentationArea extends PureComponent {
   }
 
   handleResize() {
+
+    const { slidePosition } = this.props;
+
     const presentationSizes = this.getPresentationSizesAvailable();
     if (Object.keys(presentationSizes).length > 0) {
       // updating the size of the space available for the slide
+
+      const width = slidePosition.width;
+      const height = slidePosition.height;
+
+      // if(!isMobile){
+
+      //   if(width > height){
+
+      //     this.setState({
+      //        presentationAreaHeight: presentationSizes.presentationAreaHeight,
+      //        presentationAreaWidth: presentationSizes.presentationAreaWidth,
+      //     });
+  
+      //   } else{
+  
+      //     this.setState({
+      //       presentationAreaHeight: 750,
+      //       presentationAreaWidth: 908,
+      //     });
+  
+      //   }
+
+      // } else{
+      //   this.setState({
+      //     presentationAreaHeight: presentationSizes.presentationAreaHeight,
+      //     presentationAreaWidth: presentationSizes.presentationAreaWidth,
+      //  });
+      // }
+
+     
+
       this.setState({
         presentationAreaHeight: presentationSizes.presentationAreaHeight,
         presentationAreaWidth: presentationSizes.presentationAreaWidth,
-      });
+     });
+
     }
+    
   }
 
   calculateSize(viewBoxDimensions) {
@@ -513,7 +553,7 @@ class PresentationArea extends PureComponent {
         updateLocalPosition={this.updateLocalPosition}
         panAndZoomChanger={this.panAndZoomChanger}
         getSvgRef={this.getSvgRef}
-        fitToWidth={fitToWidth}
+        fitToWidth={fitToWidth} 
       >
         <WhiteboardOverlayContainer
           getSvgRef={this.getSvgRef}
@@ -676,6 +716,10 @@ class PresentationArea extends PureComponent {
 
     if (!currentSlide) return null;
 
+    // if(isMobile){
+    //   fitToWidth = false;
+    // }
+
     return (
       <PresentationToolbarContainer
         {...{
@@ -802,12 +846,9 @@ class PresentationArea extends PureComponent {
     } = this.state;
 
 
-
     if(isPresentationChanged){
       toggleSwapLayoutOff();
     }
-
-  
 
     let viewBoxDimensions;
 
