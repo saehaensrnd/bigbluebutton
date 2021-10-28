@@ -213,33 +213,6 @@ class MessageForm extends PureComponent {
       isEmoji = false;
       return;
     } 
-      
-    //   userArray.forEach(prevUser => {
-     
-    //     console.log("prev userEmoji : " + prevUser.emoji);
-    //     console.log("prev userEmoji22222 : " + prevUser.emoji);
-  
-    //     users.forEach(user => {
-  
-    //       console.log("userEmoji : " + user.emoji);
-    //       console.log("userEmoji22222 : " + user.emoji);
-
-    //       if(user.userId === prevUser.userId && Auth.userID === user.userID){
-  
-    //         if(user.emoji !== prevUser.emoji){
-    //           isEmoji = true;
-    //           prevUser.emoji = user.emoji;
-    //           currentEmoji = user.emoji;
-    //           this.handleEmojiSubmit();
-    //           isEmoji = false;
-    //         }
-  
-    //       }
-  
-    //     })
-  
-    //  });
-
 
     users.forEach(user => {
 
@@ -247,19 +220,14 @@ class MessageForm extends PureComponent {
 
         if(currentEmoji !== user.emoji && user.emoji !== "none"){
           isEmoji = true;
-          //prevUser.emoji = user.emoji;
           currentEmoji = user.emoji;
           this.handleEmojiSubmit();
         
-          //currentEmoji = "none";
-          //isEmoji = false;
         }
 
       }
 
     })
-
-    console.log("chat update!!");
     
   }
 
@@ -372,13 +340,8 @@ class MessageForm extends PureComponent {
     } = this.props;
     const { message } = this.state;
 
-    //let msg = emojiArray[currentEmoji].trim();
     let msg = intl.formatMessage(messages[currentEmoji]).trim();
-    // if(isEmoji){
-    //   msg = currentEmoji.trim();
-    // } else {
-    //   return;
-    // }
+
    
     console.log("msg : " + msg + " : " + currentEmoji);
 

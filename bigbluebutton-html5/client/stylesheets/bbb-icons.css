@@ -67,6 +67,9 @@
 .icon-bbb-rectangle_tool:before {
   content: "\e91f";
 }
+.icon-bbb-fill_rectangle_tool:before {
+  content: "\e91f";
+}
 .icon-bbb-text_tool:before {
   content: "\e920";
 }

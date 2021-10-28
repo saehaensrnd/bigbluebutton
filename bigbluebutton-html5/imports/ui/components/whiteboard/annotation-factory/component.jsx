@@ -6,6 +6,7 @@ import Ellipse from '../annotations/ellipse/component';
 import Line from '../annotations/line/component';
 import Poll from '../annotations/poll/component';
 import Rectangle from '../annotations/rectangle/component';
+import FillRectangle from '../annotations/fill-rectangle/component';
 import Text from '../annotations/text/container';
 import Triangle from '../annotations/triangle/component';
 import Pencil from '../annotations/pencil/component';
@@ -98,6 +99,7 @@ AnnotationFactory.defaultProps = {
     line: Line,
     poll_result: Poll,
     rectangle: Rectangle,
+    fillRectangle: Rectangle,
     eraser: Eraser,
     text: Text,
     triangle: Triangle,

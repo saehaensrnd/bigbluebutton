@@ -316,21 +316,36 @@ class LayoutManagerComponent extends Component {
     }
 
     if ((mediaAreaWidth - presentationWidth) > (mediaAreaHeight - presentationHeight)) {
-      layoutContextDispatch(
-        {
-          type: 'setWebcamsPlacement',
-          value: 'left',
-        },
-      );
-      Storage.setItem('webcamsPlacement', 'left');
+      
+      if(!isMobile){
+        layoutContextDispatch(
+          {
+            type: 'setWebcamsPlacement',
+            value: 'left',
+          },
+        );
+        Storage.setItem('webcamsPlacement', 'left');
+      } else {
+        layoutContextDispatch(
+          {
+            type: 'setWebcamsPlacement',
+            value: 'top',
+          },
+        );
+        Storage.setItem('webcamsPlacement', 'top');
+      }
+      
     } else {
-      // layoutContextDispatch(
-      //   {
-      //     type: 'setWebcamsPlacement',
-      //     value: 'top',
-      //   },
-      // );
-      // Storage.setItem('webcamsPlacement', 'top');
+      if(isMobile){
+        layoutContextDispatch(
+          {
+            type: 'setWebcamsPlacement',
+            value: 'top',
+          },
+        );
+        Storage.setItem('webcamsPlacement', 'top');
+      }
+      
     }
   }
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getFormattedColor, getStrokeWidth, denormalizeCoord, isFilled } from '../helpers';
+import { getFormattedColor, getStrokeWidth, denormalizeCoord } from '../helpers';
 
-export default class RectangleDrawComponent extends Component {
+export default class FillRectangleDrawComponent extends Component {
   shouldComponentUpdate(nextProps) {
     const { version } = this.props;
     return version !== nextProps.version;
@@ -54,8 +54,7 @@ export default class RectangleDrawComponent extends Component {
         y={results.y}
         width={results.width}
         height={results.height}
-        fill="none"
-        //fill={getFormattedColor(annotation.color)}
+        fill={getFormattedColor(annotation.color)}
         stroke={getFormattedColor(annotation.color)}
         strokeWidth={getStrokeWidth(annotation.thickness, slideWidth)}
         style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}
@@ -65,7 +64,7 @@ export default class RectangleDrawComponent extends Component {
   }
 }
 
-RectangleDrawComponent.propTypes = {
+FillRectangleDrawComponent.propTypes = {
   // Defines a version of the shape, so that we know if we need to update the component or not
   version: PropTypes.number.isRequired,
   // Defines an annotation object, which contains all the basic info we need to draw a rectangle

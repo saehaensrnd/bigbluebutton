@@ -19,6 +19,10 @@ const intlMessages = defineMessages({
     id: 'app.whiteboard.toolbar.tools.rectangle',
     description: 'Tool submenu rectangle annotation',
   },
+  toolFillRectangle: {
+    id: 'app.whiteboard.toolbar.tools.fillRectangle',
+    description: 'Tool submenu fill rectangle annotation',
+  },
   toolTriangle: {
     id: 'app.whiteboard.toolbar.tools.triangle',
     description: 'Tool submenu triangle annotation',

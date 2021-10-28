@@ -251,8 +251,6 @@ def svg_render_shape_eraser(g, slide, shape)
   g << use
 end
 
-
-
 def svg_render_shape_rect(g, slide, shape)
   g['shape'] = "rect#{shape[:shape_unique_id]}"
   g['style'] = "stroke:##{shape[:color]};stroke-width:#{shape_thickness(slide,shape)};visibility:hidden;fill:none"

@@ -744,6 +744,7 @@
     "app.whiteboard.toolbar.tools.hand": "Pan",
     "app.whiteboard.toolbar.tools.pencil": "Pencil",
     "app.whiteboard.toolbar.tools.rectangle": "Rectangle",
+    "app.whiteboard.toolbar.tools.fillRectangle": "Fill Rectangle",
     "app.whiteboard.toolbar.tools.triangle": "Triangle",
     "app.whiteboard.toolbar.tools.ellipse": "Ellipse",
     "app.whiteboard.toolbar.tools.line": "Line",

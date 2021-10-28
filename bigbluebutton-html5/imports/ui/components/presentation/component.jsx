@@ -56,7 +56,7 @@ const ALLOW_FULLSCREEN = Meteor.settings.public.app.allowFullscreen;
 
 let isPresentationChanged = false;
 
-//const { isMobile } = deviceInfo;
+const { isMobile } = deviceInfo;
 
 class PresentationArea extends PureComponent {
   constructor() {
@@ -352,30 +352,30 @@ class PresentationArea extends PureComponent {
       const width = slidePosition.width;
       const height = slidePosition.height;
 
-      // if(!isMobile){
+      if(!isMobile){
 
-      //   if(width > height){
+        if(width > height){
 
-      //     this.setState({
-      //        presentationAreaHeight: presentationSizes.presentationAreaHeight,
-      //        presentationAreaWidth: presentationSizes.presentationAreaWidth,
-      //     });
+          this.setState({
+             presentationAreaHeight: presentationSizes.presentationAreaHeight,
+             presentationAreaWidth: presentationSizes.presentationAreaWidth,
+          });
   
-      //   } else{
+        } else{
   
-      //     this.setState({
-      //       presentationAreaHeight: 750,
-      //       presentationAreaWidth: 908,
-      //     });
+          this.setState({
+            presentationAreaHeight: 750,
+            presentationAreaWidth: 908,
+          });
   
-      //   }
+        }
 
-      // } else{
-      //   this.setState({
-      //     presentationAreaHeight: presentationSizes.presentationAreaHeight,
-      //     presentationAreaWidth: presentationSizes.presentationAreaWidth,
-      //  });
-      // }
+      } else{
+        this.setState({
+          presentationAreaHeight: presentationSizes.presentationAreaHeight,
+          presentationAreaWidth: presentationSizes.presentationAreaWidth,
+       });
+      }
 
      
 

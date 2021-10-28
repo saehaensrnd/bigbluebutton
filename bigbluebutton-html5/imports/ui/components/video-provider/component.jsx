@@ -11,6 +11,7 @@ import {
 } from '/imports/utils/fetchStunTurnServers';
 import logger from '/imports/startup/client/logger';
 import { notifyStreamStateChange } from '/imports/ui/services/bbb-webrtc-sfu/stream-state-service';
+import Auth from '/imports/ui/services/auth';
 
 // Default values and default empty object to be backwards compat with 2.2.
 // FIXME Remove hardcoded defaults 2.3.
@@ -237,6 +238,7 @@ class VideoProvider extends Component {
         .forEach((peer) => {
           // 0 means no threshold in place. Reapply original one if needed
           const profileToApply = (threshold === 0) ? peer.originalProfileId : profile;
+          
           VideoService.applyCameraProfile(peer, profileToApply);
         });
     }
@@ -481,6 +483,7 @@ class VideoProvider extends Component {
       iceServers = getMappedFallbackStun();
     } finally {
       const { constraints, bitrate, id: profileId } = VideoService.getCameraProfile();
+      
       this.outboundIceQueues[stream] = [];
       const peerOptions = {
         mediaConstraints: {

@@ -171,6 +171,11 @@ class UserOptions extends PureComponent {
       intl.formatMessage(intlMessages.sortedLastNameHeading),
     ).dispatchEvent(new MouseEvent('click',
       { bubbles: true, cancelable: true, view: window }));
+    // window.open("http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp");
+    
+    // window.open("http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp?id=user-joined&external-meeting-id=r4pmwssgrm7xfh5w5vctmqllb8dusgketztyq7jn&name=admin");
+    // window.open("http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp?event");
+    
   }
 
   onActionsShow() {

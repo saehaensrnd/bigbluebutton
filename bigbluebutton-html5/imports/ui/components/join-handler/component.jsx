@@ -59,6 +59,15 @@ class JoinHandler extends Component {
 
         this.firstJoinTime = undefined;
         this.fetchToken();
+
+        console.log("Join!!!");
+        
+        // window.open("http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp");
+    
+      // window.open("http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp?id=user-joined&external-meeting-id=r4pmwssgrm7xfh5w5vctmqllb8dusgketztyq7jn&name=admin");
+      // window.open("http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp?event");
+
+
       } else if (status === 'failed') {
         c.stop();
 
@@ -130,6 +139,65 @@ class JoinHandler extends Component {
           sessionToken, fullname, externUserID, confname,
         );
         resolve(resp);
+        //console.log("meetingID : " + Auth.meetingID);
+
+
+        var x = new XMLHttpRequest();
+        var getMeetings_url = "https://saehaensrnd.com/bigbluebutton/api/getMeetings?checksum=2c7b2422242d98c0cb10a13b151080bfc8561ddf";
+        x.open("GET", getMeetings_url, true);
+        x.onreadystatechange = function () {
+          if (x.readyState == 4) {
+      
+            if(x.status == 200){
+      
+              var doc = x.responseXML;
+            
+              var meetings = "";
+      
+              meetings = doc.getElementsByTagName("meeting");
+     
+              if(meetings.length > 0){
+                
+                for(var i=0; i<meetings.length; i++){
+               
+                  
+                  var meetingID = meetings[i].getElementsByTagName("meetingID").item(0).textContent;
+                  var internalMeetingID = meetings[i].getElementsByTagName("internalMeetingID").item(0).textContent;
+            
+                  
+                  if(internalMeetingID == Auth.meetingID){
+                    console.log("Auth meetingID22 : " + meetingID);	
+
+                    var url = "http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp?id=user-joined&external-meeting-id=" + meetingID + 
+                    "&name=" + Auth.fullname + "&userID=" + Auth.userID;
+    
+                    window.open(url, 'API', 'width=500, height=500');
+
+                    break;
+                  }
+                  				
+                }
+      
+              }
+      
+            } 
+      
+        }};
+                
+        //x.send();
+
+
+
+
+
+
+
+
+
+
+
+
+
       });
     };
 

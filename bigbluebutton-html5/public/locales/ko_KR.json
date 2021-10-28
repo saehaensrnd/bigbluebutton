@@ -737,6 +737,7 @@
     "app.whiteboard.toolbar.tools.hand": "Pan",
     "app.whiteboard.toolbar.tools.pencil": "연필",
     "app.whiteboard.toolbar.tools.rectangle": "직사각형",
+    "app.whiteboard.toolbar.tools.fillRectangle": "채운 직사각형",
     "app.whiteboard.toolbar.tools.triangle": "삼각형",
     "app.whiteboard.toolbar.tools.ellipse": "타원",
     "app.whiteboard.toolbar.tools.line": "라인",

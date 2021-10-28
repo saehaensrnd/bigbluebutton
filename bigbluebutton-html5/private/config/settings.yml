@@ -264,12 +264,12 @@ public:
           frameRate: 10
       - id: low
         name: Low
-        default: true
-        bitrate: 50
-      - id: medium
-        name: Medium
         default: false
         bitrate: 100
+      - id: medium
+        name: Medium
+        default: true
+        bitrate: 120
       - id: high
         name: High
         default: false
@@ -599,6 +599,8 @@ public:
           value: triangle
         - icon: rectangle_tool
           value: rectangle
+        - icon: fill_rectangle_tool
+          value: fillRectangle
         - icon: pen_tool
           value: pencil
         - icon: hand
@@ -610,6 +612,7 @@ public:
         - ellipse
         - triangle
         - rectangle
+        - fillRectangle
         - pencil
         - hand
       multiUserTools:
@@ -619,6 +622,7 @@ public:
         - ellipse
         - triangle
         - rectangle
+        - fillRectangle
         - pencil
   clientLog:
     server:

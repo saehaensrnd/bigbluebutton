@@ -6,6 +6,7 @@ import PencilDrawListener from './pencil-draw-listener/component';
 import ShapePointerListener from './shape-pointer-listener/component';
 import PencilPointerListener from './pencil-pointer-listener/component';
 import CursorListener from './cursor-listener/component';
+import { isFilled } from '/imports/ui/components/whiteboard/annotations/helpers';
 
 export default class WhiteboardOverlay extends Component {
   // a function to transform a screen point to svg point
@@ -17,7 +18,7 @@ export default class WhiteboardOverlay extends Component {
     if (CTM !== null) {
       return screenPoint.matrixTransform(CTM.inverse());
     }
-
+    //작업
     const outOfBounds = someSvgObject.createSVGPoint();
     outOfBounds.x = -1;
     outOfBounds.y = -1;
@@ -169,7 +170,7 @@ export default class WhiteboardOverlay extends Component {
     const { tool } = drawSettings;
 
     //if (tool === 'triangle' || tool === 'rectangle' || tool === 'ellipse' || tool === 'line') {
-    if (tool === 'triangle' || tool === 'rectangle' || tool === 'ellipse' || tool === 'line' || tool === 'eraser') {
+    if (tool === 'triangle' || tool === 'rectangle' || tool === 'ellipse' || tool === 'line' || tool === 'eraser' || tool === 'fillRectangle') {
       if (window.PointerEvent) {
         return (
           <ShapePointerListener
@@ -179,6 +180,10 @@ export default class WhiteboardOverlay extends Component {
             whiteboardId={whiteboardId}
           />
         );
+      }
+
+      if(tool === 'fillRectangle'){
+        isFilled = true;
       }
 
       return (
