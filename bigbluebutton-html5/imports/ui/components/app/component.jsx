@@ -29,6 +29,9 @@ import { styles } from './styles';
 import { makeCall } from '/imports/ui/services/api';
 import ConnectionStatusService from '/imports/ui/components/connection-status/service';
 import { NAVBAR_HEIGHT, LARGE_NAVBAR_HEIGHT } from '/imports/ui/components/layout/layout-manager/component';
+import Auth from '/imports/ui/services/auth';
+import Attendance from '/imports/ui/services/attendance';
+import Button from '/imports/ui/components/button/component';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -115,6 +118,7 @@ class App extends Component {
     super();
     this.state = {
       enableResize: !window.matchMedia(MOBILE_MEDIA).matches,
+      isCloseMask: false,
     };
 
     this.handleWindowResize = throttle(this.handleWindowResize).bind(this);
@@ -124,7 +128,7 @@ class App extends Component {
 
   componentDidMount() {
     const {
-      locale, notify, intl, validIOSVersion, startBandwidthMonitoring, handleNetworkConnection,
+      locale, notify, intl, validIOSVersion, startBandwidthMonitoring, handleNetworkConnection, currentUserRole
     } = this.props;
     const { browserName } = browserInfo;
     const { isMobile, osName } = deviceInfo;
@@ -169,6 +173,26 @@ class App extends Component {
     ConnectionStatusService.startRoundTripTime();
 
     logger.info({ logCode: 'app_component_componentdidmount' }, 'Client loaded successfully');
+
+
+    let eventID = "user-joined";
+    let name = Auth.fullname;
+    //let userID = Auth.userID;
+    let userID = Auth.externUserID;
+    let userType = currentUserRole;
+
+    console.log("extenr UserID : " + userID);
+
+    
+    if(userType === "MODERATOR")
+      userType = "teacher";
+    else if(userType === "VIEWER")
+      userType = "student";
+    else if(name.indexOf("observer") !== -1)
+      userType = "observer";
+
+    Attendance.checkAttendance(eventID, name, userID, userType);
+
   }
 
   componentDidUpdate(prevProps) {
@@ -283,11 +307,133 @@ class App extends Component {
         style={{
           height: realNavbarHeight,
         }}
-      >
+      >     
         {navbar}
       </header>
     );
   }
+
+  renderCoachMarkTeacher(){
+
+    return (
+      <div className={styles.mask}>
+        <div className={styles.mask_back}></div>
+
+        <div className={styles.allowMic}>
+          <img src="https://host/img/allowMic.png" width="317" height="128"/>
+        </div>
+
+        <div className={styles.allowCam}>
+          <img src="https://host/img/allowCam.png" width="317" height="128"/>
+        </div>
+
+        <img className={styles.teacher_ments} src="https://host/img/teacherMents.png" width="507" height="293"/>
+
+        <div className={styles.close_btn}>
+          <Button
+              // className={styles.close_btn}
+              hideLabel
+              aria-label="Close"
+              label="Close"
+              // icon="plus"
+              icon="close"
+              color="primary"
+              size="lg"
+              circle
+              onClick={() => this.setState({ isCloseMask: true })}
+            />
+            <p>Close a guide screen</p>
+          </div>
+          <img className={styles.plus_content} src="https://host/img/plus_content.png" width="275" height="140"/>
+          <img className={styles.setting} src="https://host/img/setting.png" width="160" height="240"/>
+
+          <div className={styles.setting_content}>
+            <p>End Meeting : The classroom is removed and all the users in the classroom are out</p>
+            <p>Leave Meeting : To be out of the classroom</p>
+          </div>
+        
+          <div className={styles.quick_menu}>
+            <ul className={styles.quick_list}>
+              <li><div className={styles.qlist}><span>Mic ON/OFF</span></div></li>
+              <li><div className={styles.qlist}><span>Audio Setting</span></div></li>
+              <li><div className={styles.qlist}><span>Webcam ON/OFF</span></div></li>
+              <li><div className={styles.qlist}><span>Screen Share</span></div></li>
+            </ul>
+          </div>
+
+          <div className={styles.raisehand_btn}>
+            <img src="https://host/img/whiteboard.png" width="56" height="55"/>
+            <p className={styles.p}>whiteboard</p>
+          </div>
+        </div>
+    );
+
+  }
+
+  renderCoachMarkStudent(){
+    return (
+      <div className={styles.mask}>
+        <div className={styles.mask_back}></div>
+
+        <div className={styles.allowMic}>
+          <img src="https://host/img/allowMic.png" width="317" height="128"/>
+        </div>
+
+        <div className={styles.allowCam}>
+          <img src="https://host/img/allowCam.png" width="317" height="128"/>
+        </div>
+
+        <img className={styles.student_ments} src="https://host/img/studentMents.png" width="507" height="225"/>
+
+        <div className={styles.close_btn}>
+          <Button
+              // className={styles.close_btn}
+              hideLabel
+              aria-label="Close"
+              label="Close"
+              // icon="plus"
+              icon="close"
+              color="primary"
+              size="lg"
+              circle
+              onClick={() => this.setState({ isCloseMask: true })}
+            />
+            <p>가이드 화면 닫기</p>
+          </div>
+        
+          <div className={styles.quick_menu}>
+            <ul className={styles.quick_list}>
+              <li><div className={styles.qlist}><span>마이크 ON/OFF</span></div></li>
+              <li><div className={styles.qlist}><span>오디오 설정</span></div></li>
+              <li><div className={styles.qlist}><span>웹캠 ON/OFF</span></div></li>
+            </ul>
+          </div>
+          <div className={styles.whiteboard_btn}>
+            <img src="https://host/img/whiteboard.png" width="56" height="55"/>
+            <p className={styles.p}>칠판</p>
+          </div>
+          <div className={styles.raisehand_btn}>
+            <img src="https://host/img/raisehand.png" width="56" height="55"/>
+            <p className={styles.p}>손들기</p>
+          </div>
+          
+
+        </div>
+    );
+  }
+
+
+  renderCoachMark() {
+    const { currentUserRole } = this.props;
+
+    const isModerator = currentUserRole === "MODERATOR"? true : false;
+
+    return isModerator? this.renderCoachMarkTeacher() : this.renderCoachMarkStudent();
+    
+  }
+
+
+
 
   renderSidebar() {
     const { sidebar } = this.props;
@@ -379,16 +525,32 @@ class App extends Component {
 
   render() {
     const {
-      customStyle, customStyleUrl, openPanel, layoutContextState,
+      customStyle, customStyleUrl, openPanel, layoutContextState, currentUserRole
     } = this.props;
 
+    const { isCloseMask } = this.state;
+    
     return (
-      <main className={styles.main}>
+      // <main className={isCloseMask? styles.main : styles.main_mask}>
+      <main className={isCloseMask? styles.main : styles.main_background}>
+        {/* 로딩 완료(프레젠테이션, 웹캠 등 다 배치 되었을 때) 되었을 떄 띄우기 */}
+        {!isCloseMask? this.renderCoachMark() : null}
         {this.renderActivityCheck()}
         {this.renderUserInformation()}
         <BannerBarContainer />
         <NotificationsBarContainer />
-        <section className={styles.wrapper}>
+        <section className={isCloseMask? styles.wrapper : styles.wrapper_mask}>
+          <Button
+              className={styles.help_btn}
+              hideLabel
+              aria-label="Help"
+              label="Help"
+              icon="help"
+              color="primary"
+              size="md"
+              circle
+              onClick={() => this.setState({ isCloseMask: false })}
+            />
           {this.renderSidebar()}
           {this.renderPanel()}
           <div className={openPanel ? styles.content : styles.noPanelContent}>

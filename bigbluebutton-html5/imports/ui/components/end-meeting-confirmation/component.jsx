@@ -4,6 +4,8 @@ import { defineMessages, injectIntl } from 'react-intl';
 import Button from '/imports/ui/components/button/component';
 import Modal from '/imports/ui/components/modal/simple/component';
 import { styles } from './styles';
+import Auth from '/imports/ui/services/auth';
+import Attendance from '/imports/ui/services/attendance';
 
 const intlMessages = defineMessages({
   endMeetingTitle: {
@@ -45,6 +47,28 @@ const propTypes = {
 };
 
 class EndMeetingComponent extends PureComponent {
+
+  constructor(props) {
+    super(props);
+
+    this.endClass = this.endClass.bind(this);
+   
+  }
+
+  endClass(){
+    const { endMeeting } = this.props;
+
+    let eventID = "meeting-ended";
+    let name = Auth.fullname;
+    let userID = Auth.userID;
+    let userType = "none";
+
+    Attendance.checkAttendance(eventID, name, userID, userType);
+    
+    endMeeting();
+
+  }
+
   render() {
     const {
       users, intl, closeModal, endMeeting, meetingTitle,
@@ -80,7 +104,8 @@ class EndMeetingComponent extends PureComponent {
               color="primary"
               className={styles.button}
               label={intl.formatMessage(intlMessages.yesLabel)}
-              onClick={endMeeting}
+              //onClick={endMeeting}
+              onClick={this.endClass}
             />
             <Button
               label={intl.formatMessage(intlMessages.noLabel)}

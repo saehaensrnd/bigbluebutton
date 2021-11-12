@@ -10,10 +10,213 @@
   --panel-margin-left: 0.1em;
 }
 
+.teacher_ments{
+
+  position: absolute;
+  margin-left: 5px;
+  top: 30%;
+
+}
+
+.student_ments{
+
+  position: absolute;
+  margin-left: 5px;
+  top: 30%;
+
+}
+
+.mask {
+  position:absolute;
+  z-index:9000;
+  width : 100%;
+  height: 100%;
+}
+
+.mask_back {
+  position:absolute;
+  width : 100%;
+  height: 100%;
+  background: #000000;
+  opacity: 0.3;
+}
+
+.plus_content{
+
+  position:absolute;
+  margin-left: 230px;
+  bottom: 0;
+  margin-bottom: 60px;
+  //left: 50%;
+  //top: 50%;
+}
+
+.help_btn{
+  position:absolute;
+  right: 0;
+  margin-right: 105px;
+  margin-top: 13px;
+  z-index: 1;
+}
+
+.setting{
+
+  position:absolute;
+  margin-right: 5px;
+  right: 0;
+  margin-top: 58px;
+  //left: 50%;
+  //top: 50%;
+}
+
+.setting_content{
+  position:absolute;
+  margin-top: 225px;
+  margin-right: 175px;
+  right: 0;
+  color:rgb(255, 255, 255);
+  text-align: right;
+
+}
+
+
+.quick_menu{
+ // position:relative; 
+  width:100%; 
+  /*height:175px;*/ 
+  margin:0; 
+  text-align:center; 
+  position:absolute;
+  //margin-left: 240px;
+  left: 47%;
+  //top: 50%;
+  bottom: 0;
+  margin-bottom: 90px;
+}
+.quick_menu .quick_list{width:100%; margin:0 auto; /*padding:50px 0;*/ margin-top:15px;}
+.quick_menu .quick_list > li{float:left; display:block; width:100%; height:70px; margin:0 15px;}
+.quick_menu .quick_list > li:nth-child(6){margin-right:0 none;}
+.quick_menu .quick_list > li > a{display:block; width:90px; height:90px; background:url('https://host/img/mic.png') 50% 50% no-repeat;}
+.quick_menu .quick_list > li > a:hover{width:90px; height:90px;}
+
+.quick_menu .quick_list > li > .qlist{display:block; width:90px; height:90px; background:url('https://host/img/mic.png') 50% 50% no-repeat;}
+
+.quick_menu .quick_list > li:nth-child(2) > a{background-image:url('https://host/img/audio.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(3) > a{background-image:url('https://host/img/webcam.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(4) > a{background-image:url('https://host/img/screenshare.png'); width:90px; height:90px;}
+
+
+.quick_menu .quick_list > li:nth-child(2) > .qlist{background-image:url('https://host/img/audio.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(3) > .qlist{background-image:url('https://host/img/webcam.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(4) > .qlist{background-image:url('https://host/img/screenshare.png'); width:90px; height:90px;}
+
+
+.quick_menu .quick_list span{display:block; font-size:15px; line-height:30px; padding-top:30px; font-weight:600; color:rgb(255, 255, 255); width:500px; text-align:left; padding-left:95px;}
+
+
+.allowMic{
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 50px;
+  margin-top: 10px;
+
+}
+
+.allowCam{
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 385px;
+  margin-top: 10px;
+}
+
+
+.whiteboard_btn {
+  position: absolute;
+  margin-right: 85px;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 63px;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: large;
+  text-align: center;
+}
+
+
+.raisehand_btn {
+  position: absolute;
+  margin-right: 19px;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 63px;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: large;
+  text-align: center;
+}
+
+.p{
+  margin: 0;
+}
+
+.close_btn {
+  position:absolute;
+  margin-top: 10px;
+  left: 50%;
+  color:rgb(255, 255, 255);
+  text-align: center;
+
+  //float: center;
+
+}
+
+.mask_img {
+  position:absolute;
+  //margin-left: 240px;
+  left: 50%;
+  //top: 50%;
+  
+}
+
+.hideDropdownButton {
+  @include mq($small-only) {
+    display:none;
+  }
+}
+
+.window {
+  display: none;
+  position:absolute;
+  left:100px;
+  top:100px;
+  z-index:10000;
+
+
+}
+
 .main {
   @extend %flex-column;
   position: relative;
   height: 100%;
+  
+  
+}
+
+.main_background {
+  @extend %flex-column;
+  position: relative;
+  height: 100%;
+  background-color: #000000;
+  
+}
+
+.main_mask {
+  @extend %flex-column;
+  position: relative;
+  height: 100%;
+  opacity: 0.8;
 }
 
 .navbar {
@@ -33,6 +236,19 @@
   @include mq($medium-up) {
     flex-flow: row;
   }
+}
+
+.wrapper_mask {
+  @extend %flex-column;
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+
+  @include mq($medium-up) {
+    flex-flow: row;
+  }
+
+  opacity: 0.5;
 }
 
 %full-page {

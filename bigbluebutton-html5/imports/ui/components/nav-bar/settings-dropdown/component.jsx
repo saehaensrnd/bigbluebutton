@@ -18,6 +18,7 @@ import ShortcutHelpComponent from '/imports/ui/components/shortcut-help/componen
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import FullscreenService from '../../fullscreen-button/service';
 import Auth from '/imports/ui/services/auth';
+import Attendance from '/imports/ui/services/attendance';
 
 import { styles } from '../styles';
 
@@ -190,6 +191,21 @@ class SettingsDropdown extends PureComponent {
   }
 
   leaveSession() {
+
+    const { amIModerator } = this.props;
+
+    let eventID = "user-left";
+    let name = Auth.fullname;
+    //let userID = Auth.userID;
+    let userID = Auth.externUserID;
+    let userType = amIModerator? "teacher" : "student";
+
+    if(Auth.fullname.indexOf("observer") !== -1){
+      userType = "observer";
+    }
+
+    Attendance.checkAttendance(eventID, name, userID, userType);
+
     makeCall('userLeftMeeting');
     // we don't check askForFeedbackOnLogout here,
     // it is checked in meeting-ended component

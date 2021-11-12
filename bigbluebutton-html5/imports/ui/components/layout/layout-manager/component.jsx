@@ -14,8 +14,10 @@ const max = (value1, value2) => (value1 >= value2 ? value1 : value2);
 const { isMobile } = deviceInfo;
 
 // values based on sass file
-const USERLIST_MIN_WIDTH = 150;
-const USERLIST_MAX_WIDTH = 240;
+// const USERLIST_MIN_WIDTH = 150;
+const USERLIST_MIN_WIDTH = 230;
+// const USERLIST_MAX_WIDTH = 240;
+const USERLIST_MAX_WIDTH = 230;
 const CHAT_MIN_WIDTH = 320;
 const CHAT_MAX_WIDTH = 400;
 const POLL_MIN_WIDTH = 320;
@@ -316,21 +318,36 @@ class LayoutManagerComponent extends Component {
     }
 
     if ((mediaAreaWidth - presentationWidth) > (mediaAreaHeight - presentationHeight)) {
-      layoutContextDispatch(
-        {
-          type: 'setWebcamsPlacement',
-          value: 'left',
-        },
-      );
-      Storage.setItem('webcamsPlacement', 'left');
+      
+      if(!isMobile){
+        layoutContextDispatch(
+          {
+            type: 'setWebcamsPlacement',
+            value: 'left',
+          },
+        );
+        Storage.setItem('webcamsPlacement', 'left');
+      } else {
+        layoutContextDispatch(
+          {
+            type: 'setWebcamsPlacement',
+            value: 'top',
+          },
+        );
+        Storage.setItem('webcamsPlacement', 'top');
+      }
+      
     } else {
-      // layoutContextDispatch(
-      //   {
-      //     type: 'setWebcamsPlacement',
-      //     value: 'top',
-      //   },
-      // );
-      // Storage.setItem('webcamsPlacement', 'top');
+      if(isMobile){
+        layoutContextDispatch(
+          {
+            type: 'setWebcamsPlacement',
+            value: 'top',
+          },
+        );
+        Storage.setItem('webcamsPlacement', 'top');
+      }
+      
     }
   }
 
