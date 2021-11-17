@@ -36,6 +36,8 @@ class ConnectionStatusButton extends PureComponent {
       connected,
     } = this.props;
 
+
+
     if (!connected) {
       return (
         <div className={styles.buttonWrapper}>

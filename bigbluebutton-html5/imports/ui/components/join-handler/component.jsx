@@ -61,12 +61,6 @@ class JoinHandler extends Component {
         this.fetchToken();
 
         console.log("Join!!!");
-        
-        // window.open("http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp");
-    
-      // window.open("http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp?id=user-joined&external-meeting-id=r4pmwssgrm7xfh5w5vctmqllb8dusgketztyq7jn&name=admin");
-      // window.open("http://jangoneadmin.inetstudy.co.kr/adminclass/schedule/receivejson.asp?event");
-
 
       } else if (status === 'failed') {
         c.stop();

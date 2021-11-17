@@ -7,7 +7,7 @@ class Attendance {
     checkAttendance(eventID, name, userID, userType){
 
       var x = new XMLHttpRequest();
-      var getMeetings_url = "https://HOST/bigbluebutton/api/getMeetings?checksum=checksum";
+      var getMeetings_url = "https://HOST/bigbluebutton/api/getMeetings?checksum=e76810293e2c1e2b46943c2457e03af3d5d226da";
       x.open("GET", getMeetings_url, false);
       x.onreadystatechange = function () {
         if (x.readyState == 4) {

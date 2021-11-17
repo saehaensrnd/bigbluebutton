@@ -139,6 +139,10 @@ class App extends Component {
     document.getElementsByTagName('html')[0].lang = locale;
     document.getElementsByTagName('html')[0].style.fontSize = isMobile ? MOBILE_FONT_SIZE : DESKTOP_FONT_SIZE;
 
+
+    console.log("locale111 : " + document.getElementsByTagName('html')[0].lang);
+    console.log("locale222 : " + locale);
+
     const body = document.getElementsByTagName('body')[0];
 
     if (browserName) {
@@ -319,19 +323,24 @@ class App extends Component {
       <div className={styles.mask}>
         <div className={styles.mask_back}></div>
 
-        <div className={styles.allowMic}>
+        {/* <div className={styles.allowMic}>
           <img src="https://host/img/allowMic.png" width="317" height="128"/>
         </div>
 
         <div className={styles.allowCam}>
           <img src="https://host/img/allowCam.png" width="317" height="128"/>
+        </div> */}
+        <div className={styles.leave_coachmark_btn}>
+          <img src="https://host/img/leave.png" width="46" height="46"/>
+          <span className={styles.span_align} >Click this button to be out</span>
         </div>
+        
 
         <img className={styles.teacher_ments} src="https://host/img/teacherMents.png" width="507" height="293"/>
 
         <div className={styles.close_btn}>
           <Button
-              // className={styles.close_btn}
+              className={styles.glow}
               hideLabel
               aria-label="Close"
               label="Close"
@@ -370,24 +379,75 @@ class App extends Component {
 
   }
 
-  renderCoachMarkStudent(){
+  renderCoachMarkStudentMobile(){  
+    // isPhone && isPortrait ? 'middle center' 
+    const isPortrait = deviceInfo.isPortrait();
+
+  
+    return isPortrait? (
+      <div className={styles.mask}>
+        <div className={styles.mask_back}></div>
+
+        <div className={styles.close_btn_mobile}>
+          <Button
+              className={styles.glow}
+              hideLabel
+              aria-label="Close"
+              label="Close"
+              // icon="plus"
+              icon="close"
+              color="primary"
+              size="md"
+              circle
+              onClick={() => this.setState({ isCloseMask: true })}
+            />
+            <p>가이드 화면 닫기</p>
+          </div>
+        
+          <div className={styles.quick_menu_mobile}>
+            <ul className={styles.quick_list}>
+              <li><div className={styles.qlist}><span>마이크 ON/OFF</span></div></li>
+              <li><div className={styles.qlist}><span>오디오 설정</span></div></li>
+              <li><div className={styles.qlist}><span>웹캠 ON/OFF</span></div></li>
+              <li><div className={styles.qlist}><span>칠판</span></div></li>
+            </ul>
+          </div>
+          <div className={styles.raisehand_btn_mobile}>
+            <img src="https://host/img/raisehand.png" width="56" height="55"/>
+            <p className={styles.p}>손들기</p>
+          </div>
+          
+
+        </div>
+    ):null;
+
+
+  }
+
+  renderCoachMarkStudentPC(){  
+
     return (
       <div className={styles.mask}>
         <div className={styles.mask_back}></div>
 
-        <div className={styles.allowMic}>
+        {/* <div className={styles.allowMic}>
           <img src="https://host/img/allowMic.png" width="317" height="128"/>
         </div>
 
         <div className={styles.allowCam}>
           <img src="https://host/img/allowCam.png" width="317" height="128"/>
+        </div> */}
+
+        <div className={styles.leave_coachmark_btn}>
+          <img src="https://host/img/leave.png" width="46" height="46"/>
+          <p>Out</p>
         </div>
 
         <img className={styles.student_ments} src="https://host/img/studentMents.png" width="507" height="225"/>
 
         <div className={styles.close_btn}>
           <Button
-              // className={styles.close_btn}
+              className={styles.glow}
               hideLabel
               aria-label="Close"
               label="Close"
@@ -420,6 +480,15 @@ class App extends Component {
 
         </div>
     );
+
+
+  }
+
+  renderCoachMarkStudent(){
+
+    const { isMobile, osName } = deviceInfo;
+
+    return isMobile? this.renderCoachMarkStudentMobile() : this.renderCoachMarkStudentPC();
   }
 
 
@@ -523,13 +592,14 @@ class App extends Component {
     ) : null);
   }
 
-  render() {
+  renderPC(){
+
     const {
       customStyle, customStyleUrl, openPanel, layoutContextState, currentUserRole
     } = this.props;
 
     const { isCloseMask } = this.state;
-    
+
     return (
       // <main className={isCloseMask? styles.main : styles.main_mask}>
       <main className={isCloseMask? styles.main : styles.main_background}>
@@ -550,6 +620,97 @@ class App extends Component {
               size="md"
               circle
               onClick={() => this.setState({ isCloseMask: false })}
+            />
+
+          <Button
+              className={styles.leave_btn}
+              hideLabel
+              aria-label="Leave"
+              label="Leave"
+              icon="logout"
+              color="primary"
+              size="md"
+              circle
+              onClick={() => { 
+                makeCall('userLeftMeeting');
+                Session.set('codeError', '680');
+              
+              }}
+            />
+            
+          <div className={styles.banner}>
+            <img src="https://host/img/banner.png" width="215" height="50"/>
+          </div>
+
+          {this.renderSidebar()}
+          {this.renderPanel()}
+          <div className={openPanel ? styles.content : styles.noPanelContent}>
+            {this.renderNavBar()}
+            {this.renderMedia()}
+            {this.renderActionsBar()}
+          </div>
+        </section>
+        <UploaderContainer />
+        <BreakoutRoomInvitation />
+        {!layoutContextState.presentationIsFullscreen && !layoutContextState.screenShareIsFullscreen && <PollingContainer />}
+        <ModalContainer />
+        <AudioContainer />
+        <ToastContainer rtl />
+        <ChatAlertContainer />
+        <WaitingNotifierContainer />
+        <LockNotifier />
+        <StatusNotifier status="raiseHand" />
+        <ManyWebcamsNotifier />
+        {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
+        {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
+      </main>
+    );
+  }
+
+  renderMobile(){
+
+    const {
+      customStyle, customStyleUrl, openPanel, layoutContextState, currentUserRole
+    } = this.props;
+
+    const { isCloseMask } = this.state;
+
+    return (
+      // <main className={isCloseMask? styles.main : styles.main_mask}>
+      <main className={styles.main}>
+        {/* 로딩 완료(프레젠테이션, 웹캠 등 다 배치 되었을 때) 되었을 떄 띄우기 */}
+        {!isCloseMask? this.renderCoachMark() : null}
+        {this.renderActivityCheck()}
+        {this.renderUserInformation()}
+        <BannerBarContainer />
+        <NotificationsBarContainer />
+        <section className={styles.wrapper}>
+          <Button
+              className={styles.help_btn_mobile}
+              hideLabel
+              aria-label="Help"
+              label="Help"
+              icon="help"
+              color="primary"
+              size="md"
+              circle
+              onClick={() => this.setState({ isCloseMask: false })}
+            />
+
+            <Button
+              className={styles.leave_btn_mobile}
+              hideLabel
+              aria-label="Leave"
+              label="Leave"
+              icon="logout"
+              color="primary"
+              size="md"
+              circle
+              onClick={() => { 
+                makeCall('userLeftMeeting');
+                Session.set('codeError', '680');
+              
+              }}
             />
           {this.renderSidebar()}
           {this.renderPanel()}
@@ -574,6 +735,15 @@ class App extends Component {
         {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
       </main>
     );
+
+
+  }
+
+  render() {
+ 
+    const { isMobile, osName } = deviceInfo;
+
+    return isMobile? this.renderMobile() : this.renderPC();
   }
 }
 

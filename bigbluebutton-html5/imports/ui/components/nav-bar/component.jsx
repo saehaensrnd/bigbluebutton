@@ -14,6 +14,7 @@ import TalkingIndicatorContainer from '/imports/ui/components/nav-bar/talking-in
 import ConnectionStatusButton from '/imports/ui/components/connection-status/button/container';
 import ConnectionStatusService from '/imports/ui/components/connection-status/service';
 import SettingsDropdownContainer from './settings-dropdown/container';
+import deviceInfo from '/imports/utils/deviceInfo';
 
 const intlMessages = defineMessages({
   toggleUserListLabel: {
@@ -91,6 +92,8 @@ class NavBar extends Component {
 
     let ariaLabel = intl.formatMessage(intlMessages.toggleUserListAria);
     ariaLabel += hasNotification ? (` ${intl.formatMessage(intlMessages.newMessages)}`) : '';
+
+    const { isMobile, osName } = deviceInfo;
 
     return (
       <div
