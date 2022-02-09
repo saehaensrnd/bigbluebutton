@@ -13,6 +13,7 @@ import {
 import UserListItemContainer from './user-list-item/container';
 import UserOptionsContainer from './user-options/container';
 import Settings from '/imports/ui/services/settings';
+import { updateLockSettings, updateWebcamsOnlyForModerator } from '/imports/ui/components/lock-viewers/service';
 
 const propTypes = {
   compact: PropTypes.bool,
@@ -185,6 +186,13 @@ class UserParticipants extends Component {
       meetingIsBreakout,
     } = this.props;
     const { isOpen, scrollArea } = this.state;
+
+    console.log("users length : " + users.length)
+
+    if(users.length > 9)
+      updateWebcamsOnlyForModerator(true);
+    else
+      updateWebcamsOnlyForModerator(false);
 
     return (
       <div className={styles.userListColumn}>
