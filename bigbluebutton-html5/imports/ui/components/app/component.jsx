@@ -45,6 +45,9 @@ import Settings from '/imports/ui/services/settings';
 import LayoutService from '/imports/ui/components/layout/service';
 import { registerTitleView } from '/imports/utils/dom-utils';
 import GlobalStyles from '/imports/ui/stylesheets/styled-components/globalStyles';
+import Button from '/imports/ui/components/common/button/component';
+
+
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -137,6 +140,7 @@ class App extends Component {
     super(props);
     this.state = {
       enableResize: !window.matchMedia(MOBILE_MEDIA).matches,
+      isCloseMask: false,
     };
 
     this.handleWindowResize = throttle(this.handleWindowResize).bind(this);
@@ -442,6 +446,132 @@ class App extends Component {
     ) : null);
   }
 
+  renderButtons(){
+
+    return (
+      <div>
+          <Styled.HelpBtnWrapper>
+            <Button
+                hideLabel
+                aria-label="Help"
+                label="Help"
+                icon="help"
+                color="primary"
+                size="md"
+                circle
+                onClick={() => this.setState({ isCloseMask: false })}
+              />
+          </Styled.HelpBtnWrapper>
+          <Styled.LeaveBtnWrapper>
+            <Button
+              hideLabel
+              aria-label="Leave"
+              label="Leave"
+              icon="logout"
+              color="primary"
+              size="md"
+              circle
+              onClick={() => { 
+
+                // const { currentUserRole } = this.props;
+
+                // let eventID = "user-left";
+                // let name = Auth.fullname;
+                // //let userID = Auth.userID;
+                // let userID = Auth.externUserID;
+                // let userType = currentUserRole;
+
+                // if(userType === "MODERATOR")
+                //   userType = "teacher";
+                // else if(userType === "VIEWER")
+                //   userType = "student";
+                // else if(name.indexOf("observer") !== -1)
+                //   userType = "observer";
+
+                //console.log("userTYpe : " + userType);
+
+                //Attendance.checkAttendance(eventID, name, userID, userType);
+
+                makeCall('userLeftMeeting');
+                Session.set('codeError', '680');
+              
+              }}
+          />
+          </Styled.LeaveBtnWrapper>
+          </div>
+    )
+  }
+
+  renderCoachMarkTeacher(){
+
+    return (
+
+      <Styled.MaskWrapper>
+
+        <Styled.LeaveCoachMarkBtnWrapper>
+          <img src="https://webconf.saehaens.com/icon/leave.png" width="46" height="46"/>
+          <Styled.SpanAlign>
+            Click this button to be out
+          </Styled.SpanAlign>
+        </Styled.LeaveCoachMarkBtnWrapper>
+        
+
+        {/* <img className={styles.teacher_ments} src="https://webconf.saehaens.com/icon/teacherMents.png" width="507" height="293"/> */}
+
+        {/* TODO */}
+        <Styled.CloseBtnWrapper>
+
+          <Button
+              hideLabel
+              aria-label="Close"
+              label="Close"
+              icon="close"
+              color="primary"
+              size="lg"
+              circle
+              onClick={() => {
+                this.setState({ isCloseMask: true })
+              }}
+            />
+            <p>Close a guide screen</p>
+
+          </Styled.CloseBtnWrapper>
+          <Styled.PlusContentWrapper>
+            <img src="https://webconf.saehaens.com/icon/plus_content.png" width="275" height="140"/>
+          </Styled.PlusContentWrapper>
+          <Styled.SettingWrapper>
+            <img src="https://webconf.saehaens.com/icon/setting.png" width="160" height="240"/> 
+          </Styled.SettingWrapper>
+      
+          <Styled.SettingContentWrapper>
+            <p>End Meeting : The classroom is removed and all the users in the classroom are out</p>
+            <p>Leave Meeting : To be out of the classroom</p>
+          </Styled.SettingContentWrapper>
+      
+              <Styled.QuickMenuWrapper>
+                <Styled.QuickListWrapper>
+                  <Styled.MicLiWrapper>Mic ON/OFF</Styled.MicLiWrapper>
+                  <Styled.AudioLiWrapper>Audio Setting</Styled.AudioLiWrapper>
+                  <Styled.WebcamLiWrapper>Webcam ON/OFF</Styled.WebcamLiWrapper>
+                  <Styled.ScreenshareLiWrapper>Screen Share</Styled.ScreenshareLiWrapper>
+                </Styled.QuickListWrapper>
+
+              </Styled.QuickMenuWrapper>
+
+          <Styled.RaiseHandBtnWrapper>
+            <img src="https://webconf.saehaens.com/icon/whiteboard.png" width="56" height="55"/>
+            <Styled.PWrapper>
+              whiteboard
+            </Styled.PWrapper>
+            </Styled.RaiseHandBtnWrapper>
+     
+        </Styled.MaskWrapper>
+    );
+
+  }
+
+  
+
   render() {
     const {
       customStyle,
@@ -455,6 +585,9 @@ class App extends Component {
       layoutType,
     } = this.props;
 
+    const { isCloseMask } = this.state;
+
+
     return (
       <>
         <LayoutEngine layoutType={layoutType} />
@@ -466,10 +599,13 @@ class App extends Component {
             height: '100%',
           }}
         >
+        <Styled.MaskBackWrapper/>
+
           {this.renderActivityCheck()}
           {this.renderUserInformation()}
           <BannerBarContainer />
           <NotificationsBarContainer />
+          {this.renderButtons()}
           <SidebarNavigationContainer />
           <SidebarContentContainer />
           <NavBarContainer main="new" />
@@ -504,6 +640,8 @@ class App extends Component {
           {this.renderActionsBar()}
           {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
           {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
+          {!isCloseMask? <Styled.BackgroundWrapper/> : null}
+          {!isCloseMask? this.renderCoachMarkTeacher() : null}
         </Styled.Layout>
       </>
     );

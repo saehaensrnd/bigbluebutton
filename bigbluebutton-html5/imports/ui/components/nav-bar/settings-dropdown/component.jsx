@@ -14,6 +14,7 @@ import { colorDanger } from '/imports/ui/stylesheets/styled-components/palette';
 import deviceInfo from '/imports/utils/deviceInfo';
 import Styled from './styles';
 import browserInfo from '/imports/utils/browserInfo';
+import Auth from '/imports/ui/services/auth';
 
 const intlMessages = defineMessages({
   optionsLabel: {
@@ -188,8 +189,11 @@ class SettingsDropdown extends PureComponent {
       intl, mountModal, amIModerator, isBreakoutRoom, isMeteorConnected,
     } = this.props;
 
-    const allowedToEndMeeting = amIModerator && !isBreakoutRoom;
+    const fullname = Auth.fullname;
+    const isObserver = fullname.indexOf("observer") != -1 ? true : false;
 
+    const allowedToEndMeeting = amIModerator && !isBreakoutRoom && !isObserver;
+    
     const {
       showHelpButton: helpButton,
       helpLink,

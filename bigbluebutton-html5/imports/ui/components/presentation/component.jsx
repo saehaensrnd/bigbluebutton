@@ -61,6 +61,8 @@ const OLD_MINIMIZE_BUTTON_ENABLED = Meteor.settings.public.presentation.oldMinim
 const { isSafari } = browserInfo;
 const FULLSCREEN_CHANGE_EVENT = isSafari ? 'webkitfullscreenchange' : 'fullscreenchange';
 
+let isPresentationChanged = false;
+
 class Presentation extends PureComponent {
   constructor() {
     super();
@@ -70,7 +72,7 @@ class Presentation extends PureComponent {
       presentationHeight: 0,
       showSlide: false,
       zoom: 100,
-      fitToWidth: false,
+      fitToWidth: true,
       isFullscreen: false,
     };
 
@@ -139,6 +141,7 @@ class Presentation extends PureComponent {
         },
       });
     }
+
   }
 
   componentDidUpdate(prevProps) {
@@ -165,6 +168,16 @@ class Presentation extends PureComponent {
     if (numCameras !== prevNumCameras) {
       this.onResize();
     }
+
+    // if(prevProps.currentPresentation != null && currentPresentation != null){
+  
+    //   if(prevProps.currentPresentation.name !== currentPresentation.name){
+    //     isPresentationChanged = true;
+    //   } else {
+    //     isPresentationChanged = false;
+    //   }
+
+    // }
 
     if (
       currentSlide?.num != null
@@ -234,6 +247,7 @@ class Presentation extends PureComponent {
 
       if (presentationBounds !== prevPresentationBounds) this.onResize();
     }
+
   }
 
   componentWillUnmount() {
@@ -349,6 +363,9 @@ class Presentation extends PureComponent {
       userIsPresenter,
       currentSlide,
       slidePosition,
+      currentPresentation,
+      toggleSwapLayout,
+      toggleSwapLayoutOff,
     } = this.props;
 
     if (!currentSlide || !slidePosition) {
@@ -817,6 +834,8 @@ class Presentation extends PureComponent {
       layoutType,
       numCameras,
       currentPresentation,
+      toggleSwapLayout,
+      toggleSwapLayoutOff,
       layoutSwapped,
     } = this.props;
 
@@ -825,6 +844,10 @@ class Presentation extends PureComponent {
       isFullscreen,
       localPosition,
     } = this.state;
+
+    // if(isPresentationChanged){
+    //   toggleSwapLayoutOff();
+    // }
 
     let viewBoxDimensions;
 

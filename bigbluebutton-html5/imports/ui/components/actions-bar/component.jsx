@@ -92,7 +92,7 @@ class ActionsBar extends PureComponent {
               />
             )
             : null}
-          {isRaiseHandButtonEnabled
+          {isRaiseHandButtonEnabled && !amIModerator
             ? (
               <Styled.RaiseHandButton
                 icon="hand"

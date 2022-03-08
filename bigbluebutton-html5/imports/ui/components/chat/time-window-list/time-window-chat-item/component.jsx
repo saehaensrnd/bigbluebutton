@@ -110,7 +110,7 @@ class TimeWindowChatItem extends PureComponent {
         ref={element => this.itemRef = element} >
         <Styled.Messages>
           {messages.map((message) => (
-            message.text !== ''
+            message.text !== '' && messageKey !== 'SYSTEM_MESSAGE-welcome-msg'
               ? (
                 <Styled.SystemMessageChatItem
                   border={message.id}

@@ -38,6 +38,7 @@ const getLearningDashboardAccessToken = () => ((
 
 const setLearningDashboardCookie = () => {
   const learningDashboardAccessToken = getLearningDashboardAccessToken();
+  console.log("accesstoekn : " + learningDashboardAccessToken);
   if (learningDashboardAccessToken !== null) {
     const lifetime = new Date();
     lifetime.setTime(lifetime.getTime() + (3600000)); // 1h (extends 7d when open Dashboard)

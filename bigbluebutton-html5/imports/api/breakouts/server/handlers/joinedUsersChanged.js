@@ -22,6 +22,12 @@ export default function joinedUsersChanged({ body }) {
   };
 
   const usersMapped = users.map(user => ({ userId: user.id, name: user.name }));
+
+  usersMapped.forEach(user => {
+    console.log("userNameeee : " + user.name);
+  });
+
+
   const modifier = {
     $set: {
       joinedUsers: usersMapped,

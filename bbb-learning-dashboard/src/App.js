@@ -13,6 +13,7 @@ import StatusTable from './components/StatusTable';
 import PollsTable from './components/PollsTable';
 import ErrorMessage from './components/ErrorMessage';
 import { makeUserCSVData, tsToHHmmss } from './services/UserService';
+import Auth from '/imports/ui/services/auth';
 
 class App extends React.Component {
   constructor(props) {

@@ -257,6 +257,21 @@ class Base extends Component {
       if (!checkedUserSettings) {
         if (getFromUserSettings('bbb_show_participants_on_login', Meteor.settings.public.layout.showParticipantsOnLogin) && !deviceInfo.isPhone) {
           if (CHAT_ENABLED && getFromUserSettings('bbb_show_public_chat_on_login', !Meteor.settings.public.chat.startClosed)) {
+
+              // layoutContextDispatch({
+              //   type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
+              //   value: false,
+              // });
+              // layoutContextDispatch({
+              //   type: ACTIONS.SET_SIDEBAR_CONTENT_PANEL,
+              //   value: PANELS.NONE,
+              // });
+              // layoutContextDispatch({
+              //   type: ACTIONS.SET_ID_CHAT_OPEN,
+              //   value: '',
+              // });
+           
+
             layoutContextDispatch({
               type: ACTIONS.SET_SIDEBAR_NAVIGATION_IS_OPEN,
               value: true,

@@ -68,6 +68,30 @@ const toggleSwapLayout = (layoutContextDispatch) => {
   });
 };
 
+const toggleSwapLayoutOn = () => {
+  window.dispatchEvent(new Event('togglePresentationHide'));
+  swapLayout.value = true;
+  swapLayout.tracker.changed();
+
+  layoutContextDispatch({
+    type: ACTIONS.SET_PRESENTATION_IS_OPEN,
+    value: !swapLayout.value,
+  });
+
+}
+
+const toggleSwapLayoutOff = () => {
+  window.dispatchEvent(new Event('togglePresentationHide'));
+  swapLayout.value = false;
+  swapLayout.tracker.changed();
+
+  layoutContextDispatch({
+    type: ACTIONS.SET_PRESENTATION_IS_OPEN,
+    value: !swapLayout.value,
+  });
+
+}
+
 export const shouldEnableSwapLayout = () => {
   if (!PRESENTATION_CONFIG.oldMinimizeButton) {
     return true;
@@ -88,6 +112,8 @@ export default {
   shouldShowOverlay,
   isVideoBroadcasting,
   toggleSwapLayout,
+  toggleSwapLayoutOn,
+  toggleSwapLayoutOff,
   shouldEnableSwapLayout,
   getSwapLayout,
   setSwapLayout,

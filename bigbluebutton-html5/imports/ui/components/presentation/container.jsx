@@ -129,6 +129,8 @@ export default withTracker(({ podId }) => {
     podId,
     layoutSwapped,
     toggleSwapLayout: MediaService.toggleSwapLayout,
+    toggleSwapLayoutOn: MediaService.toggleSwapLayoutOn,
+    toggleSwapLayoutOff: MediaService.toggleSwapLayoutOff,
     publishedPoll: Meetings.findOne({ meetingId: Auth.meetingID }, {
       fields: {
         publishedPoll: 1,

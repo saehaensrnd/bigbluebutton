@@ -12,6 +12,7 @@ import Help from '../help/component';
 import AudioDial from '../audio-dial/component';
 import AudioAutoplayPrompt from '../autoplay/component';
 import Settings from '/imports/ui/services/settings';
+import Auth from '/imports/ui/services/auth';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -379,10 +380,12 @@ class AudioModal extends Component {
     const arrow = isRTL ? '←' : '→';
     const dialAudioLabel = `${intl.formatMessage(intlMessages.audioDialTitle)} ${arrow}`;
 
+    const isObserver = Auth.fullname.indexOf("observer") !== -1;
+
     return (
       <div>
         <Styled.AudioOptions data-test="audioModalOptions">
-          {!showMicrophone && !isMobileNative
+          {!showMicrophone && !isMobileNative && !isObserver
               && (
               <>
                 <Styled.AudioModalButton
@@ -541,9 +544,12 @@ class AudioModal extends Component {
       showPermissionsOvelay,
       closeModal,
       isIE,
+      isConnecting,
     } = this.props;
 
     const { content } = this.state;
+
+    console.log("isConnecting555 : " + isConnecting);
 
     return (
       <span>

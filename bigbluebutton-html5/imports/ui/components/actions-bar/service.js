@@ -34,6 +34,15 @@ const getUsersNotAssigned = filterBreakoutUsers(currentBreakoutUsers);
 
 const takePresenterRole = () => makeCall('assignPresenter', Auth.userID);
 
+const amIPresenter = () => {
+  const currentUser = Users.findOne({ userId: Auth.userID }, { fields: { presenter: 1 } });
+
+  if (!currentUser) {
+    return false;
+  }
+  return currentUser.presenter;
+};
+
 const amIModerator = () => {
   const currentUser = Users.findOne({ userId: Auth.userID },
     { fields: { role: 1 } });
@@ -48,6 +57,7 @@ const amIModerator = () => {
 const isMe = (intId) => intId === Auth.userID;
 
 export default {
+  amIPresenter,
   amIModerator,
   isMe,
   currentUser: () => Users.findOne({ meetingId: Auth.meetingID, userId: Auth.userID },

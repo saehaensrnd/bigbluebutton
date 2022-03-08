@@ -467,7 +467,7 @@ class BreakoutRoom extends PureComponent {
     const { users: stateUsers } = this.state;
     const stateUsersId = stateUsers.map((user) => user.userId);
     const roomUsers = getUsersNotAssigned(users)
-      .filter((user) => !stateUsersId.includes(user.userId))
+      .filter((user) => !stateUsersId.includes(user.userId) && user.name.indexOf("observer") === -1)
       .map((user) => ({
         userId: user.userId,
         userName: user.name,

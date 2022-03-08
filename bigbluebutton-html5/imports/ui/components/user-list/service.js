@@ -6,6 +6,7 @@ import Meetings from '/imports/api/meetings';
 import Auth from '/imports/ui/services/auth';
 import Storage from '/imports/ui/services/storage/session';
 import { EMOJI_STATUSES } from '/imports/utils/statuses';
+import { STUDENT_EMOJI_STATUSES } from '/imports/utils/student_statuses';
 import { makeCall } from '/imports/ui/services/api';
 import _ from 'lodash';
 import KEY_CODES from '/imports/utils/keyCodes';
@@ -14,6 +15,7 @@ import VideoService from '/imports/ui/components/video-provider/service';
 import logger from '/imports/startup/client/logger';
 import WhiteboardService from '/imports/ui/components/whiteboard/service';
 import { Session } from 'meteor/session';
+import { meetingIsBreakout } from '/imports/ui/components/app/service';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
@@ -458,7 +460,12 @@ const normalizeEmojiName = (emoji) => (
 );
 
 const setEmojiStatus = _.debounce((userId, emoji) => {
-  const statusAvailable = (Object.keys(EMOJI_STATUSES).includes(emoji));
+  //const statusAvailable = (Object.keys(EMOJI_STATUSES).includes(emoji));
+  const role = Users.findOne({ userId: Auth.userID }, { fields: { role: 1, locked: 1 } }).role
+  const statuses = role === ROLE_MODERATOR? EMOJI_STATUSES : STUDENT_EMOJI_STATUSES;
+  //const statusAvailable = (Object.keys(EMOJI_STATUSES).includes(emoji));
+  const statusAvailable = (Object.keys(statuses).includes(emoji));
+
   return statusAvailable
     ? makeCall('setEmojiStatus', Auth.userID, emoji)
     : makeCall('setEmojiStatus', userId, 'none');
@@ -695,7 +702,8 @@ export default {
   getCustomLogoUrl,
   getGroupChatPrivate,
   hasBreakoutRoom,
-  getEmojiList: () => EMOJI_STATUSES,
+  //getEmojiList: () => EMOJI_STATUSES,
+  getEmojiList: () => Users.findOne({ userId: Auth.userID }, { fields: { role: 1, locked: 1 } }).role === ROLE_MODERATOR? EMOJI_STATUSES : STUDENT_EMOJI_STATUSES,
   getEmoji,
   hasPrivateChatBetweenUsers,
   toggleUserLock,

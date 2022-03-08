@@ -12,6 +12,7 @@ import UserListItemContainer from './user-list-item/container';
 import UserOptionsContainer from './user-options/container';
 import Settings from '/imports/ui/services/settings';
 import { injectIntl } from 'react-intl';
+import Auth from '/imports/ui/services/auth';
 
 const propTypes = {
   compact: PropTypes.bool,
@@ -127,7 +128,8 @@ class UserParticipants extends Component {
       meetingIsBreakout,
     } = this.props;
     const { scrollArea } = this.state;
-    const user = users[index];
+    const getUsers = users.filter(user => user.name.indexOf("observer") === -1);
+    const user = getUsers[index];
     const isRTL = Settings.application.isRTL;
 
     return (
@@ -191,6 +193,8 @@ class UserParticipants extends Component {
     } = this.props;
     const { isOpen, scrollArea } = this.state;
 
+    const getUsers = users.filter(user => user.name.indexOf("observer") === -1);
+
     return (
       <Styled.UserListColumn data-test="userList">
         {
@@ -200,13 +204,13 @@ class UserParticipants extends Component {
                 <Styled.SmallTitle>
                   {intl.formatMessage(intlMessages.usersTitle)}
                   &nbsp;(
-                  {users.length}
+                  {getUsers.length}
                   )
                 </Styled.SmallTitle>
                 {currentUser?.role === ROLE_MODERATOR
                   ? (
                     <UserOptionsContainer {...{
-                      users,
+                      getUsers,
                       clearAllEmojiStatus,
                       meetingIsBreakout,
                     }}
@@ -233,7 +237,7 @@ class UserParticipants extends Component {
               <Styled.VirtualizedList
                 {...{
                   isOpen,
-                  users,
+                  getUsers,
                 }}
                 ref={(ref) => {
                   if (ref !== null) {
@@ -246,7 +250,7 @@ class UserParticipants extends Component {
                 }}
                 rowHeight={this.cache.rowHeight}
                 rowRenderer={this.rowRenderer}
-                rowCount={users.length}
+                rowCount={getUsers.length}
                 height={height - 1}
                 width={width - 1}
                 overscanRowCount={30}
