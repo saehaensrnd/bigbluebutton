@@ -48,7 +48,6 @@ import GlobalStyles from '/imports/ui/stylesheets/styled-components/globalStyles
 import Button from '/imports/ui/components/common/button/component';
 
 
-
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
 const DESKTOP_FONT_SIZE = APP_CONFIG.desktopFontSize;
@@ -504,6 +503,8 @@ class App extends Component {
 
   renderCoachMarkTeacher(){
 
+    const { animations } = Settings.application;
+
     return (
 
       <Styled.MaskWrapper>
@@ -521,7 +522,7 @@ class App extends Component {
         {/* TODO */}
         <Styled.CloseBtnWrapper>
 
-          <Button
+          {/* <Button
               hideLabel
               aria-label="Close"
               label="Close"
@@ -532,13 +533,26 @@ class App extends Component {
               onClick={() => {
                 this.setState({ isCloseMask: true })
               }}
+            /> */}
+            <Styled.CloseButton
+              hideLabel
+              aria-label="Close"
+              label="Close"
+              icon="close"
+              color="primary"
+              size="lg"
+              circle
+              onClick={() => {
+                this.setState({ isCloseMask: true })
+              }}
+              animations={animations}
             />
             <p>Close a guide screen</p>
 
           </Styled.CloseBtnWrapper>
-          <Styled.PlusContentWrapper>
+          {/* <Styled.PlusContentWrapper>
             <img src="https://webconf.saehaens.com/icon/plus_content.png" width="275" height="140"/>
-          </Styled.PlusContentWrapper>
+          </Styled.PlusContentWrapper> */}
           <Styled.SettingWrapper>
             <img src="https://webconf.saehaens.com/icon/setting.png" width="160" height="240"/> 
           </Styled.SettingWrapper>
@@ -558,20 +572,104 @@ class App extends Component {
 
               </Styled.QuickMenuWrapper>
 
+          <Styled.PlusBtnWrapper>
+            <img src="https://netstudy01.saehaens.com/icon/plus_content2.png" width="275" height="200"/>
+          </Styled.PlusBtnWrapper>
+
+
           <Styled.RaiseHandBtnWrapper>
             <img src="https://webconf.saehaens.com/icon/whiteboard.png" width="56" height="55"/>
             <Styled.PWrapper>
               whiteboard
             </Styled.PWrapper>
-            </Styled.RaiseHandBtnWrapper>
+          </Styled.RaiseHandBtnWrapper>
      
         </Styled.MaskWrapper>
     );
 
   }
 
-  
+  renderCoachMarkStudent(){
 
+    const { animations } = Settings.application;
+
+    return (
+
+      <Styled.MaskWrapper>
+
+        <Styled.LeaveCoachMarkBtnWrapper>
+          <img src="https://webconf.saehaens.com/icon/leave.png" width="46" height="46"/>
+          <Styled.SpanAlign>
+            강의실 나가기
+          </Styled.SpanAlign>
+        </Styled.LeaveCoachMarkBtnWrapper>
+        
+
+        {/* <img className={styles.teacher_ments} src="https://webconf.saehaens.com/icon/teacherMents.png" width="507" height="293"/> */}
+
+        {/* TODO */}
+        <Styled.CloseBtnWrapper>
+
+          <Styled.CloseButton
+                hideLabel
+                aria-label="Close"
+                label="Close"
+                icon="close"
+                color="primary"
+                size="lg"
+                circle
+                onClick={() => {
+                  this.setState({ isCloseMask: true })
+                }}
+                animations={animations}
+              />
+            <p>가이드 화면 닫기</p>
+
+          </Styled.CloseBtnWrapper>
+      
+              <Styled.QuickMenuWrapper>
+                <Styled.QuickListWrapper>
+                  <Styled.MicLiWrapper>마이크 ON/OFF</Styled.MicLiWrapper>
+                  <Styled.AudioLiWrapper>오디오 설정 Setting</Styled.AudioLiWrapper>
+                  <Styled.WebcamLiWrapper>웹캠 ON/OFF</Styled.WebcamLiWrapper>
+                </Styled.QuickListWrapper>
+
+              </Styled.QuickMenuWrapper>
+
+          <Styled.WhiteboardBtnWrapper>
+            <img src="https://webconf.saehaens.com/icon/whiteboard.png" width="56" height="55"/>
+            <Styled.PWrapper>
+              칠판
+            </Styled.PWrapper>
+          </Styled.WhiteboardBtnWrapper>
+
+          <Styled.RaiseHandBtnWrapper>
+            <img src="https://webconf.saehaens.com/icon/raisehand.png" width="56" height="55"/>
+            <Styled.PWrapper>
+              손들기
+            </Styled.PWrapper>
+          </Styled.RaiseHandBtnWrapper>
+     
+        </Styled.MaskWrapper>
+    );
+
+  }
+
+  renderCoachMark(){
+
+    const { currentUserRole } = this.props;
+
+    const isModerator = currentUserRole === MODERATOR;
+
+    if(!deviceInfo.isMobile){
+      return isModerator? this.renderCoachMarkTeacher() : this.renderCoachMarkStudent();
+    }
+
+    return;
+
+  }
+
+  
   render() {
     const {
       customStyle,
@@ -586,7 +684,6 @@ class App extends Component {
     } = this.props;
 
     const { isCloseMask } = this.state;
-
 
     return (
       <>
@@ -641,7 +738,7 @@ class App extends Component {
           {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
           {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
           {!isCloseMask? <Styled.BackgroundWrapper/> : null}
-          {!isCloseMask? this.renderCoachMarkTeacher() : null}
+          {!isCloseMask? this.renderCoachMark(): null}
         </Styled.Layout>
       </>
     );

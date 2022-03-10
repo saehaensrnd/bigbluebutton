@@ -172,6 +172,10 @@ class AudioModal extends Component {
       isUsingAudio,
     } = this.props;
 
+    const isObserver = Auth.fullname.indexOf("observer") !== -1;
+
+    if(isObserver) return;
+
     if (!isUsingAudio) {
       if (forceListenOnlyAttendee || audioLocked) return this.handleJoinListenOnly();
 

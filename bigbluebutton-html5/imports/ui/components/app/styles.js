@@ -1,6 +1,20 @@
 import styled from 'styled-components';
 import { barsPadding } from '/imports/ui/stylesheets/styled-components/general';
 import { FlexColumn } from '/imports/ui/stylesheets/styled-components/placeholders';
+import Button from '/imports/ui/components/common/button/component';
+import { css, keyframes } from 'styled-components';
+
+const pulse = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 white;
+  }
+  70% {
+    box-shadow: 0 0 0 0.5625rem transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+`;
 
 const MaskWrapper = styled.div`
   position:absolute;
@@ -60,7 +74,7 @@ const LeaveCoachMarkBtnWrapper = styled.div`
 
 const WhiteboardBtnWrapper = styled.div`
   position: absolute;
-  margin-right: 19px;
+  margin-right: 85px;
   right: 0;
   bottom: 0;
   margin-bottom: 63px;
@@ -76,7 +90,71 @@ const CloseBtnWrapper = styled.div`
   left: 50%;
   color:rgb(255, 255, 255);
   text-align: center;
+
+  ${({ animations }) => animations && css`
+    animation: ${pulse} 1s infinite ease-in;
+  `}
+
 `;
+
+const CloseButton = styled(Button)`
+  ${({ animations }) => animations && css`
+  animation: ${pulse} 1s infinite ease-in;
+  `}
+`;
+
+
+// const CloaseButton = styled(Button)`
+//   margin-right: ${smPaddingX};
+//   margin-left: 0;
+
+//   @media ${smallOnly} {
+//     margin-right: ${smPaddingY};
+//   }
+
+//   [dir="rtl"] & {
+//     margin-left: ${smPaddingX};
+//     margin-right: 0;
+
+//     @media ${smallOnly} {
+//       margin-left: ${smPaddingY};
+//     }
+//   }
+
+//   ${({ ghost }) => ghost && `
+//     span {
+//       box-shadow: none;
+//       background-color: transparent !important;
+//       border-color: ${colorWhite} !important;
+//     }
+//   `}
+
+//   ${({ talking }) => talking && `
+//     border-radius: 50%;
+//   `}
+    
+//   ${({ talking, animations }) => talking && animations && css`
+//     animation: ${pulse} 1s infinite ease-in;
+//   `}
+
+//   ${({ talking, animations }) => talking && !animations && css`
+//     & span {
+//       content: '';
+//       outline: none !important;
+//       background-clip: padding-box;
+//       box-shadow: 0 0 0 4px rgba(255,255,255,.5);
+//     }
+//   `}
+// `;
+
+
+
+
+
+
+
+
+
 
 const LeaveBtnWrapper = styled.div`
   position:absolute;
@@ -175,6 +253,18 @@ const RaiseHandBtnWrapper = styled.div`
   text-align: center;
 `;
 
+const PlusBtnWrapper = styled.div`
+  position: absolute;
+  margin-left: 19px;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 63px;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: large;
+  text-align: center;
+`;
+
 
 
 const SpanAlign = styled.span`
@@ -238,6 +328,7 @@ export default {
   QuickMenuWrapper,
   QuickListWrapper,
   RaiseHandBtnWrapper,
+  WhiteboardBtnWrapper,
   SpanAlign,
   PlusContentWrapper,
   SettingWrapper,
@@ -251,6 +342,7 @@ export default {
   BackgroundWrapper,
   LeaveBtnWrapper,
   HelpBtnWrapper,
-  WhiteboardBtnWrapper,
   PWrapper,
+  CloseButton,
+  PlusBtnWrapper,
 };
