@@ -174,12 +174,15 @@ class AudioModal extends Component {
 
     const isObserver = Auth.fullname.indexOf("observer") !== -1;
 
-    if(isObserver) return;
-
     if (!isUsingAudio) {
       if (forceListenOnlyAttendee || audioLocked) return this.handleJoinListenOnly();
 
-      if (joinFullAudioImmediately && !listenOnlyMode) return this.handleJoinMicrophone();
+      if (joinFullAudioImmediately && !listenOnlyMode) {
+        
+        if(isObserver) return this.handleJoinListenOnly();
+        else return this.handleJoinMicrophone();
+        
+      }
 
       if (!listenOnlyMode) return this.handleGoToEchoTest();
     }
@@ -389,7 +392,7 @@ class AudioModal extends Component {
     return (
       <div>
         <Styled.AudioOptions data-test="audioModalOptions">
-          {!showMicrophone && !isMobileNative && !isObserver
+          {!showMicrophone && !isMobileNative
               && (
               <>
                 <Styled.AudioModalButton

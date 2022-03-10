@@ -475,7 +475,7 @@ public:
       enabled: true
     moderatorChatEmphasized: true
   notes:
-    enabled: true
+    enabled: false
     id: notes
   layout:
     autoSwapLayout: false

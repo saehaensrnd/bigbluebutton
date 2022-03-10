@@ -150,7 +150,13 @@ const CloseButton = styled(Button)`
 
 
 
-
+const MobileLeaveBtnWrapper = styled.div`
+  position:absolute;
+  right: 0;
+  margin-right: 9px;
+  margin-top: 55px;
+  z-index: 1;
+`;
 
 
 
@@ -345,4 +351,5 @@ export default {
   PWrapper,
   CloseButton,
   PlusBtnWrapper,
+  MobileLeaveBtnWrapper,
 };

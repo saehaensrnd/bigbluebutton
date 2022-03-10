@@ -445,6 +445,51 @@ class App extends Component {
     ) : null);
   }
 
+  renderMobileButtons(){
+
+    return (
+      <div>
+          
+          <Styled.MobileLeaveBtnWrapper>
+            <Button
+              hideLabel
+              aria-label="Leave"
+              label="Leave"
+              icon="logout"
+              color="primary"
+              size="md"
+              circle
+              onClick={() => { 
+
+                // const { currentUserRole } = this.props;
+
+                // let eventID = "user-left";
+                // let name = Auth.fullname;
+                // //let userID = Auth.userID;
+                // let userID = Auth.externUserID;
+                // let userType = currentUserRole;
+
+                // if(userType === "MODERATOR")
+                //   userType = "teacher";
+                // else if(userType === "VIEWER")
+                //   userType = "student";
+                // else if(name.indexOf("observer") !== -1)
+                //   userType = "observer";
+
+                //console.log("userTYpe : " + userType);
+
+                //Attendance.checkAttendance(eventID, name, userID, userType);
+
+                makeCall('userLeftMeeting');
+                Session.set('codeError', '680');
+              
+              }}
+          />
+          </Styled.MobileLeaveBtnWrapper>
+          </div>
+    )
+  }
+
   renderButtons(){
 
     return (
@@ -669,6 +714,15 @@ class App extends Component {
 
   }
 
+  renderBackground(){
+
+    if(!deviceInfo.isMobile){
+      return <Styled.BackgroundWrapper/>
+    }
+
+    return;
+
+  }
   
   render() {
     const {
@@ -702,7 +756,7 @@ class App extends Component {
           {this.renderUserInformation()}
           <BannerBarContainer />
           <NotificationsBarContainer />
-          {this.renderButtons()}
+          {deviceInfo.isPhone? this.renderMobileButtons() : this.renderButtons()}
           <SidebarNavigationContainer />
           <SidebarContentContainer />
           <NavBarContainer main="new" />
@@ -737,7 +791,7 @@ class App extends Component {
           {this.renderActionsBar()}
           {customStyleUrl ? <link rel="stylesheet" type="text/css" href={customStyleUrl} /> : null}
           {customStyle ? <link rel="stylesheet" type="text/css" href={`data:text/css;charset=UTF-8,${encodeURIComponent(customStyle)}`} /> : null}
-          {!isCloseMask? <Styled.BackgroundWrapper/> : null}
+          {!isCloseMask? this.renderBackground() : null}
           {!isCloseMask? this.renderCoachMark(): null}
         </Styled.Layout>
       </>
