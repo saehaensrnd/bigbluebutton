@@ -2,6 +2,7 @@ const colorWhite = 'var(--color-white, #FFF)';
 const colorOffWhite = 'var(--color-off-white, #F3F6F9)';
 
 const colorBlack = 'var(--color-black, #000000)';
+//const colorBlack = 'var(--color-black, #FA989B)';
 
 const colorGray = 'var(--color-gray, #4E5A66)';
 const colorGrayDark = 'var(--color-gray-dark, #06172A)';
@@ -15,11 +16,13 @@ const colorBlueLightest = 'var(--color-blue-lightest, #E4ECF2)';
 
 const colorTransparent = 'var(--color-transparent, #ff000000)';
 
-const colorPrimary = 'var(--color-primary, #0F70D7)';
+//const colorPrimary = 'var(--color-primary, #0F70D7)';
+const colorPrimary = 'var(--color-primary, #96B3FF)';
 const colorDanger = 'var(--color-danger, #DF2721)';
 const colorSuccess = 'var(--color-success, #008081)';
 const colorWarning = 'var(--color-warning, purple)';
 const colorOffline = `var(--color-offline, ${colorGrayLight})`;
+
 const colorMuted = 'var(--color-muted, #586571)';
 const colorMutedBackground = 'var(--color-muted-background, #F3F6F9)';
 
