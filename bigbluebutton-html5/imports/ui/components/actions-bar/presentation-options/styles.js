@@ -6,7 +6,7 @@ const RestorePresentationButton = styled(Button)`
   ${({ ghost }) => ghost && `
       span {
         box-shadow: none;
-        background-color: transparent !important;
+        background-color: #FA989B !important;
         border-color: ${colorWhite} !important;
       }
    `}

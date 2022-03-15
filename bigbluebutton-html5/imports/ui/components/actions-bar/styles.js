@@ -76,11 +76,21 @@ const Right = styled.div`
   }
 `;
 
+// const RaiseHandButton = styled(Button)`
+//   ${({ emoji }) => emoji !== 'raiseHand' && `
+//       span {
+//         box-shadow: none;
+//         background-color: transparent !important;
+//         border-color: ${colorWhite} !important;
+//       }
+//    `}
+// `;
+
 const RaiseHandButton = styled(Button)`
   ${({ emoji }) => emoji !== 'raiseHand' && `
       span {
         box-shadow: none;
-        background-color: transparent !important;
+        background-color: #FA989B !important;
         border-color: ${colorWhite} !important;
       }
    `}

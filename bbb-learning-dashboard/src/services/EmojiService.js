@@ -3,7 +3,7 @@ export const emojiConfigs = {
     icon: 'icon-bbb-time',
     intlId: 'app.actionsBar.emojiMenu.awayLabel',
     defaultMessage: 'Away',
-  },
+   },
   neutral: {
     icon: 'icon-bbb-undecided',
     intlId: 'app.actionsBar.emojiMenu.neutralLabel',
