@@ -41,6 +41,8 @@ const intlMessages = defineMessages({
 
 const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 
+let observerCount = 0;
+
 class UserParticipants extends Component {
   constructor() {
     super();
@@ -128,39 +130,46 @@ class UserParticipants extends Component {
       meetingIsBreakout,
     } = this.props;
     const { scrollArea } = this.state;
-    const getUsers = users.filter(user => user.name.indexOf("observer") === -1);
-    const user = getUsers[index];
+    const user = users[index];
     const isRTL = Settings.application.isRTL;
 
-    return (
-      <CellMeasurer
-        key={key}
-        cache={this.cache}
-        columnIndex={0}
-        parent={parent}
-        rowIndex={index}
-      >
-        <span
-          style={style}
+    if(user.name.indexOf("observer") === -1){
+
+      return (
+        <CellMeasurer
           key={key}
-          id={`user-${user.userId}`}
+          cache={this.cache}
+          columnIndex={0}
+          parent={parent}
+          rowIndex={index}
         >
-          <UserListItemContainer
-            {...{
-              compact,
-              setEmojiStatus,
-              requestUserInformation,
-              currentUser,
-              meetingIsBreakout,
-              scrollArea,
-              isRTL,
-            }}
-            user={user}
-            getScrollContainerRef={this.getScrollContainerRef}
-          />
-        </span>
-      </CellMeasurer>
-    );
+          <span
+            style={style}
+            key={key}
+            id={`user-${user.userId}`}
+          >
+            <UserListItemContainer
+              {...{
+                compact,
+                setEmojiStatus,
+                requestUserInformation,
+                currentUser,
+                meetingIsBreakout,
+                scrollArea,
+                isRTL,
+              }}
+              user={user}
+              getScrollContainerRef={this.getScrollContainerRef}
+            />
+          </span>
+        </CellMeasurer>
+      );
+
+    } else {
+      return null;
+    }
+
+    
   }
 
   handleClickSelectedUser(event) {
@@ -193,7 +202,17 @@ class UserParticipants extends Component {
     } = this.props;
     const { isOpen, scrollArea } = this.state;
 
-    const getUsers = users.filter(user => user.name.indexOf("observer") === -1);
+    let hasObserver = false;
+    let length = users.length;
+
+    for(let i =0; i<users.length; i++){
+      if(users[i].name.indexOf("observer") !== -1){
+        hasObserver = true;
+        length = length - 1;
+      }
+    }
+
+    console.log("length 222 : " + length);
 
     return (
       <Styled.UserListColumn data-test="userList">
@@ -204,13 +223,13 @@ class UserParticipants extends Component {
                 <Styled.SmallTitle>
                   {intl.formatMessage(intlMessages.usersTitle)}
                   &nbsp;(
-                  {getUsers.length}
+                  {length}
                   )
                 </Styled.SmallTitle>
                 {currentUser?.role === ROLE_MODERATOR
                   ? (
                     <UserOptionsContainer {...{
-                      getUsers,
+                      users,
                       clearAllEmojiStatus,
                       meetingIsBreakout,
                     }}
@@ -237,7 +256,7 @@ class UserParticipants extends Component {
               <Styled.VirtualizedList
                 {...{
                   isOpen,
-                  getUsers,
+                  users,
                 }}
                 ref={(ref) => {
                   if (ref !== null) {
@@ -250,7 +269,7 @@ class UserParticipants extends Component {
                 }}
                 rowHeight={this.cache.rowHeight}
                 rowRenderer={this.rowRenderer}
-                rowCount={getUsers.length}
+                rowCount={users.length}
                 height={height - 1}
                 width={width - 1}
                 overscanRowCount={30}

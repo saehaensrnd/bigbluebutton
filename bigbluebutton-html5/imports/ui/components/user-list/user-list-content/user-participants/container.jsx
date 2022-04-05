@@ -26,6 +26,7 @@ const UserParticipantsContainer = (props) => {
   const users = contextUsers ? formatUsers(usersArray, videoUsers, whiteboardUsers) : [];
 
   return (
+    
     <UserParticipants {
     ...{
       currentUser,

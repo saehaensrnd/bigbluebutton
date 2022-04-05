@@ -206,10 +206,30 @@ const getUsers = () => {
     const meeting = Meetings.findOne({ meetingId: Auth.meetingID },
       { fields: { 'lockSettingsProps.hideUserList': 1 } });
     if (meeting && meeting.lockSettingsProps && meeting.lockSettingsProps.hideUserList) {
-      const moderatorOrCurrentUser = (u) => u.role === ROLE_MODERATOR || u.userId === Auth.userID;
+      const moderatorOrCurrentUser = (u) => u.role === ROLE_MODERATOR || u.userId === Auth.userID
       users = users.filter(moderatorOrCurrentUser);
     }
   }
+
+  //observer feature
+//For this feature to be active, when you join a room, you must have the full name "observer" and the role must be moderator.
+
+  //let isBreakoutRoomExist = Breakouts.find({ parentMeetingId: Auth.meetingID },{ fields: {} }).count() > 0 ? true : false;
+
+
+  let isBreakoutRoom = meetingIsBreakout();
+
+
+  //fullname.indexOf("observer") != -1 ? true : false;
+  // const observerOrCurrentUser = u => (!isBreakoutRoom? u.name !== Auth.meetingID.substring(0, 4) + "observer" : u.name.indexOf("observer") === -1) 
+  // || u.role === ROLE_VIEWER || u.userId === Auth.userID;
+  const observerOrCurrentUser = u => (!isBreakoutRoom? u.name !== Auth.meetingID.substring(0, 4) + "observer" : u.name.indexOf("observer") === -1) 
+  || u.userId === Auth.userID;
+  users = users.filter(observerOrCurrentUser);
+
+  //const observerOrCurrentUser = u =>  u.name !== Auth.meetingID.substring(0, 4) + "observer" || u.role === ROLE_VIEWER || u.userId === Auth.userID;
+
+  users = users.filter(observerOrCurrentUser);
 
   return addIsSharingWebcam(addWhiteboardAccess(users)).sort(sortUsers);
 };
