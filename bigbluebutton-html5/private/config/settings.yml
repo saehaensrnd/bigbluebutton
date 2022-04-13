@@ -8,10 +8,10 @@ public:
     # audio
     autoJoin: true
     # Disables the listen only option in audio modal.
-    listenOnlyMode: true
+    listenOnlyMode: false
     forceListenOnly: false
     # Skips the echo test when connecting with microphone.
-    skipCheck: false
+    skipCheck: true
     # Skips the echo test when connecting with microphone right after user
     # joins the room the first time. Subsequent joins to microphone won't
     # have echo test skipped, for example if user leaves and joins the mic
@@ -205,7 +205,7 @@ public:
   externalVideoPlayer:
     enabled: true
   kurento:
-    wsUrl: HOST
+    wsUrl: wss://webconf.saehaens.com/bbb-webrtc-sfu
     # Valid for video-provider. Time (ms) before its WS connection times out
     # and tries to reconnect.
     wsConnectionTimeout: 4000
@@ -334,7 +334,7 @@ public:
     # Default is undefined, which means the default setting in bbb-webrtc-sfu
     # prevails (videoMediaServer).
     #videoMediaServer: Kurento
-    autoShareWebcam: false
+    autoShareWebcam: true
     skipVideoPreview: false
     skipVideoPreviewOnFirstJoin: false
     # cameraSortingModes.paginationSorting: sorting mode to be applied when pagination is active

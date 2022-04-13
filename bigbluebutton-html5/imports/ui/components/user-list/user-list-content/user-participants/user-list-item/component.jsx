@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import UserDropdown from './user-dropdown/component';
+import { notify } from '/imports/ui/services/notification';
+import { defineMessages} from 'react-intl';
 
 const propTypes = {
   compact: PropTypes.bool.isRequired,
@@ -15,6 +17,64 @@ const propTypes = {
   toggleUserLock: PropTypes.func.isRequired,
   isMeteorConnected: PropTypes.bool.isRequired,
 };
+
+const intlMessages = defineMessages({
+  userListLabel: {
+    id: 'app.userList.label',
+    description: 'Aria-label for Userlist Nav',
+  },
+  chatLabel: {
+    id: 'app.chat.label',
+    description: 'Aria-label for Chat Section',
+  },
+  mediaLabel: {
+    id: 'app.media.label',
+    description: 'Aria-label for Media Section',
+  },
+  actionsBarLabel: {
+    id: 'app.actionsBar.label',
+    description: 'Aria-label for ActionsBar Section',
+  },
+  iOSWarning: {
+    id: 'app.iOSWarning.label',
+    description: 'message indicating to upgrade ios version',
+  },
+  clearedEmoji: {
+    id: 'app.toast.clearedEmoji.label',
+    description: 'message for cleared emoji status',
+  },
+  setEmoji: {
+    id: 'app.toast.setEmoji.label',
+    description: 'message when a user emoji has been set',
+  },
+  meetingMuteOn: {
+    id: 'app.toast.meetingMuteOn.label',
+    description: 'message used when meeting has been muted',
+  },
+  meetingMuteOff: {
+    id: 'app.toast.meetingMuteOff.label',
+    description: 'message used when meeting has been unmuted',
+  },
+  pollPublishedLabel: {
+    id: 'app.whiteboard.annotations.poll',
+    description: 'message displayed when a poll is published',
+  },
+});
+
+const emojiArray = {
+
+  away: "I'm out for a moment",
+  raiseHand: "I have a question",
+  //neutral: "Nothing",
+  speakLouder: "Please speak Louder",
+  speakSofter : 'Please speak Softer',
+  speakFaster: 'Please speak Faster',
+  speakSlower : 'Please speak Slower',
+  thumbsUp: 'Good!',
+  thumbsDown: 'Bad',
+
+};
+
 
 class UserListItem extends PureComponent {
   render() {

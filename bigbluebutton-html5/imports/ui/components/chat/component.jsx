@@ -13,6 +13,7 @@ import ChatDropdownContainer from './chat-dropdown/container';
 import { PANELS, ACTIONS } from '../layout/enums';
 import { UserSentMessageCollection } from './service';
 import Auth from '/imports/ui/services/auth';
+import Users from '/imports/api/users';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_ID = CHAT_CONFIG.public_id;
@@ -60,6 +61,11 @@ const Chat = (props) => {
   const CLOSE_CHAT_AK = shortcuts.closeprivatechat;
   const isPublicChat = chatID === PUBLIC_CHAT_ID;
   ChatLogger.debug('ChatComponent::render', props);
+
+  const users = Users.find({
+    meetingId: Auth.meetingID,
+  }, { fields: { userId: 1, emoji: 1 } });
+
   return (
     <div
       data-test={isPublicChat ? 'publicChat' : 'privateChat'}
@@ -162,6 +168,7 @@ const Chat = (props) => {
         connected={isMeteorConnected}
         locked={isChatLocked}
         partnerIsLoggedOut={partnerIsLoggedOut}
+        users={users}
       />
     </div>
   );
