@@ -47,6 +47,8 @@ import { NAVBAR_HEIGHT, LARGE_NAVBAR_HEIGHT } from '/imports/ui/components/layou
 import Settings from '/imports/ui/services/settings';
 import LayoutService from '/imports/ui/components/layout/service';
 import { registerTitleView } from '/imports/utils/dom-utils';
+import Auth from '/imports/ui/services/auth';
+import Button from '/imports/ui/components/button/component';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -133,6 +135,7 @@ class App extends Component {
     super(props);
     this.state = {
       enableResize: !window.matchMedia(MOBILE_MEDIA).matches,
+      isCloseMask: false,
     };
 
     this.handleWindowResize = throttle(this.handleWindowResize).bind(this);
@@ -157,6 +160,7 @@ class App extends Component {
       autoSwapLayout,
       shouldShowScreenshare,
       shouldShowExternalVideo,
+      currentUserRole,
     } = this.props;
     const { browserName } = browserInfo;
     const { osName } = deviceInfo;
@@ -351,6 +355,130 @@ class App extends Component {
       && (isPhone || isLayeredView.matches);
   }
 
+
+
+  renderCoachMarkTeacher(){
+
+    return (
+      <div className={styles.mask}>
+        <div className={styles.mask_back}></div>
+
+        <div className={styles.leave_coachmark_btn}>
+          <img src="https://webconf.saehaens.com/icon/leave.png" width="46" height="46"/>
+          <span className={styles.span_align} >Click this button to be out</span>
+        </div>
+
+        <img className={styles.teacher_ments} src="https://webconf.saehaens.com/icon/teacherMents.png" width="507" height="293"/>
+
+        <div className={styles.close_btn}>
+          <Button
+              className={styles.glow}
+              hideLabel
+              aria-label="Close"
+              label="Close"
+              // icon="plus"
+              icon="close"
+              color="primary"
+              size="lg"
+              circle
+              onClick={() => this.setState({ isCloseMask: true })}
+            />
+            <p>Close a guide screen</p>
+          </div>
+          <img className={styles.plus_btn} src="https://webconf.saehaens.com/icon/plus_content2.png" width="275" height="200"/>
+          <img className={styles.setting} src="https://webconf.saehaens.com/icon/setting.png" width="160" height="240"/>
+
+          <div className={styles.setting_content}>
+            <p>End Meeting : The classroom is removed and all the users in the classroom are out</p>
+            <p>Leave Meeting : To be out of the classroom</p>
+          </div>
+
+          <div className={styles.quick_menu}>
+            <ul className={styles.quick_list}>
+              <li><div className={styles.qlist}><span>Mic ON/OFF</span></div></li>
+              <li><div className={styles.qlist}><span>Audio Setting</span></div></li>
+              <li><div className={styles.qlist}><span>Webcam ON/OFF</span></div></li>
+              <li><div className={styles.qlist}><span>Screen Share</span></div></li>
+            </ul>
+          </div>
+
+          <div className={styles.raisehand_btn}>
+            <img src="https://webconf.saehaens.com/icon/whiteboard.png" width="56" height="55"/>
+            <p className={styles.p}>whiteboard</p>
+          </div>
+        </div>
+    );
+
+  }
+
+  renderCoachMarkStudent(){
+    return (
+      <div className={styles.mask}>
+        <div className={styles.mask_back}></div>
+
+        <img className={styles.student_ments} src="https://webconf.saehaens.com/icon/studentMents.png" width="507" height="225"/>
+
+        <div className={styles.close_btn}>
+          <Button
+              className={styles.glow}
+              hideLabel
+              aria-label="Close"
+              label="Close"
+              // icon="plus"
+              icon="close"
+              color="primary"
+              size="lg"
+              circle
+              onClick={() => this.setState({ isCloseMask: true })}
+            />
+            <p>가이드 화면 닫기</p>
+          </div>
+
+          <div className={styles.quick_menu}>
+            <ul className={styles.quick_list}>
+              <li><div className={styles.qlist}><span>마이크 ON/OFF</span></div></li>
+              <li><div className={styles.qlist}><span>오디오 설정</span></div></li>
+              <li><div className={styles.qlist}><span>웹캠 ON/OFF</span></div></li>
+            </ul>
+          </div>
+          <div className={styles.whiteboard_btn}>
+            <img src="https://webconf.saehaens.com/icon/whiteboard.png" width="56" height="55"/>
+            <p className={styles.p}>칠판</p>
+          </div>
+          <div className={styles.raisehand_btn}>
+            <img src="https://webconf.saehaens.com/icon/raisehand.png" width="56" height="55"/>
+            <p className={styles.p}>손들기</p>
+          </div>
+
+
+        </div>
+    );
+  }
+
+
+  renderCoachMark() {
+    const { currentUserRole } = this.props;
+
+    const isModerator = currentUserRole === "MODERATOR"? true : false;
+
+    return isModerator? this.renderCoachMarkTeacher() : this.renderCoachMarkStudent();
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   renderCaptions() {
     const {
       captions,
@@ -460,7 +588,10 @@ class App extends Component {
       shouldShowScreenshare,
       shouldShowExternalVideo,
       isPresenter,
+      currentUserRole,
     } = this.props;
+
+    const { isCloseMask } = this.state;
 
     return (
       <>
@@ -473,8 +604,35 @@ class App extends Component {
             height: '100%',
           }}
         >
+          {!isCloseMask? this.renderCoachMark() : null}
           {this.renderActivityCheck()}
           {this.renderUserInformation()}
+          <Button
+              className={styles.help_btn}
+              hideLabel
+              aria-label="Help"
+              label="Help"
+              icon="help"
+              color="primary"
+              size="md"
+              circle
+              onClick={() => this.setState({ isCloseMask: false })}
+            />
+            <Button
+              className={styles.leave_btn}
+              hideLabel
+              aria-label="Leave"
+              label="Leave"
+              icon="logout"
+              color="primary"
+              size="md"
+              circle
+              onClick={() => { 
+                makeCall('userLeftMeeting');
+                Session.set('codeError', '680');
+
+              }}
+            />
           <BannerBarContainer />
           <NotificationsBarContainer />
           <SidebarNavigationContainer />

@@ -27,6 +27,7 @@ import {
 import { ACTIONS } from '/imports/ui/components/layout/enums';
 import deviceInfo from '/imports/utils/deviceInfo';
 import Settings from '/imports/ui/services/settings';
+import Auth from '/imports/ui/services/auth';
 
 const intlMessages = defineMessages({
   screenShareLabel: {
@@ -276,6 +277,8 @@ class ScreenshareComponent extends React.Component {
         dark
       />
     );
+   
+
   }
 
   renderAutoplayOverlay() {

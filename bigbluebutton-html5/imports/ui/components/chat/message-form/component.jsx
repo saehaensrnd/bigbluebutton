@@ -417,7 +417,9 @@ class MessageForm extends PureComponent {
 
     const {users} = this.props;
 
-    return CHAT_ENABLED ? (
+    const isObserver = Auth.fullname.indexOf("observer") !== -1;
+
+    return (CHAT_ENABLED && !isObserver) ? (
       <form
         ref={(ref) => { this.form = ref; }}
         className={cx(className, styles.form)}

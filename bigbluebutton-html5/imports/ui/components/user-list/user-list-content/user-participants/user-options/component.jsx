@@ -13,6 +13,7 @@ import BBBMenu from '/imports/ui/components/menu/component';
 import { styles } from './styles';
 import { getUserNamesLink } from '/imports/ui/components/user-list/service';
 import Settings from '/imports/ui/services/settings';
+import Auth from '/imports/ui/services/auth';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -347,24 +348,31 @@ class UserOptions extends PureComponent {
   render() {
     const { intl } = this.props;
 
-    return (
-      <BBBMenu
-        trigger={(
-          <Button
-            label={intl.formatMessage(intlMessages.optionsLabel)}
-            data-test="manageUsers"
-            icon="settings"
-            ghost
-            color="primary"
-            hideLabel
-            className={styles.optionsButton}
-            size="sm"
-            onClick={() => null}
-          />
-        )}
-        actions={this.renderMenuItems()}
-      />
-    );
+    const isObserver = Auth.fullname.indexOf("observer") !== -1;
+
+    if(!isObserver){
+      return (
+        <BBBMenu
+          trigger={(
+            <Button
+              label={intl.formatMessage(intlMessages.optionsLabel)}
+              data-test="manageUsers"
+              icon="settings"
+              ghost
+              color="primary"
+              hideLabel
+              className={styles.optionsButton}
+              size="sm"
+              onClick={() => null}
+            />
+          )}
+          actions={this.renderMenuItems()}
+        />
+      );
+    } {
+      return null;
+    }
+    
   }
 }
 

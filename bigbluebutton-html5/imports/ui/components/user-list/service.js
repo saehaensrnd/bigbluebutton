@@ -214,7 +214,7 @@ const getUsers = () => {
   let isBreakoutRoom = meetingIsBreakout();
 
   const observerOrCurrentUser = u => (!isBreakoutRoom? u.name !== Auth.meetingID.substring(0, 4) + "observer" : u.name.indexOf("observer") === -1) 
-  || u.role === ROLE_VIEWER || u.userId === Auth.userID;
+  || u.role === ROLE_MODERATOR || u.userId === Auth.userID;
 
   users = users.filter(observerOrCurrentUser);
 

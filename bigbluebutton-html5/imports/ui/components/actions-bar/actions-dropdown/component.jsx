@@ -11,6 +11,7 @@ import BBBMenu from '/imports/ui/components/menu/component';
 import cx from 'classnames';
 import { styles } from '../styles';
 import { PANELS, ACTIONS } from '../../layout/enums';
+import Auth from '/imports/ui/services/auth';
 
 const propTypes = {
   amIPresenter: PropTypes.bool.isRequired,
@@ -98,6 +99,21 @@ class ActionsDropdown extends PureComponent {
     this.handleExternalVideoClick = this.handleExternalVideoClick.bind(this);
     this.makePresentationItems = this.makePresentationItems.bind(this);
   }
+
+  componentDidMount(){
+
+    const {
+      amIModerator,
+      amIPresenter,
+      handleTakePresenter
+    } = this.props;
+
+    let amIObserver = Auth.fullname.indexOf("observer") === -1? false : true;
+
+  if(amIModerator && !amIPresenter && !amIObserver){
+    handleTakePresenter();
+  }
+}
 
   componentDidUpdate(prevProps) {
     const { amIPresenter: wasPresenter } = prevProps;

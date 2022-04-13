@@ -14,6 +14,7 @@ import EchoTest from '../echo-test/component';
 import Help from '../help/component';
 import AudioDial from '../audio-dial/component';
 import AudioAutoplayPrompt from '../autoplay/component';
+import Auth from '/imports/ui/services/auth';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -174,6 +175,12 @@ class AudioModal extends Component {
       isUsingAudio,
     } = this.props;
 
+    const isObserver = Auth.fullname.indexOf("observer") !== -1;
+
+    if(isObserver){
+      return this.handleJoinListenOnly();
+    }
+
     if (!isUsingAudio) {
       if (forceListenOnlyAttendee || audioLocked) return this.handleJoinListenOnly();
 
@@ -186,9 +193,11 @@ class AudioModal extends Component {
 
   componentDidUpdate(prevProps) {
     const { autoplayBlocked, closeModal } = this.props;
+    
+    const isObserver = Auth.fullname.indexOf("observer") !== -1;
 
     if (autoplayBlocked !== prevProps.autoplayBlocked) {
-      if (autoplayBlocked) {
+      if (autoplayBlocked && !isObserver) {
         this.setContent({ content: 'autoplayBlocked' });
       } else {
         closeModal();
@@ -564,6 +573,7 @@ class AudioModal extends Component {
     } = this.props;
 
     const { content } = this.state;
+    const isObserver = Auth.fullname.indexOf("observer") !== -1;
 
     return (
       <span>
@@ -607,7 +617,7 @@ class AudioModal extends Component {
               : null
           }
           <div className={styles.content}>
-            {this.renderContent()}
+            {!isObserver? this.renderContent() : null}
           </div>
         </Modal>
       </span>

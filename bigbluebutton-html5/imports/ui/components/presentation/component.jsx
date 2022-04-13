@@ -70,7 +70,7 @@ class Presentation extends PureComponent {
       presentationHeight: 0,
       showSlide: false,
       zoom: 100,
-      fitToWidth: false,
+      fitToWidth: true,
       isFullscreen: false,
     };
 

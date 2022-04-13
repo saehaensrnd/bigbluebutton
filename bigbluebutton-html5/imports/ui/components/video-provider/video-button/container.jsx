@@ -5,6 +5,7 @@ import { withModalMounter } from '/imports/ui/components/modal/service';
 import VideoPreviewContainer from '/imports/ui/components/video-preview/container';
 import JoinVideoButton from './component';
 import VideoService from '../service';
+import Auth from '/imports/ui/services/auth';
 
 const JoinVideoOptionsContainer = (props) => {
   const {
@@ -18,12 +19,21 @@ const JoinVideoOptionsContainer = (props) => {
   const mountVideoPreview = () => { mountModal(<VideoPreviewContainer forceOpen={false} />); };
   const forceMountVideoPreview = () => { mountModal(<VideoPreviewContainer forceOpen />); };
 
-  return (
-    <JoinVideoButton {...{
-      mountVideoPreview, forceMountVideoPreview, hasVideoStream, disableReason, ...restProps,
-    }}
-    />
-  );
+  const isObserver = Auth.fullname.indexOf("observer") != -1;
+
+  if(!isObserver){
+
+    return (
+      <JoinVideoButton {...{
+        mountVideoPreview, forceMountVideoPreview, hasVideoStream, disableReason, ...restProps,
+      }}
+      />
+    );
+
+  } else {
+    return null;
+  }
+  
 };
 
 export default withModalMounter(injectIntl(withTracker(() => ({

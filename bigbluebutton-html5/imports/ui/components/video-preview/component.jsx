@@ -22,6 +22,7 @@ import {
   isVirtualBackgroundEnabled,
   getSessionVirtualBackgroundInfo,
 } from '/imports/ui/services/virtual-background/service'
+import Auth from '/imports/ui/services/auth';
 
 const VIEW_STATES = {
   finding: 'finding',
@@ -359,6 +360,10 @@ class VideoPreview extends Component {
   }
 
   handleStartSharing() {
+
+    const isObserver = Auth.fullname.indexOf("observer") != -1;
+    if(isObserver) return;
+    
     const { resolve, startSharing } = this.props;
     const { webcamDeviceId } = this.state;
     // Only streams that will be shared should be stored in the service.  // If the store call returns false, we're duplicating stuff. So clean this one
