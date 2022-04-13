@@ -519,6 +519,15 @@
   }
 }
 
+.leave_btn_mobile{
+
+  position:absolute;
+  right: 0;
+  margin-right: 10px;
+  margin-top: 55px;
+  z-index: 1;
+}
+
 .media {
   @extend %full-page;
   flex: 1 100%;

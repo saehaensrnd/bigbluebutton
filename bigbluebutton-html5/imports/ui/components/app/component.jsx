@@ -604,9 +604,10 @@ class App extends Component {
             height: '100%',
           }}
         >
-          {!isCloseMask? this.renderCoachMark() : null}
+          {(!isCloseMask && !deviceInfo.isMobile)? this.renderCoachMark() : null}
           {this.renderActivityCheck()}
           {this.renderUserInformation()}
+          {!deviceInfo.isMobile?
           <Button
               className={styles.help_btn}
               hideLabel
@@ -617,9 +618,9 @@ class App extends Component {
               size="md"
               circle
               onClick={() => this.setState({ isCloseMask: false })}
-            />
+            /> : null}
             <Button
-              className={styles.leave_btn}
+              className={!deviceInfo.isMobile ? styles.leave_btn : styles.leave_btn_mobile}
               hideLabel
               aria-label="Leave"
               label="Leave"

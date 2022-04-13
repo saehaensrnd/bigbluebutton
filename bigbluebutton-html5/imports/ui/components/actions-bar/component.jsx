@@ -9,6 +9,7 @@ import ScreenshareButtonContainer from '/imports/ui/components/actions-bar/scree
 import AudioControlsContainer from '../audio/audio-controls/container';
 import JoinVideoOptionsContainer from '../video-provider/video-button/container';
 import PresentationOptionsContainer from './presentation-options/component';
+import Auth from '/imports/ui/services/auth';
 
 class ActionsBar extends PureComponent {
   render() {
@@ -38,6 +39,9 @@ class ActionsBar extends PureComponent {
       actionsBarStyle,
       isOldMinimizeButtonEnabled,
     } = this.props;
+
+    const isObserver = Auth.fullname.indexOf("observer") !== -1;
+
 
     return (
       <div
@@ -95,7 +99,7 @@ class ActionsBar extends PureComponent {
               />
             )
             : null}
-          {isRaiseHandButtonEnabled && !amIModerator
+          {!isObserver && isRaiseHandButtonEnabled && !amIModerator
             ? (
               <Button
                 icon="hand"
