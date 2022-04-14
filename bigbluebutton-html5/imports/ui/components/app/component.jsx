@@ -49,6 +49,7 @@ import LayoutService from '/imports/ui/components/layout/service';
 import { registerTitleView } from '/imports/utils/dom-utils';
 import Auth from '/imports/ui/services/auth';
 import Button from '/imports/ui/components/button/component';
+import { meetingIsBreakout } from '/imports/ui/components/app/service';
 
 const MOBILE_MEDIA = 'only screen and (max-width: 40em)';
 const APP_CONFIG = Meteor.settings.public.app;
@@ -593,6 +594,8 @@ class App extends Component {
 
     const { isCloseMask } = this.state;
 
+    let isBreakoutRoom = meetingIsBreakout();
+
     return (
       <>
         {this.renderLayoutManager()}
@@ -604,10 +607,10 @@ class App extends Component {
             height: '100%',
           }}
         >
-          {(!isCloseMask && !deviceInfo.isMobile)? this.renderCoachMark() : null}
+          {(!isCloseMask && !deviceInfo.isMobile && !isBreakoutRoom)? this.renderCoachMark() : null}
           {this.renderActivityCheck()}
           {this.renderUserInformation()}
-          {!deviceInfo.isMobile?
+          {(!deviceInfo.isMobile && !isBreakoutRoom)?
           <Button
               className={styles.help_btn}
               hideLabel
@@ -619,7 +622,7 @@ class App extends Component {
               circle
               onClick={() => this.setState({ isCloseMask: false })}
             /> : null}
-            <Button
+            {!isBreakoutRoom? <Button
               className={!deviceInfo.isMobile ? styles.leave_btn : styles.leave_btn_mobile}
               hideLabel
               aria-label="Leave"
@@ -633,7 +636,7 @@ class App extends Component {
                 Session.set('codeError', '680');
 
               }}
-            />
+            /> : null}
           <BannerBarContainer />
           <NotificationsBarContainer />
           <SidebarNavigationContainer />
