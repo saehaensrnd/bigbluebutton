@@ -6,7 +6,7 @@
     "app.chat.disconnected": "연결이 끊어졌습니다. 메시지를 보낼 수 없습니다  ",
     "app.chat.locked": "채팅이 잠겼습니다. 메시지를 보낼 수 없습니다 ",
     "app.chat.inputLabel": "채팅을 위해 메시지를 {0} 입력 하세요 ",
-    "app.chat.inputPlaceholder": "{0} 에게 메시지를 보내세요 ",
+    "app.chat.inputPlaceholder": "메시지를 입력하세요 ",
     "app.chat.titlePublic": "공개 채팅",
     "app.chat.titlePrivate": "{0} 와 비공개 채팅",
     "app.chat.partnerDisconnected": "{0} 가 미팅에서 나갔습니다 ",
