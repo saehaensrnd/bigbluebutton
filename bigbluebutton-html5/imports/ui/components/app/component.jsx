@@ -145,6 +145,9 @@ class App extends Component {
 
     this.throttledDeviceType = throttle(() => this.setDeviceType(),
       50, { trailing: true, leading: true }).bind(this);
+
+    this.getCookie = this.getCookie.bind(this);
+    this.setCookie = this.setCookie.bind(this);
   }
 
   componentDidMount() {
@@ -230,6 +233,12 @@ class App extends Component {
     ConnectionStatusService.startRoundTripTime();
 
     logger.info({ logCode: 'app_component_componentdidmount' }, 'Client loaded successfully');
+
+    var cookieCheck = this.getCookie();
+
+    if(cookieCheck === "N"){
+      this.setState({ isCloseMask: true });
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -356,6 +365,36 @@ class App extends Component {
       && (isPhone || isLayeredView.matches);
   }
 
+  getCookie() { 
+
+    var cookie = document.cookie; 
+
+    if (document.cookie != "") { 
+
+      var cookie_array = cookie.split("; "); 
+
+      for ( var index in cookie_array) { 
+
+        var cookie_name = cookie_array[index].split("=");
+
+        if (cookie_name[0] == "renderCoachMark_webconf") { 
+          return cookie_name[1]; 
+        } 
+
+      } 
+
+    } 
+    return ; 
+  }
+
+  setCookie(name, value) {
+    // var date = new Date();
+    // date.setDate(date.getDate() + expiredays);
+    //document.cookie = escape(name) + "=" + escape(value) + ";";
+    
+    document.cookie = encodeURI(name) + "=" + encodeURI(value) + ";";
+  }
+
 
 
   renderCoachMarkTeacher(){
@@ -382,7 +421,10 @@ class App extends Component {
               color="primary"
               size="lg"
               circle
-              onClick={() => this.setState({ isCloseMask: true })}
+              onClick={() => {
+                this.setState({ isCloseMask: true })
+                this.setCookie("renderCoachMark_webconf", "N");
+              }}
             />
             <p>Close a guide screen</p>
           </div>
@@ -430,7 +472,10 @@ class App extends Component {
               color="primary"
               size="lg"
               circle
-              onClick={() => this.setState({ isCloseMask: true })}
+              onClick={() => {
+                this.setState({ isCloseMask: true })
+                this.setCookie("renderCoachMark_webconf", "N");
+              }}
             />
             <p>가이드 화면 닫기</p>
           </div>
