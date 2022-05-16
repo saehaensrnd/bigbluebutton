@@ -473,7 +473,7 @@ public:
     moderatorChatEmphasized: true
   note:
     enabled: true
-    url: ETHERPAD_HOST
+    url: https://webconf.saehaens.com/pad
   layout:
     autoSwapLayout: false
     hidePresentation: false
@@ -701,6 +701,8 @@ public:
         - value: 20
         - value: 16
       tools:
+        - icon: eraser_tool
+          value: eraser
         - icon: text_tool
           value: text
         - icon: line_tool
@@ -716,6 +718,7 @@ public:
         - icon: hand
           value: hand
       presenterTools:
+        - eraser
         - text
         - line
         - ellipse
@@ -724,6 +727,7 @@ public:
         - pencil
         - hand
       multiUserTools:
+        - eraser
         - text
         - line
         - ellipse
@@ -764,7 +768,7 @@ private:
     pencilChunkLength: 100
     loadSlidesFromHttpAlways: false
   etherpad:
-    apikey: ETHERPAD_APIKEY
+    apikey: 3VcWrTRqQ6EL4kTRB6kFdnmRgSc5QdWZEasV1waTRq5l9m85mIBEmPRqkFoV6G
     version: 1.2.13
     host: 127.0.0.1
     port: 9001

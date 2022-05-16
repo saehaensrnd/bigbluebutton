@@ -805,6 +805,7 @@
     "app.whiteboard.toolbar.tools.ellipse": "타원",
     "app.whiteboard.toolbar.tools.line": "라인",
     "app.whiteboard.toolbar.tools.text": "텍스트",
+    "app.whiteboard.toolbar.tools.eraser": "지우개",
     "app.whiteboard.toolbar.thickness": "두께 그리기",
     "app.whiteboard.toolbar.thicknessDisabled": "두께 그리기 불가",
     "app.whiteboard.toolbar.color": "색깔",
