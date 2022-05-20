@@ -82,7 +82,7 @@ class ScreenshareComponent extends React.Component {
       loaded: false,
       autoplayBlocked: false,
       isStreamHealthy: false,
-      switched: false,
+      switched: true,
       // Volume control hover toolbar
       showHoverToolBar: false,
     };

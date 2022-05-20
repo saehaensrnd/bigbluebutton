@@ -842,8 +842,8 @@ class WhiteboardToolbar extends Component {
           {annotationSelected.value === 'text' ? this.renderFontItem() : this.renderThicknessItem()}
           {this.renderColorItem()}
           {this.renderUndoItem()}
-          {/* {this.renderClearAllItem()} */}
-          {window.PointerEvent ? this.renderPalmRejectionItem() : null}
+          {this.renderClearAllItem()}
+          {/* {window.PointerEvent ? this.renderPalmRejectionItem() : null} */}
           {isPresenter ? this.renderMultiUserItem() : null}
         </div>
       </div>
