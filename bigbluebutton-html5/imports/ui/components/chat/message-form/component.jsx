@@ -106,7 +106,7 @@ const messages = defineMessages({
 
   notHear: {
     id: 'app.chat.notHear',
-    description: 'not Hear',
+    description: 'notHear',
   },
   notCam: {
     id: 'app.chat.notCam',
@@ -143,18 +143,6 @@ const messages = defineMessages({
   notKnow: {
     id: 'app.chat.notKnow',
     description: 'notKnow',
-  },
-  sayAgain: {
-    id: 'app.chat.sayAgain',
-    description: 'sayAgain',
-  },
-  notHear: {
-    id: 'app.chat.notHear',
-    description: 'notHear',
-  },
-  notCam: {
-    id: 'app.chat.notCam',
-    description: 'notCam',
   },
   notTextbook: {
     id: 'app.chat.notTextbook',

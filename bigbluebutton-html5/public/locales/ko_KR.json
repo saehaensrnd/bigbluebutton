@@ -36,8 +36,19 @@
     "app.chat.notTextbook":"I can't see the textbook",
     "app.chat.notWhiteboard":"I can't see the whiteboard",
     "app.chat.notPen":"I can't see the pen",
-    "app.chat.usePen":" Please let me use a pen for the textbook",
-    
+    "app.chat.usePen":"Please let me use a pen for the textbook",
+    "app.chat.speakLouder":"Please speak loudly",
+    "app.chat.logoutNlogin":" Please log out and log in again",
+
+    "app.chat.checkMic":"Please check if your microphone is on",
+    "app.chat.teacherLogout":"I will log out and log in back. Please do not log out and wait for me",
+    "app.chat.callParent":" If your parents are there, please call them",
+    "app.chat.seePicture":"Can you see the picture?",
+    "app.chat.repeat":"Repeat after me",
+    "app.chat.thumbsUp": "Good job",
+    "app.chat.whiteboard" : "Click the whiteboard button at the right-bottom",
+
+
 
 
     "app.chat.copySuccess": "채팅 내용이 복사 됨",

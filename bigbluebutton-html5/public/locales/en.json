@@ -39,6 +39,18 @@
     "app.chat.thumbsUp": "잘했어요",
     "app.chat.whiteboard" : "오른쪽 하단에 있는 칠판 버튼을 눌러주세요",
 
+    "app.chat.speakSlower": "천천히 말해주세요",
+    "app.chat.raiseHand": "질문 있어요",
+    "app.chat.notKnow":"잘 모르겠어요",
+    "app.chat.notTextbook":"교재가 보이지 않아요",
+    "app.chat.notWhiteboard":"칠판이 보이지 않아요",
+    "app.chat.notPen":"펜이 보이지 않아요",
+    "app.chat.usePen":"펜을 사용할 수 있도록 해주세요",
+
+
+
+
+
     "app.chat.copySuccess": "Copied chat transcript",
     "app.chat.copyErr": "Copy chat transcript failed",
     "app.captions.label": "Captions",
