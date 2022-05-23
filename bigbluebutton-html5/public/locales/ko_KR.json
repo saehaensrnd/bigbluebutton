@@ -25,15 +25,21 @@
     "app.chat.multi.typing": "여러 사용자가 타이핑하고 있습니다 ",
     "app.chat.one.typing": "{0} 가 타이핑중입니다 ",
     "app.chat.two.typing": "{0} 과 {1} 이 타이핑중입니다",
-    "app.chat.speakLouder": "Please Speak Louder",
-    "app.chat.speakSofter": "Please Speak Softer",
-    "app.chat.speakFaster": "Please Speak Faster",
-    "app.chat.speakSlower": "Please Speak Slower",
+
+
+    "app.chat.speakSlower": "Please speak slowly",
     "app.chat.raiseHand": "I have a question",
-    "app.chat.thumbsUp": "Good!",
-    "app.chat.thumbsDown": "Bad",
-    "app.chat.away": "I'm out for a moment",
-    "app.chat.whiteboard" : "오른쪽 하단에 있는 칠판 버튼을 눌러주세요",
+    "app.chat.notKnow":"I don't know",
+    "app.chat.sayAgain":"Say it again, please",
+    "app.chat.notHear":"I can't hear you",
+    "app.chat.notCam":"I can't see you",
+    "app.chat.notTextbook":"I can't see the textbook",
+    "app.chat.notWhiteboard":"I can't see the whiteboard",
+    "app.chat.notPen":"I can't see the pen",
+    "app.chat.usePen":" Please let me use a pen for the textbook",
+    
+
+
     "app.chat.copySuccess": "채팅 내용이 복사 됨",
     "app.chat.copyErr": "채팅 내용의 복사 실패",
     "app.captions.label": "자막",
@@ -456,12 +462,60 @@
     "app.actionsBar.emojiMenu.speakSofterDesc": "좀 더 부드럽게 해주세요",
     "app.actionsBar.emojiMenu.speakFasterLabel": "좀 더 빠르게 말해주세요",
     "app.actionsBar.emojiMenu.speakFasterDesc": "좀 더 빠르게 말해주세요",
-    "app.actionsBar.emojiMenu.speakSlowerLabel": "좀 더 천천히 말해주세요",
-    "app.actionsBar.emojiMenu.speakSlowerDesc": "좀 더 천천히 말해주세요",
+    "app.actionsBar.emojiMenu.speakSlowerLabel": "천천히 말해주세요",
+    "app.actionsBar.emojiMenu.speakSlowerDesc": "천천히 말해주세요",
+
+
+
+    "app.actionsBar.emojiMenu.notHearLabel": "소리가 들리지 않아요",
+    "app.actionsBar.emojiMenu.notHearDesc": "소리가 들리지 않아요",
+    "app.actionsBar.emojiMenu.notCamLabel": "카메라가 안 보여요",
+    "app.actionsBar.emojiMenu.notCamDesc": "카메라가 안 보여요",
+    "app.actionsBar.emojiMenu.logoutNloginLabel": "로그아웃했다가 다시 입장해주세요",
+    "app.actionsBar.emojiMenu.logoutNloginDesc": "로그아웃했다가 다시 입장해주세요",
+    "app.actionsBar.emojiMenu.checkMicLabel": "마이크가 켜져 있는지 확인하세요",
+    "app.actionsBar.emojiMenu.checkMicDesc": "마이크가 켜져 있는지 확인하세요",
+    "app.actionsBar.emojiMenu.teacherLogoutLabel": "선생님이 잠시 나갔다가 들어올께요",
+    "app.actionsBar.emojiMenu.teacherLogoutDesc": "선생님이 잠시 나갔다가 들어올께요",
+    "app.actionsBar.emojiMenu.callParentLabel": "부모님이 계시면 모셔오세요",
+    "app.actionsBar.emojiMenu.callParentDesc": "부모님이 계시면 모셔오세요",
+    "app.actionsBar.emojiMenu.seePictureLabel": "사진이 보이나요?",
+    "app.actionsBar.emojiMenu.seePictureDesc": "사진이 보이나요?",
+    "app.actionsBar.emojiMenu.repeatLabel": "따라하세요",
+    "app.actionsBar.emojiMenu.repeatDesc": "따라하세요",
+    "app.actionsBar.emojiMenu.sayAgainLabel": "다시 말해주세요",
+    "app.actionsBar.emojiMenu.sayAgainDesc": "다시 말해주세요",
+
+
+
+    "app.actionsBar.emojiMenu.notKnowLabel": "잘 모르겠어요",
+    "app.actionsBar.emojiMenu.notKnowDesc": "잘 모르겠어요",
+    "app.actionsBar.emojiMenu.notTextbookLabel": "교재가 보이지 않아요",
+    "app.actionsBar.emojiMenu.notTextbookDesc": "교재가 보이지 않아요",
+    "app.actionsBar.emojiMenu.notWhiteboardLabel": "칠판이 보이지 않아요",
+    "app.actionsBar.emojiMenu.notWhiteboardDesc": "칠판이 보이지 않아요",
+    "app.actionsBar.emojiMenu.notPenLabel": "펜이 보이지 않아요",
+    "app.actionsBar.emojiMenu.notPenDesc": "펜이 보이지 않아요",
+    "app.actionsBar.emojiMenu.usePenLabel": "펜을 사용할 수 있도록 해주세요",
+    "app.actionsBar.emojiMenu.usePenDesc": "펜을 사용할 수 있도록 해주세요",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     "app.actionsBar.emojiMenu.awayLabel": "부재중",
     "app.actionsBar.emojiMenu.awayDesc": "부재중으로 상태 변경",
-    "app.actionsBar.emojiMenu.raiseHandLabel": "손들기",
+    "app.actionsBar.emojiMenu.raiseHandLabel": "질문 있어요",
     "app.actionsBar.emojiMenu.lowerHandLabel": "손내리기",
     "app.actionsBar.emojiMenu.raiseHandDesc": "질문을 위해 손 들기",
     "app.actionsBar.emojiMenu.neutralLabel": "미결정",
@@ -599,7 +653,7 @@
     "app.error.404": "없음",
     "app.error.408": "인증 실패",
     "app.error.410": "미팅 종료 ",
-    "app.error.500": "어머나 ! 뭔가 잘못 되었어요 ",
+    "app.error.500": "뭔가 잘못 되었어요 ",
     "app.error.userLoggedOut": "로그 아웃으로 인해 사용자에게 잘못된 sessionToken이 있습니다.",
     "app.error.ejectedUser": "사용자에게 제거로 인해 잘못된 sessionToken이 있습니다.",
     "app.error.userBanned": "사용자가 차단되었습니다.",

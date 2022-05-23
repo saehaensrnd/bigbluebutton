@@ -473,7 +473,7 @@ public:
     moderatorChatEmphasized: true
   note:
     enabled: true
-    url: ETHERPAD_HOST
+    url: https://webconf.saehaens.com/pad
   layout:
     autoSwapLayout: false
     hidePresentation: false
@@ -764,7 +764,7 @@ private:
     pencilChunkLength: 100
     loadSlidesFromHttpAlways: false
   etherpad:
-    apikey: ETHERPAD_APIKEY
+    apikey: 3VcWrTRqQ6EL4kTRB6kFdnmRgSc5QdWZEasV1waTRq5l9m85mIBEmPRqkFoV6G
     version: 1.2.13
     host: 127.0.0.1
     port: 9001
