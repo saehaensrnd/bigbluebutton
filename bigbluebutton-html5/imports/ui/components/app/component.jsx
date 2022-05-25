@@ -180,25 +180,6 @@ class App extends Component {
 
     logger.info({ logCode: 'app_component_componentdidmount' }, 'Client loaded successfully');
 
-
-    let eventID = "user-joined";
-    let name = Auth.fullname;
-    //let userID = Auth.userID;
-    let userID = Auth.externUserID;
-    let userType = currentUserRole;
-
-    console.log("extenr UserID : " + userID);
-
-    
-    if(userType === "MODERATOR")
-      userType = "teacher";
-    else if(userType === "VIEWER")
-      userType = "student";
-    else if(name.indexOf("observer") !== -1)
-      userType = "observer";
-
-    //Attendance.checkAttendance(eventID, name, userID, userType);
-
     var cookieCheck = this.getCookie();
 
     console.log("cookieCheck2222 : " + cookieCheck);
@@ -681,25 +662,6 @@ class App extends Component {
               size="md"
               circle
               onClick={() => { 
-
-                const { currentUserRole } = this.props;
-
-                let eventID = "user-left";
-                let name = Auth.fullname;
-                //let userID = Auth.userID;
-                let userID = Auth.externUserID;
-                let userType = currentUserRole;
-
-                if(userType === "MODERATOR")
-                  userType = "teacher";
-                else if(userType === "VIEWER")
-                  userType = "student";
-                else if(name.indexOf("observer") !== -1)
-                  userType = "observer";
-
-                console.log("userTYpe : " + userType);
-
-                Attendance.checkAttendance(eventID, name, userID, userType);
 
                 makeCall('userLeftMeeting');
                 Session.set('codeError', '680');

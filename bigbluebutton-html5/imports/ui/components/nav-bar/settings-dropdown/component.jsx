@@ -194,18 +194,6 @@ class SettingsDropdown extends PureComponent {
 
     const { amIModerator } = this.props;
 
-    let eventID = "user-left";
-    let name = Auth.fullname;
-    //let userID = Auth.userID;
-    let userID = Auth.externUserID;
-    let userType = amIModerator? "teacher" : "student";
-
-    if(Auth.fullname.indexOf("observer") !== -1){
-      userType = "observer";
-    }
-
-    Attendance.checkAttendance(eventID, name, userID, userType);
-
     makeCall('userLeftMeeting');
     // we don't check askForFeedbackOnLogout here,
     // it is checked in meeting-ended component

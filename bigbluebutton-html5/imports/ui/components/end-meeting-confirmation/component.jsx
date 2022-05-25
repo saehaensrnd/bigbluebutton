@@ -57,13 +57,6 @@ class EndMeetingComponent extends PureComponent {
 
   endClass(){
     const { endMeeting } = this.props;
-
-    let eventID = "meeting-ended";
-    let name = Auth.fullname;
-    let userID = Auth.userID;
-    let userType = "none";
-
-    Attendance.checkAttendance(eventID, name, userID, userType);
     
     endMeeting();
 
