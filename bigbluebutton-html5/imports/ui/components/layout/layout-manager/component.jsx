@@ -66,10 +66,10 @@ class LayoutManagerComponent extends Component {
         presentationWidth = mediaAreaWidth;
       }
 
-      if(!isMobile){
-        presentationWidth = 970;
-        presentationHeight = 750;
-      }
+      // if(!isMobile){
+      //   presentationWidth = 970;
+      //   presentationHeight = 750;
+      // }
 
     }
 
@@ -735,7 +735,8 @@ class LayoutManagerComponent extends Component {
     let presentationAreaHeight;
 
     if (webcamsPlacement === 'left' || webcamsPlacement === 'right') {
-      presentationAreaWidth = mediaAreaWidth - webcamAreaWidth - 20 - 100;
+      //presentationAreaWidth = mediaAreaWidth - webcamAreaWidth - 20 - 100;
+      presentationAreaWidth = mediaAreaWidth - webcamAreaWidth - 20;
       presentationAreaHeight = mediaAreaHeight - 20;
     } else {
       presentationAreaWidth = mediaAreaWidth;

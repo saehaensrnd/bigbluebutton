@@ -68,6 +68,7 @@ class PresentationArea extends PureComponent {
       showSlide: false,
       zoom: 100,
       fitToWidth: true,
+      //fitToWidth: false,
       isFullscreen: false,
     };
 

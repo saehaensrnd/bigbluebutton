@@ -1,17 +1,17 @@
 export const STUDENT_EMOJI_STATUSES = {
     // name: icon
-    away: 'time',
+    //away: 'time',
     raiseHand: 'hand',
     //neutral: 'undecided',
-    speakLouder: 'confused',
-    speakSofter : 'confused',
-    speakFaster: 'confused',
     speakSlower : 'confused',
-    //sad: 'sad',
-    //happy: 'happy',
-    //applause: 'applause',
-    //thumbsUp: 'thumbs_up',
-    //thumbsDown: 'thumbs_down',
+    notKnow : 'confused',
+    sayAgain : 'confused',
+    notHear : 'confused',
+    notCam : 'confused',
+    notTextbook : 'confused',
+    notWhiteboard : 'confused',
+    notPen : 'confused',
+    usePen : 'confused'
   };
   
   export default { STUDENT_EMOJI_STATUSES };

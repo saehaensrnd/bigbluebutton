@@ -25,17 +25,26 @@
     "app.chat.multi.typing": "Multiple users are typing",
     "app.chat.one.typing": "{0} is typing",
     "app.chat.two.typing": "{0} and {1} are typing",
-    "app.chat.speakLouder": "소리 좀 크게 말해주세요",
-    "app.chat.speakSofter": "좀 더 부드럽게 말해주세요",
-    "app.chat.speakFaster": "좀 더 빠르게  말해주세요",
-    "app.chat.raiseHand": "질문 있어요",
-    "app.chat.speakSlower": "좀 더 천천히 말해주세요",
-    "app.chat.thumbsUp": "잘했어요!",
-    "app.chat.thumbsDown": "아쉬워요",
-    "app.chat.away": "부재중입니다",
+    "app.chat.speakLouder": "좀 더 큰소리로 말해주세요",
+    "app.chat.notHear":"소리가 들리지 않아요",
+    "app.chat.notCam":"카메라가 안 보여요",
+    "app.chat.logoutNlogin":"로그아웃했다가 다시 입장해주세요",
+    "app.chat.checkMic":"마이크가 켜져 있는지 확인하세요",
+    "app.chat.teacherLogout":"선생님이 잠시 나갔다가 들어올게요. 나가지 말고 잠시만 기다려 주세요",
+    "app.chat.callParent":"부모님이 계시면 모셔오세요",
+    "app.chat.seePicture":"사진이 보이나요?",
+    "app.chat.repeat":"따라하세요",
+    "app.chat.sayAgain":"다시 말해주세요",
+    "app.chat.thumbsUp": "잘했어요",
     "app.chat.whiteboard" : "오른쪽 하단에 있는 칠판 버튼을 눌러주세요",
  
-
+    "app.chat.speakSlower": "천천히 말해주세요",
+    "app.chat.raiseHand": "질문 있어요",
+    "app.chat.notKnow":"잘 모르겠어요",
+    "app.chat.notTextbook":"교재가 보이지 않아요",
+    "app.chat.notWhiteboard":"칠판이 보이지 않아요",
+    "app.chat.notPen":"펜이 보이지 않아요",
+    "app.chat.usePen":"펜을 사용할 수 있도록 해주세요",
 
 
     "app.captions.label": "Captions",
@@ -422,14 +431,54 @@
     "app.actionsBar.actionsDropdown.selectRandUserLabel": "Select random user",
     "app.actionsBar.actionsDropdown.selectRandUserDesc": "Chooses a user from available viewers at random",
     "app.actionsBar.emojiMenu.statusTriggerLabel": "frenquetly used comments",
-    "app.actionsBar.emojiMenu.speakLouderLabel": "Please Speak Louder",
-    "app.actionsBar.emojiMenu.speakLouderDesc": "Please Speak Louder",
+    "app.actionsBar.emojiMenu.speakLouderLabel": "Please speak louder",
+    "app.actionsBar.emojiMenu.speakLouderDesc": "Please speak louder",
     "app.actionsBar.emojiMenu.speakSofterLabel": "Please Speak Softer",
     "app.actionsBar.emojiMenu.speakSofterDesc": "Please Speak Softer",
     "app.actionsBar.emojiMenu.speakFasterLabel": "Please Speak Faster",
     "app.actionsBar.emojiMenu.speakFasterDesc": "Please Speak Faster",
     "app.actionsBar.emojiMenu.speakSlowerLabel": "Please Speak Slower",
     "app.actionsBar.emojiMenu.speakSlowerDesc": "Please Speak Slower",
+
+
+    "app.actionsBar.emojiMenu.notHearLabel": "I can't hear you",
+    "app.actionsBar.emojiMenu.notHearDesc": "I can't hear you",
+    "app.actionsBar.emojiMenu.notCamLabel": "I can't see you",
+    "app.actionsBar.emojiMenu.notCamDesc": "I can't see you",
+    "app.actionsBar.emojiMenu.logoutNloginLabel": "Please log out and log in again",
+    "app.actionsBar.emojiMenu.logoutNloginDesc": "Please log out and log in again",
+    "app.actionsBar.emojiMenu.checkMicLabel": "Please check if your microphone is on",
+    "app.actionsBar.emojiMenu.checkMicDesc": "Please check if your microphone is on",
+    "app.actionsBar.emojiMenu.teacherLogoutLabel": "I will log out and log in back",
+    "app.actionsBar.emojiMenu.teacherLogoutDesc": "I will log out and log in back",
+    "app.actionsBar.emojiMenu.callParentLabel": "Call your parents",
+    "app.actionsBar.emojiMenu.callParentDesc": "Call your parents",
+    "app.actionsBar.emojiMenu.seePictureLabel": "Can you see the picture?",
+    "app.actionsBar.emojiMenu.seePictureDesc": "Can you see the picture?",
+    "app.actionsBar.emojiMenu.repeatLabel": "Repeat after me",
+    "app.actionsBar.emojiMenu.repeatDesc": "Repeat after me",
+    "app.actionsBar.emojiMenu.sayAgainLabel": "Say it again",
+    "app.actionsBar.emojiMenu.sayAgainDesc": "Say it again",
+
+    "app.actionsBar.emojiMenu.notKnowLabel": "I don't know",
+    "app.actionsBar.emojiMenu.notKnowDesc": "I don't know",
+    "app.actionsBar.emojiMenu.notTextbookLabel": "I can't see the textbook",
+    "app.actionsBar.emojiMenu.notTextbookDesc": "I can't see the textbook",
+    "app.actionsBar.emojiMenu.notWhiteboardLabel": "I can't see the whiteboard",
+    "app.actionsBar.emojiMenu.notWhiteboardDesc": "I can't see the whiteboard",
+    "app.actionsBar.emojiMenu.notPenLabel": "I can't see the pen",
+    "app.actionsBar.emojiMenu.notPenDesc": "I can't see the pen",
+    "app.actionsBar.emojiMenu.usePenLabel": "Please let me use a pen for the textbook.",
+    "app.actionsBar.emojiMenu.usePenDesc": "Please let me use a pen for the textbook.",
+
+
+
+
+
+
+
+
+
     "app.actionsBar.emojiMenu.awayLabel": "Away",
     "app.actionsBar.emojiMenu.awayDesc": "Change your status to away",
     "app.actionsBar.emojiMenu.raiseHandLabel": "Raise hand",

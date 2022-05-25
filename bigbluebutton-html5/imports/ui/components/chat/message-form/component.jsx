@@ -103,6 +103,67 @@ const messages = defineMessages({
     id: 'app.chat.raiseHand',
     description: 'raiseHand',
   },
+
+
+  notHear: {
+    id: 'app.chat.notHear',
+    description: 'notHear',
+  },
+  notCam: {
+    id: 'app.chat.notCam',
+    description: 'notCam',
+  },
+  logoutNlogin: {
+    id: 'app.chat.logoutNlogin',
+    description: 'logoutNlogin',
+  },
+  checkMic: {
+    id: 'app.chat.checkMic',
+    description: 'checkMic',
+  },
+  teacherLogout: {
+    id: 'app.chat.teacherLogout',
+    description: 'teacherLogout',
+  },
+  callParent: {
+    id: 'app.chat.callParent',
+    description: 'callParent',
+  },
+  seePicture: {
+    id: 'app.chat.seePicture',
+    description: 'seePicture',
+  },
+  repeat: {
+    id: 'app.chat.repeat',
+    description: 'repeat',
+  },
+  sayAgain: {
+    id: 'app.chat.sayAgain',
+    description: 'sayAgain',
+  },
+  notKnow: {
+    id: 'app.chat.notKnow',
+    description: 'notKnow',
+  },
+  notTextbook: {
+    id: 'app.chat.notTextbook',
+    description: 'notTextbook',
+  },
+  notWhiteboard: {
+    id: 'app.chat.notWhiteboard',
+    description: 'notWhiteboard',
+  },
+  notPen: {
+    id: 'app.chat.notPen',
+    description: 'notPen',
+  },
+  usePen: {
+    id: 'app.chat.usePen',
+    description: 'usePen',
+  }
+
+
+
 });
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
@@ -113,19 +174,6 @@ let userArray = [];
 let isTyping = false;
 let isSent = false;
 
-const emojiArray = {
-
-  away: "I'm out for a moment",
-  raiseHand: "I have a question",
-  //neutral: "Nothing",
-  speakLouder: "Please speak Louder",
-  speakSofter : 'Please speak Softer',
-  speakFaster: 'Please speak Faster',
-  speakSlower : 'Please speak Slower',
-  thumbsUp: 'Good!',
-  thumbsDown: 'Bad',
-
-};
 
 class MessageForm extends PureComponent {
   constructor(props) {

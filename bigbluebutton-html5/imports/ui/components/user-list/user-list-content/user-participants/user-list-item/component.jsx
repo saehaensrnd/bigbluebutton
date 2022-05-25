@@ -61,19 +61,6 @@ const intlMessages = defineMessages({
   },
 });
 
-const emojiArray = {
-
-  away: "I'm out for a moment",
-  raiseHand: "I have a question",
-  //neutral: "Nothing",
-  speakLouder: "Please speak Louder",
-  speakSofter : 'Please speak Softer',
-  speakFaster: 'Please speak Faster',
-  speakSlower : 'Please speak Slower',
-  thumbsUp: 'Good!',
-  thumbsDown: 'Bad',
-
-};
 
 class UserListItem extends PureComponent {
   

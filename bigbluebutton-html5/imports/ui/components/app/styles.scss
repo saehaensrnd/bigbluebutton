@@ -148,19 +148,19 @@
 .quick_menu .quick_list{width:100%; margin:0 auto; /*padding:50px 0;*/ margin-top:15px;}
 .quick_menu .quick_list > li{float:left; display:block; width:100%; height:70px; margin:0 15px;}
 .quick_menu .quick_list > li:nth-child(6){margin-right:0 none;}
-.quick_menu .quick_list > li > a{display:block; width:90px; height:90px; background:url('https://host/img/mic.png') 50% 50% no-repeat;}
+.quick_menu .quick_list > li > a{display:block; width:90px; height:90px; background:url('https://webconf.saehaens.com/icon/mic.png') 50% 50% no-repeat;}
 .quick_menu .quick_list > li > a:hover{width:90px; height:90px;}
 
-.quick_menu .quick_list > li > .qlist{display:block; width:90px; height:90px; background:url('https://host/img/mic.png') 50% 50% no-repeat;}
+.quick_menu .quick_list > li > .qlist{display:block; width:90px; height:90px; background:url('https://webconf.saehaens.com/icon/mic.png') 50% 50% no-repeat;}
 
-.quick_menu .quick_list > li:nth-child(2) > a{background-image:url('https://host/img/audio.png'); width:90px; height:90px;}
-.quick_menu .quick_list > li:nth-child(3) > a{background-image:url('https://host/img/webcam.png'); width:90px; height:90px;}
-.quick_menu .quick_list > li:nth-child(4) > a{background-image:url('https://host/img/screenshare.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(2) > a{background-image:url('https://webconf.saehaens.com/icon/audio.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(3) > a{background-image:url('https://webconf.saehaens.com/icon/webcam.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(4) > a{background-image:url('https://webconf.saehaens.com/icon/screenshare.png'); width:90px; height:90px;}
 
 
-.quick_menu .quick_list > li:nth-child(2) > .qlist{background-image:url('https://host/img/audio.png'); width:90px; height:90px;}
-.quick_menu .quick_list > li:nth-child(3) > .qlist{background-image:url('https://host/img/webcam.png'); width:90px; height:90px;}
-.quick_menu .quick_list > li:nth-child(4) > .qlist{background-image:url('https://host/img/screenshare.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(2) > .qlist{background-image:url('https://webconf.saehaens.com/icon/audio.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(3) > .qlist{background-image:url('https://webconf.saehaens.com/icon/webcam.png'); width:90px; height:90px;}
+.quick_menu .quick_list > li:nth-child(4) > .qlist{background-image:url('https://webconf.saehaens.com/icon/screenshare.png'); width:90px; height:90px;}
 
 .quick_menu .quick_list span{display:block; font-size:15px; line-height:30px; padding-top:30px; font-weight:600; color:rgb(255, 255, 255); width:500px; text-align:left; padding-left:95px;}
 
@@ -184,21 +184,21 @@
  .quick_menu_mobile .quick_list{width:100%; margin:0 auto; /*padding:50px 0;*/ margin-top:15px;}
  .quick_menu_mobile .quick_list > li{float:left; display:block; width:100%; height:70px; margin:0 15px;}
  .quick_menu_mobile .quick_list > li:nth-child(6){margin-right:0 none;}
- .quick_menu_mobile .quick_list > li > a{display:block; width:90px; height:90px; background:url('https://host/img/mic.png') 50% 50% no-repeat;}
+ .quick_menu_mobile .quick_list > li > a{display:block; width:90px; height:90px; background:url('https://webconf.saehaens.com/icon/mic.png') 50% 50% no-repeat;}
  .quick_menu_mobile .quick_list > li > a:hover{width:90px; height:90px;}
  
- .quick_menu_mobile .quick_list > li > .qlist{display:block; width:90px; height:90px; background:url('https://host/img/mic.png') 50% 50% no-repeat;}
+ .quick_menu_mobile .quick_list > li > .qlist{display:block; width:90px; height:90px; background:url('https://webconf.saehaens.com/icon/mic.png') 50% 50% no-repeat;}
  
- .quick_menu_mobile .quick_list > li:nth-child(2) > a{background-image:url('https://host/img/audio.png'); width:90px; height:90px;}
- .quick_menu_mobile .quick_list > li:nth-child(3) > a{background-image:url('https://host/img/webcam.png'); width:90px; height:90px;}
- .quick_menu_mobile .quick_list > li:nth-child(4) > a{background-image:url('https://host/img/screenshare.png'); width:90px; height:90px;}
- .quick_menu_mobile .quick_list > li:nth-child(5) > a{background-image:url('https://host/img/whiteboard.png'); width:90px; height:90px;}
+ .quick_menu_mobile .quick_list > li:nth-child(2) > a{background-image:url('https://webconf.saehaens.com/icon/audio.png'); width:90px; height:90px;}
+ .quick_menu_mobile .quick_list > li:nth-child(3) > a{background-image:url('https://webconf.saehaens.com/icon/webcam.png'); width:90px; height:90px;}
+ .quick_menu_mobile .quick_list > li:nth-child(4) > a{background-image:url('https://webconf.saehaens.com/icon/screenshare.png'); width:90px; height:90px;}
+ .quick_menu_mobile .quick_list > li:nth-child(5) > a{background-image:url('https://webconf.saehaens.com/icon/whiteboard.png'); width:90px; height:90px;}
  
  
- .quick_menu_mobile .quick_list > li:nth-child(2) > .qlist{background-image:url('https://host/img/audio.png'); width:90px; height:90px;}
- .quick_menu_mobile .quick_list > li:nth-child(3) > .qlist{background-image:url('https://host/img/webcam.png'); width:90px; height:90px;}
- .quick_menu_mobile .quick_list > li:nth-child(4) > .qlist{background-image:url('https://host/img/screenshare.png'); width:90px; height:90px;}
- .quick_menu_mobile .quick_list > li:nth-child(5) > .qlist{background-image:url('https://host/img/whiteboard.png'); width:90px; height:90px;}
+ .quick_menu_mobile .quick_list > li:nth-child(2) > .qlist{background-image:url('https://webconf.saehaens.com/icon/audio.png'); width:90px; height:90px;}
+ .quick_menu_mobile .quick_list > li:nth-child(3) > .qlist{background-image:url('https://webconf.saehaens.com/icon/webcam.png'); width:90px; height:90px;}
+ .quick_menu_mobile .quick_list > li:nth-child(4) > .qlist{background-image:url('https://webconf.saehaens.com/icon/screenshare.png'); width:90px; height:90px;}
+ .quick_menu_mobile .quick_list > li:nth-child(5) > .qlist{background-image:url('https://webconf.saehaens.com/icon/whiteboard.png'); width:90px; height:90px;}
  
  
  .quick_menu_mobile .quick_list span{display:block; font-size:15px; line-height:30px; padding-top:30px; font-weight:600; color:rgb(255, 255, 255); width:500px; text-align:left; padding-left:95px;}

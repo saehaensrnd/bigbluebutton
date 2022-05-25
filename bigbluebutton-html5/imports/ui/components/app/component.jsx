@@ -124,11 +124,13 @@ class App extends Component {
     this.handleWindowResize = throttle(this.handleWindowResize).bind(this);
     this.shouldAriaHide = this.shouldAriaHide.bind(this);
     this.renderMedia = withDraggableContext(this.renderMedia.bind(this));
+    this.getCookie = this.getCookie.bind(this);
+    this.setCookie = this.setCookie.bind(this);
   }
 
   componentDidMount() {
     const {
-      locale, notify, intl, validIOSVersion, startBandwidthMonitoring, handleNetworkConnection, currentUserRole
+      locale, notify, intl, validIOSVersion, startBandwidthMonitoring, handleNetworkConnection, currentUserRole, isCloseMask
     } = this.props;
     const { browserName } = browserInfo;
     const { isMobile, osName } = deviceInfo;
@@ -195,7 +197,16 @@ class App extends Component {
     else if(name.indexOf("observer") !== -1)
       userType = "observer";
 
-    Attendance.checkAttendance(eventID, name, userID, userType);
+    //Attendance.checkAttendance(eventID, name, userID, userType);
+
+    var cookieCheck = this.getCookie();
+
+    console.log("cookieCheck2222 : " + cookieCheck);
+
+    if(cookieCheck === "N"){
+      this.setState({ isCloseMask: true });
+    }
+
 
   }
 
@@ -317,6 +328,36 @@ class App extends Component {
     );
   }
 
+  getCookie() { 
+
+    var cookie = document.cookie; 
+
+    if (document.cookie != "") { 
+
+      var cookie_array = cookie.split("; "); 
+
+      for ( var index in cookie_array) { 
+
+        var cookie_name = cookie_array[index].split("=");
+
+        if (cookie_name[0] == "renderCoachMark_webconf") { 
+          return cookie_name[1]; 
+        } 
+
+      } 
+
+    } 
+    return ; 
+  }
+
+  setCookie(name, value) {
+    // var date = new Date();
+    // date.setDate(date.getDate() + expiredays);
+    //document.cookie = escape(name) + "=" + escape(value) + ";";
+    
+    document.cookie = encodeURI(name) + "=" + encodeURI(value) + ";";
+  }
+
   renderCoachMarkTeacher(){
 
     return (
@@ -324,19 +365,19 @@ class App extends Component {
         <div className={styles.mask_back}></div>
 
         {/* <div className={styles.allowMic}>
-          <img src="https://host/img/allowMic.png" width="317" height="128"/>
+          <img src="https://install.inetstudy.co.kr:4430/demosite/demo26_kdh/img/allowMic.png" width="317" height="128"/>
         </div>
 
         <div className={styles.allowCam}>
-          <img src="https://host/img/allowCam.png" width="317" height="128"/>
+          <img src="https://install.inetstudy.co.kr:4430/demosite/demo26_kdh/img/allowCam.png" width="317" height="128"/>
         </div> */}
         <div className={styles.leave_coachmark_btn}>
-          <img src="https://host/img/leave.png" width="46" height="46"/>
+          <img src="https://webconf.saehaens.com/icon/leave.png" width="46" height="46"/>
           <span className={styles.span_align} >Click this button to be out</span>
         </div>
         
 
-        <img className={styles.teacher_ments} src="https://host/img/teacherMents.png" width="507" height="293"/>
+        <img className={styles.teacher_ments} src="https://webconf.saehaens.com/icon/teacherMents.png" width="507" height="293"/>
 
         <div className={styles.close_btn}>
           <Button
@@ -349,12 +390,15 @@ class App extends Component {
               color="primary"
               size="lg"
               circle
-              onClick={() => this.setState({ isCloseMask: true })}
+              onClick={() => {
+                this.setState({ isCloseMask: true })
+                this.setCookie("renderCoachMark_webconf", "N");
+              }}
             />
             <p>Close a guide screen</p>
           </div>
-          <img className={styles.plus_content} src="https://host/img/plus_content.png" width="275" height="140"/>
-          <img className={styles.setting} src="https://host/img/setting.png" width="160" height="240"/>
+          <img className={styles.plus_content} src="https://webconf.saehaens.com/icon/plus_content.png" width="275" height="140"/>
+          <img className={styles.setting} src="https://webconf.saehaens.com/icon/setting.png" width="160" height="240"/>
 
           <div className={styles.setting_content}>
             <p>End Meeting : The classroom is removed and all the users in the classroom are out</p>
@@ -371,7 +415,7 @@ class App extends Component {
           </div>
 
           <div className={styles.raisehand_btn}>
-            <img src="https://host/img/whiteboard.png" width="56" height="55"/>
+            <img src="https://webconf.saehaens.com/icon/whiteboard.png" width="56" height="55"/>
             <p className={styles.p}>whiteboard</p>
           </div>
         </div>
@@ -383,7 +427,6 @@ class App extends Component {
     // isPhone && isPortrait ? 'middle center' 
     const isPortrait = deviceInfo.isPortrait();
 
-  
     return isPortrait? (
       <div className={styles.mask}>
         <div className={styles.mask_back}></div>
@@ -399,7 +442,10 @@ class App extends Component {
               color="primary"
               size="md"
               circle
-              onClick={() => this.setState({ isCloseMask: true })}
+              onClick={() => {
+                this.setState({ isCloseMask: true })
+                this.setCookie("renderCoachMark_webconf", "N");
+              }}
             />
             <p>가이드 화면 닫기</p>
           </div>
@@ -413,7 +459,7 @@ class App extends Component {
             </ul>
           </div>
           <div className={styles.raisehand_btn_mobile}>
-            <img src="https://host/img/raisehand.png" width="56" height="55"/>
+            <img src="https://webconf.saehaens.com/icon/raisehand.png" width="56" height="55"/>
             <p className={styles.p}>손들기</p>
           </div>
           
@@ -431,19 +477,19 @@ class App extends Component {
         <div className={styles.mask_back}></div>
 
         {/* <div className={styles.allowMic}>
-          <img src="https://host/img/allowMic.png" width="317" height="128"/>
+          <img src="https://install.inetstudy.co.kr:4430/demosite/demo26_kdh/img/allowMic.png" width="317" height="128"/>
         </div>
 
         <div className={styles.allowCam}>
-          <img src="https://host/img/allowCam.png" width="317" height="128"/>
+          <img src="https://install.inetstudy.co.kr:4430/demosite/demo26_kdh/img/allowCam.png" width="317" height="128"/>
         </div> */}
 
         <div className={styles.leave_coachmark_btn}>
-          <img src="https://host/img/leave.png" width="46" height="46"/>
+          <img src="https://webconf.saehaens.com/icon/leave.png" width="46" height="46"/>
           <p>Out</p>
         </div>
 
-        <img className={styles.student_ments} src="https://host/img/studentMents.png" width="507" height="225"/>
+        <img className={styles.student_ments} src="https://webconf.saehaens.com/icon/studentMents.png" width="507" height="225"/>
 
         <div className={styles.close_btn}>
           <Button
@@ -456,7 +502,10 @@ class App extends Component {
               color="primary"
               size="lg"
               circle
-              onClick={() => this.setState({ isCloseMask: true })}
+              onClick={() => {
+                this.setState({ isCloseMask: true })
+                this.setCookie("renderCoachMark_webconf", "N");
+              }}
             />
             <p>가이드 화면 닫기</p>
           </div>
@@ -469,11 +518,11 @@ class App extends Component {
             </ul>
           </div>
           <div className={styles.whiteboard_btn}>
-            <img src="https://host/img/whiteboard.png" width="56" height="55"/>
+            <img src="https://webconf.saehaens.com/icon/whiteboard.png" width="56" height="55"/>
             <p className={styles.p}>칠판</p>
           </div>
           <div className={styles.raisehand_btn}>
-            <img src="https://host/img/raisehand.png" width="56" height="55"/>
+            <img src="https://webconf.saehaens.com/icon/raisehand.png" width="56" height="55"/>
             <p className={styles.p}>손들기</p>
           </div>
           
@@ -632,15 +681,35 @@ class App extends Component {
               size="md"
               circle
               onClick={() => { 
+
+                const { currentUserRole } = this.props;
+
+                let eventID = "user-left";
+                let name = Auth.fullname;
+                //let userID = Auth.userID;
+                let userID = Auth.externUserID;
+                let userType = currentUserRole;
+
+                if(userType === "MODERATOR")
+                  userType = "teacher";
+                else if(userType === "VIEWER")
+                  userType = "student";
+                else if(name.indexOf("observer") !== -1)
+                  userType = "observer";
+
+                console.log("userTYpe : " + userType);
+
+                Attendance.checkAttendance(eventID, name, userID, userType);
+
                 makeCall('userLeftMeeting');
                 Session.set('codeError', '680');
               
               }}
             />
             
-          <div className={styles.banner}>
-            <img src="https://host/img/banner.png" width="215" height="50"/>
-          </div>
+          {/* <div className={styles.banner}>
+            <img src="https://install.inetstudy.co.kr:4430/demosite/demo26_kdh/img/banner.png" width="215" height="50"/>
+          </div> */}
 
           {this.renderSidebar()}
           {this.renderPanel()}

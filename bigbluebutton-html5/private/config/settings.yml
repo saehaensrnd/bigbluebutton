@@ -175,7 +175,7 @@ public:
     enableNetworkMonitoring: false
     packetLostThreshold: 10
   kurento:
-    wsUrl: wss://23rnd.saehaens.com/bbb-webrtc-sfu
+    wsUrl: wss://netstudy.saehaens.com/bbb-webrtc-sfu
     # Valid for video-provider. Time (ms) before its WS connection times out
     # and tries to reconnect.
     wsConnectionTimeout: 4000
@@ -421,7 +421,7 @@ public:
       enabled: true
   note:
     enabled: true
-    url: https://saehaensrnd.com/pad
+    url: https://netstudy.saehaens.com/pad
   layout:
     autoSwapLayout: false
     hidePresentation: false
@@ -644,7 +644,7 @@ private:
     pencilChunkLength: 100
     loadSlidesFromHttpAlways: false
   etherpad:
-    apikey: smhhywfsmETCYFrz8PQYB8j0yj8McOjNqwiYFqVx9OgfwMItrDaVFm65NObbudT
+    apikey: 0Y1QU7ZhEkJYPdXrOY1DVnIrwp5tU1v4dJA3oY69uS4mBqMfnd27WKkipYZHnP
     version: 1.2.13
     host: 127.0.0.1
     port: 9001
